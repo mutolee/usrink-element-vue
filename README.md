@@ -4,6 +4,12 @@
 
 详细的介绍，运行起来之后，在里面看，会介绍当前脚手架实现了哪些东西、每个目录的约定及文件说明。
 
+### 预览
+
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/login.png?raw=true)
+
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/index.png?raw=true)
+
 ### 如何安装
 
 下载项目之后，在文件夹 vel-admin-web 下执行以下命令，进行安装依赖包。
