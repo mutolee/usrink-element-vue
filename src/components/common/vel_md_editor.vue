@@ -99,6 +99,10 @@ export default {
     background-color: unset !important;
 }
 
+.v-note-wrapper .v-note-panel .v-note-show {
+    transition: none !important;
+}
+
 .v-note-wrapper .v-note-panel .v-note-edit.divarea-wrapper .content-input-wrapper {
     padding: 15px !important;
 }
