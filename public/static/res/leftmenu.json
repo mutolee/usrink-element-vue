@@ -41,6 +41,13 @@
                     "icon": "el-icon-postcard",
                     "path": "/example/markdown",
                     "component": "/example/markdownView"
+                },
+                {
+                    "id": "1-6",
+                    "label": "iframe",
+                    "icon": "el-icon-postcard",
+                    "path": "/example/iframe",
+                    "component": "/example/iframePageView"
                 }
             ]
         }

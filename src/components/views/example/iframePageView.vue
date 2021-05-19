@@ -1,0 +1,18 @@
+<template>
+    <el-card class="box-card" shadow="never" :body-style="{padding:'1px',height:'calc(100vh - 124px)'}">
+        <vel_iframe url="http://www.baidu.com"></vel_iframe>
+    </el-card>
+
+</template>
+
+<script>
+import vel_iframe from "../../common/vel_iframe";
+export default {
+    name: "iframePageView",
+    components: {vel_iframe}
+}
+</script>
+
+<style scoped>
+
+</style>
