@@ -35,7 +35,7 @@
 import vel_md_editor from "@/components/common/vel_md_editor";
 
 export default {
-    name: "qitashuomingView",
+    name: "vel_welcomeView",
     components: {vel_md_editor}
 }
 </script>
