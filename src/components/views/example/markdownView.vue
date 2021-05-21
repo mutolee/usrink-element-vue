@@ -104,8 +104,8 @@ export default {
         },
         save() {
             this.$message.warning("内容获取，请打开控制台查看！")
-            console.log("markdown文本内容：\n" + this.value)
-            console.log("html文本内容：\n" + this.render)
+            console.log("%cMarkdown文本内容：", "color:blue;font-weight:700;font-size:14px", "\r" + this.value)
+            console.log("%cHtml文本内容：", "color:blue;font-weight:700;font-size:14px", "\n" + this.render)
         }
     }
 }
