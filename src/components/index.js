@@ -42,4 +42,41 @@ export default (vue) => {
     vue.component("vel-navbar", vel_navbar);
     vue.component("vel-page", vel_page);
 
+    /**
+     * 全局混入，将用于每个新创建的 vue 实例
+     */
+    vue.mixin({
+        // 当组件在 <keep-alive> 内被切换，
+        // 它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行。
+        activated() {
+            // 对keep-alive 缓存的组件进行管理
+            if (this.$vnode.data.keepAlive) {
+                this.$rkm.add(this.$route.path, this)
+            }
+        }
+    })
+
+    // Vue 原型上配置一个 （路由与 keep-alive） 缓存的映射对象
+    vue.prototype.$rkm = new RouterKeepAliveMapping()
+
+}
+
+/**
+ * （路由与 keep-alive） 缓存的映射对象
+ *  提供添加映射及销毁缓存的组件
+ */
+class RouterKeepAliveMapping {
+    constructor() {
+        this.cacheMap = {}
+    }
+
+    add(routePath, vm) {
+        this.cacheMap[routePath] = vm
+    }
+
+    destroy(routePath) {
+        if (this.cacheMap[routePath]) {
+            this.cacheMap[routePath].$destroy()
+        }
+    }
 }

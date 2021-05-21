@@ -102,6 +102,8 @@ export default {
             if (this.tabs.length === 0) {
                 this.$router.push(WELCOME_ROUTER)
             }
+            // 销毁页面组件
+            this.$rkm.destroy(value)
         },
         changeTab(currMenu) {
             let currPath = currMenu.path
