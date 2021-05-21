@@ -42,10 +42,19 @@ export default (vue) => {
     vue.component("vel-navbar", vel_navbar);
     vue.component("vel-page", vel_page);
 
+
     /**
      * 全局混入，将用于每个新创建的 vue 实例
      */
     vue.mixin({
+
+        // 混入到每个组件中
+        data() {
+            return {
+                refresh: true // 刷新信号标识
+            }
+        },
+
         // 当组件在 <keep-alive> 内被切换，
         // 它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行。
         activated() {

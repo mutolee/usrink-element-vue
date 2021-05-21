@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" shadow="never" :body-style="{padding:'15px',height:'calc(100vh - 152px)'}">
+    <el-card v-if="refresh" class="box-card" shadow="never" :body-style="{padding:'15px',height:'calc(100vh - 152px)'}">
         <el-form>
             <el-form-item>
                 <el-button type="success" icon="el-icon-edit" @click="save">保存</el-button>

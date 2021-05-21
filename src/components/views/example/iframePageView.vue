@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" shadow="never" :body-style="{padding:'1px',height:'calc(100vh - 124px)'}">
+    <el-card v-if="refresh" class="box-card" shadow="never" :body-style="{padding:'1px',height:'calc(100vh - 124px)'}">
         <vel_iframe url="http://www.baidu.com"></vel_iframe>
     </el-card>
 

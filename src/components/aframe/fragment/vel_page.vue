@@ -2,7 +2,7 @@
     <section class="vel_page" :style="{height:height}">
         <el-scrollbar style="height: 100%">
             <div class="vel_page_content">
-                <keep-alive v-if="loaded">
+                <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
             </div>
@@ -16,18 +16,13 @@ import NProgress from 'nprogress'
 export default {
     name: "vel_page",
     props: ['height'],
-    data() {
-        return {
-            loaded: true
-        }
-    },
     methods: {
-        reload() {
+        reload: function () {
             NProgress.start();  // 页面 loading 进度条开始
-            this.loaded = false;
-            let that = this;
+            let vm = this.$rkm.cacheMap[this.$route.path];
+            vm.refresh = false
             this.$nextTick(() => {
-                that.loaded = true;
+                vm.refresh = true
                 NProgress.done();  // 页面 loading 进度条结束
             })
         }

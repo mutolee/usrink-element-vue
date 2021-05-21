@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" shadow="never" :body-style="{padding:'15px',minHeight:'calc(100vh - 152px)'}">
+    <el-card v-if="refresh" class="box-card" shadow="never" :body-style="{padding:'15px',minHeight:'calc(100vh - 152px)'}">
         <vel_md_editor content="
 ### 说明
 
