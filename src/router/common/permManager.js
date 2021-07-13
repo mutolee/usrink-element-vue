@@ -62,9 +62,8 @@ export function isPathInMenus(path) {
  */
 export function loadRouter() {
     return new Promise((resolve, reject) => {
-        let userToken = cookieUtil.get(TOKEN);
         // 请求用户菜单
-        api.getLeftMenuList(userToken).then((res) => {
+        api.getLeftMenuList().then((res) => {
             // 保存用户菜单
             buildUserMenuData(res.data)
             // 动态装载菜单路由组件

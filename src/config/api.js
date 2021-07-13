@@ -22,12 +22,9 @@ function userLogin(param) {
  * 获取菜单列表
  * @returns {Promise<unknown>}
  */
-function getLeftMenuList(param) {
+function getLeftMenuList() {
     return http.get({
-        url: BASE_URL + 'static/res/leftmenu.json',
-        data: {
-            ...param
-        }
+        url: BASE_URL + 'static/res/leftmenu.json'
     });
 }
 
