@@ -169,10 +169,6 @@ export default {
     font-size: 16px !important;
 }
 
-.el-dialog__body {
-    padding: 20px 20px 0 20px !important;
-}
-
 .el-dialog__body .el-row .el-col {
     padding-right: 10px;
 }
@@ -182,8 +178,24 @@ export default {
     border-top: 1px solid #f4f4f4;
 }
 
-.el-scrollbar .el-scrollbar__wrap {
+.el-scrollbar .el-scrollbar__wrap:not(.el-select-dropdown__wrap) {
     overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    width: 7px; /*滚动条宽度*/
+    height: 7px; /*滚动条高度*/
+    background-color: white;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.3);
+    background-color: #e2e2e2; /*滚动条的背景颜色*/
+}
+
+.el-drawer{
+    overflow-y: scroll !important;
 }
 
 
