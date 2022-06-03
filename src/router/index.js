@@ -5,7 +5,7 @@ import vel_login from "../components/aframe/vel_login";
 import welcome from "../components/aframe/vel_welcome";
 import notfound from "../components/aframe/vel_notfound";
 import intercept from "./common/intercept"
-import {GEN_ROUTER, GEN_ROUTER_NAME, LOGIN_ROUTER, NOT_FOUND_ROUTER, WELCOME_ROUTER} from "../config/constant"
+import {GEN_ROUTER, GEN_ROUTER_NAME, LOGIN_ROUTER, NOT_FOUND_ROUTER, WELCOME_ROUTER} from "@/config/constant"
 
 Vue.use(VueRouter)
 

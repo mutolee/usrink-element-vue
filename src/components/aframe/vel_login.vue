@@ -30,7 +30,7 @@
 <script>
 import api from "../../config/api";
 import cookie from "../../utils/cookieUtil";
-import {GEN_ROUTER, STATUS_CODE, TOKEN, USER_NAME} from "../../config/constant"
+import {GEN_ROUTER, STATUS_CODE, TOKEN, USER_NAME} from "@/config/constant"
 
 export default {
     name: "vel_login",

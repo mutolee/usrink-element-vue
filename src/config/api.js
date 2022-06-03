@@ -1,5 +1,5 @@
 import http from "../utils/httpUtil";
-import {BASE_URL, LOGIN_API} from "./constant";
+import {LOGIN_API} from "./constant";
 
 
 /**
@@ -8,7 +8,7 @@ import {BASE_URL, LOGIN_API} from "./constant";
  */
 function userLogin(param) {
     return http.get({
-        url: BASE_URL + LOGIN_API,
+        url: LOGIN_API,
         data: {
             userName: param.userName,
             userPwd: param.userPwd,
@@ -24,7 +24,7 @@ function userLogin(param) {
  */
 function getLeftMenuList() {
     return http.get({
-        url: BASE_URL + 'static/res/leftmenu.json'
+        url: "static/res/leftmenu.json"
     });
 }
 

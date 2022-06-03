@@ -95,7 +95,7 @@ export default {
 <style>
 
 .vel_editor_md_preview .v-show-content {
-    padding: 0px !important;
+    padding: 0 !important;
     background-color: unset !important;
 }
 

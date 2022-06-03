@@ -1,16 +1,17 @@
 import axios from "axios"
-import {LOGIN_API, STATUS_CODE, TOKEN} from "@/config/constant";
+import {BASE_URL, LOGIN_API, STATUS_CODE, TOKEN} from "@/config/constant";
 import {isLogin, logout} from "@/router/common/permManager";
 import cookieUtil from "@/utils/cookieUtil";
-import qs from 'qs';
-import {Message} from 'element-ui';
+import qs from "qs";
+import {Message} from "element-ui";
 
 axios.defaults.timeout = 100000
+axios.defaults.baseURL = BASE_URL
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    if (config.url.indexOf(LOGIN_API) == -1) {
+    if (config.url.indexOf(LOGIN_API) === -1) {
         // 如果不是登录请求，需要验证登录是否过期
         if (isLogin()) {
             // 请求携带 Token 参数
@@ -85,7 +86,7 @@ function post(config) {
         axios({
             url: config.url,
             method: "POST",
-            headers: {'content-type': 'application/x-www-form-urlencoded'},
+            headers: {"content-type": "application/x-www-form-urlencoded"},
             data: qs.stringify(config.data),
         }).then(res => {
             resolve(res.data)
