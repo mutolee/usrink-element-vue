@@ -1,13 +1,15 @@
 import axios from "axios"
-import {BASE_URL, LOGIN_API, STATUS_CODE, TOKEN} from "@/config/constant";
+import {BASE_URL, DEV_URL, LOGIN_API, STATUS_CODE, TOKEN} from "@/config/constant";
 import {isLogin, logout} from "@/router/common/permManager";
 import cookieUtil from "@/utils/cookieUtil";
 import qs from "qs";
 import {Message} from "element-ui";
+import process from "eslint-plugin-vue/lib/configs/base";
 
 axios.defaults.timeout = 100000
-axios.defaults.baseURL = BASE_URL
 
+// 根据环境使用不同的地址
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? BASE_URL : DEV_URL
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
