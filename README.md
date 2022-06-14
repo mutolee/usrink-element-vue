@@ -14,6 +14,14 @@
 
 ![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/index.png?raw=true)
 
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/desc.png?raw=true)
+
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/route.png?raw=true)
+
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/api.png?raw=true)
+
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/md.png?raw=true)
+
 ### 如何安装
 
 下载项目之后，在文件夹 vel-admin-web 下执行以下命令，进行安装依赖包。
