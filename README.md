@@ -14,13 +14,13 @@
 
 ![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/index.png?raw=true)
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/desc.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/desc.jpg?raw=true)
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/route.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/route.jpg?raw=true)
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/api.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/api.jpg?raw=true)
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/md.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/md.jpg?raw=true)
 
 ### 如何安装
 
