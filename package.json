@@ -13,6 +13,7 @@
         "crypto-js": "^4.0.0",
         "element-ui": "^2.15.1",
         "mavon-editor": "^2.9.1",
+        "module": "^1.2.5",
         "nprogress": "^0.2.0",
         "qs": "^6.10.3",
         "vue": "^2.6.11",

@@ -1,5 +1,5 @@
 export const BASE_URL = 'http://localhost:8080/'
-export const DEV_URL = 'http://localhost:8000/'
+export const DEV_URL = 'http://localhost:8080/'
 export const USER_NAME = 'userName'
 export const TOKEN = 'token'
 export const LOGIN_API = "static/res/login.json"

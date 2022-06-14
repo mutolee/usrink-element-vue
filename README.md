@@ -10,9 +10,9 @@
 
 ### 预览
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/login.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/login.jpg?raw=true)
 
-![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/index.png?raw=true)
+![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/index.jpg?raw=true)
 
 ![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/desc.jpg?raw=true)
 
