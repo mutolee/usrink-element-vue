@@ -1,6 +1,6 @@
 ## 特别鸣谢 
 感谢JetBrains Webstorm提供支持<br>
-[![](https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/Jet.png?raw=true)](https://jb.gg/OpenSource)
+<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/Jet.png?raw=true" width=150>
 
 ## vel-admin-web
 
