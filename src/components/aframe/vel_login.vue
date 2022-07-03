@@ -17,7 +17,7 @@
                     <el-input v-model="loginForm.yzm"
                               placeholder="验证码">
                     </el-input>
-                    <img src="/static/imgs/yzm.png"/>
+                    <img src="static/imgs/yzm.png"/>
                 </div>
             </el-form-item>
             <el-form-item>
