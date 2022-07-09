@@ -39,6 +39,6 @@ npm run dev
 npm run build
 ```
 
-命令执行完会在 vel-admin-web 文件夹下生成 dist 文件夹，里面就是css、img、js、html等等文件，后面就不用说了吧！！！
+命令执行完会在 vel-admin-web 文件夹下生成 docs 文件夹，里面就是css、img、js、html等等文件，后面就不用说了吧！！！
 
 

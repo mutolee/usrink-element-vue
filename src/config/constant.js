@@ -35,7 +35,7 @@ export const NAV_INCLUDES_SET_KEY = NAV + "/" + NAV_INCLUDES_SET
 
 
 // Http API 常量配置
-export const BASE_URL = "http://192.168.0.105:8081"
+export const BASE_URL = "https://mutolee.github.io/vel-admin-web"
 export const BASE_URL_DEV = "http://localhost:3000"
 
 // Http 接口状态
