@@ -127,7 +127,8 @@ let loopRoutes = (routesArr, routes, breadcrumb) => {
 // router.addRoute() 挂载到路由系统中
 // 关于路由懒加载，文档地址：https://router.vuejs.org/zh/guide/advanced/lazy-loading.html
 let addRoute = (routesArr) => {
-
+    // 导入所有vue视图模块
+    const modules = import.meta.globEager("../../components/views/**/*.vue")
     for (let i = 0; i < routesArr.length; i++) {
         let route = routesArr[i]
         // 过滤掉内置的静态路由
@@ -137,7 +138,7 @@ let addRoute = (routesArr) => {
         // 添加子路由，子路由挂载在`gen`路由下
         router.addRoute('gen', {
             path: route.path, // 路由懒加载
-            component: () => import(`../../components/views${route.component}.vue`)
+            component: modules[`../../components/views${route.component}.vue`].default
         });
     }
 

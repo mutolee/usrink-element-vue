@@ -1,8 +1,7 @@
 import axios from 'axios'
 import {isAuthenticated, logout} from "../router/modules/auth";
-import {BASE_URL, BASE_URL_DEV, STATUS_CODE} from "./constant";
+import envConfig from "./envConfig";
 import {ElMessage} from "element-plus";
-
 
 /**
  * 创建一个Axios实例，应用中的请求基于该实例配置
@@ -11,7 +10,7 @@ import {ElMessage} from "element-plus";
  */
 const service = axios.create({
     // 配置当前实例的BaseURL
-    baseURL: process.env.NODE_ENV === 'production' ? BASE_URL : BASE_URL_DEV, // 配置当前实例的超时时间
+    baseURL: envConfig.baseUrl(), // 配置当前实例的超时时间
     timeout: 10 * 1000
 })
 

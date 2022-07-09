@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-card shadow="never" class="vel_el_card_override vel_el_card_introduce">
           <div class="introduce_avatar">
-            <el-avatar :size="60" :src="'/static/imgs/jimeng.webp'"/>
+            <el-avatar :size="60" :src="avatarUrl"/>
           </div>
           <div class="introduce_desc">
             <p class="tit">你好呀，{{ userNick }}，又是元气满满的一天！</p>
@@ -182,18 +182,20 @@
 </template>
 
 <script setup>
-import {ref, computed, getCurrentInstance} from "vue";
+import {computed, getCurrentInstance} from "vue";
 import EchartsDemo1 from "../commons/welcome/echarts-demo-1.vue";
 import EchartsDemo2 from "../commons/welcome/echarts-demo-2.vue";
 import EchartsDemo3 from "../commons/welcome/echarts-demo-3.vue";
 import TableDemo1 from "../commons/welcome/table-demo-1.vue";
 import ProgressDemo1 from "../commons/welcome/progress-demo-1.vue";
 import * as Constant from "../../config/constant";
+import envConfig from "../../config/envConfig";
 
 const globalCfg = getCurrentInstance().appContext.config.globalProperties
 
 const name = 'vel-frame-welcome'
-const githubUrl = ref('https://github.com/mutolee/vel-admin-web')
+const githubUrl = 'https://github.com/mutolee/vel-admin-web'
+const avatarUrl = envConfig.baseUrl() + '/static/imgs/jimeng.webp'
 
 // 用户名称
 const userNick = computed(() => globalCfg.$store.getters[Constant.USERINFO_USER_NICK_GET_KEY])

@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 
 // 模块化管理Vue中的状态
 let modules = {}
@@ -11,6 +11,7 @@ let modulesFiles = import.meta.globEager('./modules/*.js')
 
 // 遍历所有模块进行装配
 for (let path in modulesFiles) {
+    console.log(path)
     let module = modulesFiles[path].default
     modules[module.name] = module
 }
