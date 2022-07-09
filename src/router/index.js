@@ -1,60 +1,99 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import vel_main from "../components/aframe/vel_main";
-import vel_login from "../components/aframe/vel_login";
-import welcome from "../components/aframe/vel_welcome";
-import notfound from "../components/aframe/vel_notfound";
-import intercept from "./common/intercept"
-import {GEN_ROUTER, GEN_ROUTER_NAME, LOGIN_ROUTER, NOT_FOUND_ROUTER, WELCOME_ROUTER} from "@/config/constant"
-
-Vue.use(VueRouter)
-
-/**
- * 解决路由重复访问问题
- * 参考：https://www.cnblogs.com/zwd666/p/13411336.html
- */
-// 1. 获取原型对象上的push函数
-let prototypePush = VueRouter.prototype.push
-// 2. 修改原型对象中的push方法
-VueRouter.prototype.push = function push(location) {
-    return prototypePush.call(this, location).catch(err => err)
-}
+import VelFrameMain from "../components/aframe/vel-frame-main.vue"
+import VelFrameLogin from "../components/aframe/vel-frame-login.vue"
+import VelFrameWelcome from "../components/aframe/vel-frame-welcome.vue"
+import VelFrameNotfound from "../components/aframe/vel-frame-notfound.vue"
+import {createRouter, createWebHashHistory} from 'vue-router'
+import {isAuthenticated} from './modules/auth'
+import * as Routes from './modules/routes'
+import NProgress from "nprogress"
 
 
-// 1. 定义路由，每个路由应该映射一个组件
-let routes = [
+// 定义路由
+// 每个路由都需要映射到一个组件
+const routes = [
     {
-        path: GEN_ROUTER,                      // 根路由
-        name: GEN_ROUTER_NAME,
-        component: vel_main,
-        redirect: WELCOME_ROUTER,              // 默认`/` 重定向到欢迎页面
-        children: [                            // 动态配置的路由都将挂载到根路由(`/`)的 children 下
-            {
-                path: WELCOME_ROUTER,
-                component: welcome
-            },
-            {
-                path: NOT_FOUND_ROUTER,
-                component: notfound            // 请求不属于用户菜单的路由时候，在二级路由视图展示 404 页面
-            }
+        name: 'gen',
+        path: '/',
+        component: VelFrameMain,
+        redirect: '/welcome',
+        children: [
+            {path: '/welcome', component: VelFrameWelcome},
+            {path: '/404', component: VelFrameNotfound}
         ]
     },
-    // 未登陆跳转页面
-    {path: LOGIN_ROUTER, component: vel_login},
-    // 匹配不到任何路由组件时候，在一级路由视图展示 404 页面
-    {path: '*', component: notfound}
+    // login 页面
+    {path: '/login', component: VelFrameLogin},
+    // 404 Notfound
+    // 理论上，这里应该永远匹配不到，因为路由守卫前置拦截会把将要访问的路由重定向的对应的路由上
+    // 比如访问了`/aaa`一个不存在的路由，
+    // 前置守卫会判断用户是否已经授权登录，如果没有会被重定向到`/login`
+    // 如果已经授权登录了，但该路由不在用户的权限内，会被重定向到`/404`
+    {path: '/:pathMatch(.*)*', component: VelFrameNotfound}
 ]
 
 
-// 2. 创建 router 实例，然后传 `routes` 配置
-let router = new VueRouter({
-    // (缩写) 相当于 routes: routes
-    routes
+/**
+ * 创建一个路由实例
+ * <br/>
+ * Router文档地址：https://router.vuejs.org/zh/guide/advanced/composition-api.html
+ */
+const router = createRouter({
+    // 我们在这里使用 hash 模式，它在URL后面使用了一个哈希字符（#），#后面的数据不会发往服务器
+    history: createWebHashHistory(),
+    routes, // `routes: routes` 的缩写
 })
 
 
-// 路由拦截器
-intercept(router)
+// 配置Router实例全局拦截器
+// 全局前置路由守卫，每一次路由跳转前都进入这个 beforeEach 函数
+router.beforeEach(async (to, from) => {
+
+    // 开启页面进度条
+    NProgress.start()
+
+    // 获取授权状态
+    let isAuth = isAuthenticated()
+
+    // 未授权，并且请求地址不是`/login`，那么跳转到`/login`
+    if (!isAuth && to.path !== '/login') {
+        return '/login'
+    }
+    // 已授权，但请求地址是`/login`，那么跳转到`/`
+    if (isAuth && to.path === '/login') {
+        return '/'
+    }
+
+    // 如果已经授过权，开始动态路由加载
+    // 及页面权限验证
+    if (isAuth) {
+        // 验证动态路由是否添加完成，如果没有，需要先同步添加路由
+        if (!Routes.AddRouteEdState.value) {
+            // 动态添加路由
+            await Routes.dynaAddRoute()
+
+            // 这里需要解释一下，按照官方的说法，如果在路由守卫中动态添加的路由与`to`相匹配,
+            // 实际上导致与我们试图访问的位置不同,
+            // 通过返回新的位置来触发重定向
+            // 文档地址：https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#在导航守卫中添加路由
+            return to.fullPath
+        }
+
+        // 验证用户当前请求是否拥有路由的权限，如果没有，页面跳转到`/404`
+        if (!Routes.isPermThisRoute(to)) {
+            return '/404'
+        }
+    }
+})
+
+
+// 配置Router实例全局拦截器
+// 全局后置路由守卫，每一次路由跳转后都进入这个 afterEach 函数
+router.afterEach(() => {
+
+    // 页面 loading 进度条结束
+    NProgress.done();
+})
 
 
 export default router
+

@@ -1,53 +1,28 @@
 {
     "name": "vel-admin-web",
-    "version": "1.0.0",
     "private": true,
+    "version": "2.0.0",
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
     },
     "dependencies": {
-        "axios": "^0.21.1",
-        "core-js": "^3.6.5",
-        "crypto-js": "^4.0.0",
-        "element-ui": "^2.15.1",
-        "mavon-editor": "^2.9.1",
-        "module": "^1.2.5",
+        "@element-plus/icons-vue": "^2.0.6",
+        "axios": "^0.27.2",
+        "core-js": "^3.23.3",
+        "echarts": "^5.3.3",
+        "element-plus": "^2.2.8",
+        "js-cookie": "^3.0.1",
+        "localforage": "^1.10.0",
         "nprogress": "^0.2.0",
-        "qs": "^6.10.3",
-        "vue": "^2.6.11",
-        "vue-router": "^3.5.1",
-        "vuex": "^3.6.2"
+        "vue": "^3.2.37",
+        "vue-echarts": "^6.2.1",
+        "vue-router": "^4.0.16",
+        "vuex": "^4.0.2"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "~4.5.0",
-        "@vue/cli-plugin-eslint": "~4.5.0",
-        "@vue/cli-service": "~4.5.0",
-        "babel-eslint": "^10.1.0",
-        "eslint": "^6.7.2",
-        "eslint-plugin-vue": "^6.2.2",
-        "vue-template-compiler": "^2.6.11"
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "parserOptions": {
-            "parser": "babel-eslint"
-        },
-        "rules": {
-            "no-debugger": "off"
-        }
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not dead"
-    ]
+        "@vitejs/plugin-vue": "^2.3.3",
+        "vite": "^2.9.13"
+    }
 }

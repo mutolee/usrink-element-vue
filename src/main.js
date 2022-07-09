@@ -1,33 +1,18 @@
-import Vue from 'vue'
-import App from './App'
-import router from './router';
-import store from './vuex';
-import common from './components';
-import http from '../src/utils/httpUtil'
+import { createApp } from 'vue'
+import store from "./vuex";
+import router from './router'
+import App from './App.vue'
 
-Vue.config.productionTip = false
+import cpt from "./components";
 
-Vue.prototype.$http = http
+const app = createApp(App)
 
-// 通用组件管理
-Vue.use(common);
+// 组件管理
+app.use(cpt)
+// 状态管理
+app.use(store)
+// 路由管理
+app.use(router)
 
-// 全局日期时间过滤器
-Vue.filter("dateFormat", function (originVal) {
-    const dt = new Date(originVal);
-    const y = dt.getFullYear();
-    const m = (dt.getMonth() + 1 + "").padStart(2, "0");
-    const d = (dt.getDate() + "").padStart(2, "0");
-    const hh = (dt.getHours() + "").padStart(2, "0");
-    const mm = (dt.getMinutes() + "").padStart(2, "0");
-    const ss = (dt.getSeconds() + "").padStart(2, "0");
-    return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
-});
+app.mount('#app')
 
-
-
-new Vue({
-    router,
-    store,
-    render: h => h(App),
-}).$mount('#app')

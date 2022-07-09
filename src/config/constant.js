@@ -1,28 +1,44 @@
-export const BASE_URL = 'http://localhost:8080/'
-export const DEV_URL = 'http://localhost:8080/'
-export const USER_NAME = 'userName'
-export const TOKEN = 'token'
-export const LOGIN_API = "static/res/login.json"
+// Vuex 常量配置，菜单折叠状态
+export const COLLAPSE = "collapse"
+export const COLLAPSE_STATE_GET = "getCollapseState"
+export const COLLAPSE_STATE_SET = "setCollapseState"
+export const COLLAPSE_STATE_GET_KEY = COLLAPSE + "/" + COLLAPSE_STATE_GET
+export const COLLAPSE_STATE_SET_KEY = COLLAPSE + "/" + COLLAPSE_STATE_SET
+// Vuex 常量配置，用户信息
+export const USERINFO = "userInfo"
+export const USERINFO_USER_NICK_GET = "getUserNick"
+export const USERINFO_USER_NICK_SET = "setUserNick"
+export const USERINFO_USER_NICK_GET_KEY = USERINFO + "/" + USERINFO_USER_NICK_GET
+export const USERINFO_USER_NICK_SET_KEY = USERINFO + "/" + USERINFO_USER_NICK_SET
+// Vuex 常量配置，菜单路由信息
+export const ROUTES = "routes"
+export const ROUTES_MENUS_GET = "getRoutesMenus"
+export const ROUTES_MENUS_SET = "setRoutesMenus"
+export const ROUTES_MENUS_GET_KEY = ROUTES + "/" + ROUTES_MENUS_GET
+export const ROUTES_MENUS_SET_KEY = ROUTES + "/" + ROUTES_MENUS_SET
+// Vuex 常量配置，Routes信息
+export const ROUTES_ROUTES_ARR_GET = "getRoutesArr"
+export const ROUTES_ROUTES_ARR_SET = "setRoutesArr"
+export const ROUTES_ROUTES_ARR_GET_KEY = ROUTES + "/" + ROUTES_ROUTES_ARR_GET
+export const ROUTES_ROUTES_ARR_SET_KEY = ROUTES + "/" + ROUTES_ROUTES_ARR_SET
+// Vuex 常量配置，Nav路由信息
+export const NAV = "nav"
+export const NAV_NAV_INFO_GET = "getNavInfo"
+export const NAV_NAV_INFO_SET = "setNavInfo"
+export const NAV_NAV_INFO_GET_KEY = NAV + "/" + NAV_NAV_INFO_GET
+export const NAV_NAV_INFO_SET_KEY = NAV + "/" + NAV_NAV_INFO_SET
+// Vuex 常量配置，includes，可以被缓存的页面的名称
+export const NAV_INCLUDES_GET = 'getIncludes'
+export const NAV_INCLUDES_SET = 'setIncludes'
+export const NAV_INCLUDES_GET_KEY = NAV + "/" + NAV_INCLUDES_GET
+export const NAV_INCLUDES_SET_KEY = NAV + "/" + NAV_INCLUDES_SET
 
-export const LEFT_MENU = 'leftmenu'
-export const IS_ROUTER_LOADED = 'isRouterLoaded'
-export const MENUS = 'menus'
-export const ARR = 'arr'
-export const LEFT_MENU_IS_ROUTER_LOADED = LEFT_MENU + "/" + IS_ROUTER_LOADED;
-export const LEFT_MENU_MENUS = LEFT_MENU + "/" + MENUS;
-export const LEFT_MENU_ARR = LEFT_MENU + "/" + ARR;
 
-export const GEN_ROUTER = '/'
-export const GEN_ROUTER_NAME = 'gen'
-export const LOGIN_ROUTER = '/login'
-export const NOT_FOUND_ROUTER = '/404'
-export const NOT_FOUND_TIT = "404";
-export const WELCOME_ROUTER = '/welcome'
-export const WELCOME_TIT = "欢迎页"
-export const STATIC_ROUTER = [NOT_FOUND_ROUTER, WELCOME_ROUTER]
-export const MY_USERINFO_ROUTER = "/user/myUserInfo"
-export const MY_MSG_ROUTER = "/user/msg"
+// Http API 常量配置
+export const BASE_URL = "http://192.168.0.105:8081"
+export const BASE_URL_DEV = "http://localhost:3000"
 
+// Http 接口状态
 export const STATUS_CODE = {
     SUCCESS: 200,
     WARNING: 201,
