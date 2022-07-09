@@ -2,6 +2,7 @@ import axios from 'axios'
 import {isAuthenticated, logout} from "../router/modules/auth";
 import envConfig from "./envConfig";
 import {ElMessage} from "element-plus";
+import {STATUS_CODE} from "./constant";
 
 /**
  * 创建一个Axios实例，应用中的请求基于该实例配置
