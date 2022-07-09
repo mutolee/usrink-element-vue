@@ -12,6 +12,9 @@ vel-admin-web 可以让你<span style="color: red">直接开始写页面</span>�
 
 ### 预览
 
+在线预览：https://mutolee.github.io/vel-admin-web/
+
+<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/preview.gif?raw=true">
 
 ### 如何安装
 
