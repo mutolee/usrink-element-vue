@@ -67,7 +67,7 @@ let routesProcess = (routes) => {
     loopRoutes(routesArr, routes.menus)
     // 遍历其他零碎页面路由部分
     loopRoutes(routesArr, routes.pages)
-    // 添加系统内置的静态路由部分
+    // 添加系统内置的静态路由部分到权限管理中
     // Why? 为什么要添加静态页面部分，因为在路由守卫拦截权限验证的时候，
     // 如果没有系统内置的静态路由部分，将导致没有权限访问而被重定向到`/404`
     routesArr.push({
