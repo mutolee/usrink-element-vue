@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <el-card shadow="never" class="vel_card_override">
-      <h3>{{ name }} 页面暂未开发...</h3>
+      <h3>{{ name }} 即将添加...</h3>
     </el-card>
   </div>
 </template>
