@@ -1,4 +1,4 @@
-import{c as ne,a as te}from"../axios/axios.aa79336e.js";var Fe={exports:{}};/*!
+import{c as ne,a as te}from"../@kangc/@kangc.e8ef1374.js";var Fe={exports:{}};/*!
     localForage -- Offline Storage, Improved
     Version 1.10.0
     https://localforage.github.io/localForage

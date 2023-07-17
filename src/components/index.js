@@ -28,6 +28,16 @@ import 'nprogress/nprogress.css'
 // 文档地址：https://echarts.apache.org/handbook/zh/get-started/
 import * as echarts from 'echarts';
 
+// VMdEditor
+// 文档地址：http://ckang1229.gitee.io/vue-markdown-editor/zh/examples/base-editor.html
+import VMdEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
+import '@kangc/v-md-editor/lib/theme/style/github.css';
+
+// highlightjs
+import hljs from 'highlight.js';
+
 /**
  * 组件管理，主要用于配置第三方组件
  * @param vue 当外界使用 vue.use() 会传入 `vue` 这个参数
@@ -57,6 +67,14 @@ const cpt = (vue) => {
     // Nprogress工具配置
     // 不显示右上角的那个转圈进度
     NProgress.configure({showSpinner: false, speed: 600});
+
+    // 配置 VMdEditor
+    VMdEditor.use(githubTheme, {
+        Hljs: hljs,
+    });
+
+    // 注册 VMdEditor
+    vue.use(VMdEditor)
 
 }
 
