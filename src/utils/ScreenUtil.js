@@ -1,16 +1,13 @@
-// 全屏状态
-// 默认false，表示不全屏
-const screenFullState = {
-    value: false
-}
-
 /**
- * 浏览器全屏模式，
+ * 浏览器全屏模式
+ * <p>
  * 参考文档：https://blog.csdn.net/weixin_43840289/article/details/124171403
+ * @param isFull 是否全屏,true为全屏，false为非全屏
+ * @param cb 回调函数
  */
-export default () => {
+const screenFull = (isFull, cb) => {
     let element = document.documentElement
-    if (screenFullState.value) {
+    if (!isFull) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitCancelFullScreen) {
@@ -33,6 +30,9 @@ export default () => {
         }
     }
 
-    // 标记浏览器当前的全屏状态
-    screenFullState.value = !screenFullState.value
+    if (typeof cb === 'function') {
+        cb(isFull);
+    }
 }
+
+export default {screenFull}

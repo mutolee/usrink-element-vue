@@ -1,30 +1,29 @@
-<template>
-  <router-view/>
-</template>
-
 <script setup>
 </script>
 
+<template>
+    <router-view/>
+</template>
 
-<!-- 全局样式 -->
+<!-- 全局样式，都写在这里 -->
 <style>
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html, body, #app {
-  color: #303133;
-  height: 100vh;
-  font-size: 14px;
-  background-color: #fff;
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+    color: #303133;
+    height: 100vh;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 }
 
 html body a {
-  color: #1890ff;
-  text-decoration: none;
+    color: #1890ff;
+    text-decoration: none;
 }
 
 </style>

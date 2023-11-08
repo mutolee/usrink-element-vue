@@ -1,23 +1,31 @@
+import {fileURLToPath, URL} from 'node:url'
+
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // Vite 配置
 // 文档地址：https://vitejs.dev/config/
 export default defineConfig({
-    base: '',
-    plugins: [vue()],
+    plugins: [
+        vue(),
+    ],
+    resolve: {
+        alias: {
+            // build的时候，用于定义别名 @，它指向项目的 src 目录
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
+    },
     build: {
-        outDir: 'docs', // 指定输出路径
-        // 打包出来的区块如果超过1500KB，触发 Some chunks are larger than 1500 KiB after minification 警告
+        // 指定build输出目录
+        outDir: 'doc',
+        // 打包出来的区块如果超过1500KB，触发 'Some chunks are larger than 1500 KiB after minification' 警告
         chunkSizeWarningLimit: 1500,
-        // rollupOptions 配置
-        // 打包将大块文件拆成小块
-        // 参考地址：https://blog.csdn.net/sinat_36728518/article/details/123112966
         rollupOptions: {
             output: {
-                // 把大块文件拆成小块
+                // 为所有node_modules的依赖创建一个独立区块
                 manualChunks(id) {
                     if (id.includes('node_modules')) {
+                        // 这里是返回依赖的包名，用作区块的名字
                         return id
                             .toString()
                             .split('node_modules/')[1]
@@ -25,7 +33,7 @@ export default defineConfig({
                             .toString();
                     }
                 },
-                // 把不同的块放入独立文件夹中，避免都放入assets目录中
+                // 把不同的区块放入独立文件夹中
                 chunkFileNames: (chunkInfo) => {
                     const facadeModuleId = chunkInfo.facadeModuleId
                         ? chunkInfo.facadeModuleId.split('/')
@@ -34,7 +42,7 @@ export default defineConfig({
                         facadeModuleId[facadeModuleId.length - 2] || '[name]';
                     return `js/${fileName}/[name].[hash].js`;
                 }
-            }
-        }
+            },
+        },
     }
 })
