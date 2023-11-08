@@ -1,6 +1,6 @@
 ## 特别鸣谢 
 感谢JetBrains Webstorm提供支持<br>
-<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/Jet.png?raw=true" width=150>
+<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/res/imgs/Jet.png?raw=true" width=150>
 
 ## vel-admin-web
 
@@ -14,7 +14,7 @@ vel-admin-web 可以让你<span style="color: red">直接开始写页面</span>�
 
 在线预览：https://mutolee.github.io/vel-admin-web/
 
-<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/static/imgs/preview.gif?raw=true">
+<img src="https://github.com/mutolee/vel-admin-web/blob/branch-develop/public/res/imgs/preview.gif?raw=true">
 
 ### 如何安装
 
