@@ -17,7 +17,7 @@ export default defineConfig({
     },
     build: {
         // 指定build输出目录
-        outDir: 'doc',
+        outDir: 'docs',
         // 打包出来的区块如果超过1500KB，触发 'Some chunks are larger than 1500 KiB after minification' 警告
         chunkSizeWarningLimit: 1500,
         rollupOptions: {
