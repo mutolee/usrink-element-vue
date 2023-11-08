@@ -1,0 +1,9 @@
+{
+    "statusCode": 200,
+    "message": "登陆成功",
+    "data": {
+        "userName": "Yanglinen",
+        "token": "qwertyuiopasdfghjklzxcvbnm",
+        "userNick": "杨林恩"
+    }
+}

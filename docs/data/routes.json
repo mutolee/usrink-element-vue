@@ -1,0 +1,87 @@
+{
+    "statusCode": 200,
+    "message": "数据加载成功",
+    "data": {
+        "pages": [
+            {
+                "id": "0-1",
+                "label": "个人中心",
+                "icon": "",
+                "path": "/user/userInfo",
+                "component": "/user/page-userinfo"
+            },
+            {
+                "id": "0-2",
+                "label": "消息中心",
+                "icon": "",
+                "path": "/user/message",
+                "component": "/user/page-message"
+            }
+        ],
+        "menus": [
+            {
+                "id": "1",
+                "label": "仪表盘",
+                "icon": "Menu",
+                "children": [
+                    {
+                        "id": "1-1",
+                        "label": "项目结构介绍",
+                        "icon": "Document",
+                        "path": "/jieshao",
+                        "component": "/page-jieshao"
+                    },
+                    {
+                        "id": "1-2",
+                        "label": "路由说明",
+                        "icon": "Document",
+                        "path": "/luyou",
+                        "component": "/page-luyou"
+                    },
+                    {
+                        "id": "1-3",
+                        "label": "API说明",
+                        "icon": "Document",
+                        "path": "/api",
+                        "component": "/page-api"
+                    },
+                    {
+                        "id": "1-4",
+                        "label": "常见示例",
+                        "icon": "Plus",
+                        "children": [
+                            {
+                                "id": "1-4-1",
+                                "label": "iframe",
+                                "icon": "Link",
+                                "path": "/example/iframe",
+                                "component": "/example/page-iframe"
+                            },
+                            {
+                                "id": "1-4-2",
+                                "label": "MarkDown编辑器",
+                                "icon": "Edit",
+                                "path": "/example/markdown",
+                                "component": "/example/page-markdown"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "label": "JSON编辑器",
+                "icon": "Tickets",
+                "path": "/other/json",
+                "component": "/other/page-json"
+            },
+            {
+                "id": "3",
+                "label": "图表",
+                "icon": "PieChart",
+                "path": "/other/charts",
+                "component": "/other/page-chart"
+            }
+        ]
+    }
+}
