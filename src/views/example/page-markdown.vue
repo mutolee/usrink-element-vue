@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, nextTick} from "vue";
+import {ref, onMounted} from "vue";
 
 // 获取元素，变量名需要和元素上的ref属性的值一致
 const velCardEle = ref(null)

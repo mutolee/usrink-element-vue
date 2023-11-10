@@ -63,6 +63,13 @@
                                 "icon": "Edit",
                                 "path": "/example/markdown",
                                 "component": "/example/page-markdown"
+                            },
+                            {
+                                "id": "1-4-3",
+                                "label": "图片裁剪工具",
+                                "icon": "Picture",
+                                "path": "/example/img-cutter",
+                                "component": "/example/page-img-cutter"
                             }
                         ]
                     }
