@@ -70,6 +70,13 @@
                                 "icon": "Picture",
                                 "path": "/example/img-cutter",
                                 "component": "/example/page-img-cutter"
+                            },
+                            {
+                                "id": "1-4-4",
+                                "label": "商品单规格",
+                                "icon": "Tickets",
+                                "path": "/example/sku-single",
+                                "component": "/example/page-sku-single"
                             }
                         ]
                     }
