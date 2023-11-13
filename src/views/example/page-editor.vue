@@ -44,4 +44,8 @@ watch(() => htmlContent.value, newVal => {
     /*height: calc(100vh - 90px - 20px - 20px - 2px);*/
 }
 
+:deep(.vel_card_override) .ql-container{
+    min-height: 350px;
+}
+
 </style>
