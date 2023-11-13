@@ -52,10 +52,10 @@
                         "children": [
                             {
                                 "id": "1-4-1",
-                                "label": "iframe",
-                                "icon": "Link",
-                                "path": "/example/iframe",
-                                "component": "/example/page-iframe"
+                                "label": "富文本编辑器",
+                                "icon": "Edit",
+                                "path": "/example/editor",
+                                "component": "/example/page-editor"
                             },
                             {
                                 "id": "1-4-2",
@@ -70,6 +70,20 @@
                                 "icon": "Picture",
                                 "path": "/example/img-cutter",
                                 "component": "/example/page-img-cutter"
+                            },
+                            {
+                                "id": "1-4-4",
+                                "label": "商品单规格",
+                                "icon": "Tickets",
+                                "path": "/example/sku-single",
+                                "component": "/example/page-sku-single"
+                            },
+                            {
+                                "id": "1-4-5",
+                                "label": "商品分类管理",
+                                "icon": "Memo",
+                                "path": "/example/shop-type",
+                                "component": "/example/page-shop-type"
                             }
                         ]
                     }
