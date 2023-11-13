@@ -52,10 +52,10 @@
                         "children": [
                             {
                                 "id": "1-4-1",
-                                "label": "iframe",
-                                "icon": "Link",
-                                "path": "/example/iframe",
-                                "component": "/example/page-iframe"
+                                "label": "富文本编辑器",
+                                "icon": "Edit",
+                                "path": "/example/editor",
+                                "component": "/example/page-editor"
                             },
                             {
                                 "id": "1-4-2",

@@ -23,6 +23,7 @@ import '@kangc/v-md-editor/lib/theme/style/github.css';
 import hljs from 'highlight.js';
 
 
+
 /**
  * 第三方管理插件，所有的第三方的配置都在这里管理，不限于第三方的注册、配置等
  * @param app 根实例对象
@@ -45,8 +46,9 @@ const thirdPlugin = (app) => {
         Hljs: hljs,
     });
 
-    // 注册 VMdEditor
+    // 配置 VMdEditor
     app.use(VMdEditor)
+
 
 }
 
