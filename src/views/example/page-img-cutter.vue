@@ -27,7 +27,7 @@ const openDialog = () => {
             </el-image>
             <br>
             <el-button @click="openDialog">选择图片</el-button>
-            <image-cutter :dialog="dialog" @cutDown="cutDown" :cut-width="100" :cut-height="100"></image-cutter>
+            <image-cutter :dialog="dialog" @cutDown="cutDown" :cut-width="300" :cut-height="150"></image-cutter>
         </el-card>
     </div>
 </template>
