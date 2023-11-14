@@ -5,19 +5,31 @@ import {onMounted, watch} from "vue";
 import {useRoutesStore} from "@/stores/data/routesStore";
 import {useNavStore} from '@/stores/data/navStore'
 import {useRoute} from 'vue-router'
+import {useDocumentWHStore} from "@/stores/data/documentWHStore";
 
 const routesStore = useRoutesStore()
 const navStore = useNavStore()
+const documentWHStore = useDocumentWHStore()
 const route = useRoute()
 
-// 记录当前访问的 route
 onMounted(() => {
+    // 记录当前访问的 route
     routeRecord(route.path)
+
+    // 记录浏览器宽高
+    documentWHRecord();
+
+    // 添加窗口大小变化时的事件监听器，以实时更新 document 高度
+    window.addEventListener('resize', () => {
+        // 记录浏览器宽高
+        documentWHRecord();
+    });
 })
 
 // 监听当前路由`path`的变化
 watch(() => route.path, (path) => {
     if (path === '/login') return
+    // 记录当前访问的 route
     routeRecord(path)
 })
 
@@ -35,8 +47,10 @@ const routeRecord = (path) => {
     pageCache()
 }
 
-// 把router映射的组件名称缓存起来，给`<keep-alive>`的include使用
-// 当页面不需要缓存的时候，删除缓存的组件名称
+/**
+ * 把router映射的组件名称缓存起来，给`<keep-alive>`的include使用
+ * 当页面不需要缓存的时候，删除缓存的组件名称
+ */
 const pageCache = () => {
     // 路由匹配到组件集合
     let components = route.matched
@@ -56,6 +70,15 @@ const pageCache = () => {
         })
     }
 }
+
+/**
+ * 记录浏览器宽高
+ */
+const documentWHRecord = () => {
+    documentWHStore.wh.w = document.documentElement.clientWidth
+    documentWHStore.wh.h = document.documentElement.clientHeight
+}
+
 </script>
 
 <template>
