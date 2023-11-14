@@ -1,11 +1,11 @@
 <script setup>
-import {defineProps} from "vue";
 
+// 定义传入参数
 const props = defineProps(['skus'])
 
 // 规格数组，由父节点传进来
 const skus = props.skus
-// 数据结构：
+// skus 数据结构：
 // [{
 //     name: '',
 //     price: 0.01,
