@@ -26,4 +26,8 @@ html body a {
     text-decoration: none;
 }
 
+.el-popper.is-light{
+    border: none !important;
+}
+
 </style>
