@@ -11,9 +11,6 @@ import localforage from 'localforage'
 import httpUtil from "@/utils/HttpUtil";
 import {useRoutesStore} from "@/stores/data/routesStore";
 
-// 是否已经加载过动态路由
-let hasLoadRoutes = false
-
 // 定义路由
 // 每个路由都需要映射到一个组件
 const routes = [
@@ -70,8 +67,10 @@ router.beforeEach(async (to) => {
 
     // 如果已经授过权，开始动态路由加载
     if (isAuth) {
+        // 获取路由状态仓库
+        let routesStore = useRoutesStore();
         // 验证动态路由是否添加完成，如果没有，需要先同步添加路由
-        if (!hasLoadRoutes) {
+        if (!routesStore.hasLoadRoutes) {
             // 动态添加路由
             let result = await dynaAddRoute()
 
@@ -122,8 +121,6 @@ const dynaAddRoute = async () => {
     if (routes != null) {
         // 动态路由程序处理
         routesProcess(routes)
-        // 标记动态路由添加完成
-        hasLoadRoutes = true
         return true;
     }
 
@@ -174,6 +171,9 @@ const routesProcess = (routes) => {
 
     // 动态添加路由
     addRoute(routesAll)
+
+    // 标记动态路由添加完成
+    routesStore.hasLoadRoutes = true
 }
 
 
@@ -242,7 +242,6 @@ const addRoute = (routesAll) => {
             component: modules['/src/views' + route.component + '.vue']
         });
     }
-
 }
 
 /**

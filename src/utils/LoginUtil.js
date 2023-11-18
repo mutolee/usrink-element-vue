@@ -2,6 +2,7 @@
 // 文档地址：https://github.com/js-cookie/js-cookie
 import jsCookie from "js-cookie"
 import localforage from "localforage";
+import {useRoutesStore} from "@/stores/data/routesStore";
 
 /**
  * 验证用户是否已经授权成功,
@@ -15,11 +16,20 @@ const isAuthenticated = () => {
 /**
  * 用户退出登录，处理一些清理工作，路由跳转至登录页面
  */
-const logout = () => {
+const logout = async () => {
+
     // 清除用户Token
     jsCookie.remove("token")
-    localforage.removeItem("userInfo")
-    localforage.removeItem("routes")
+    await localforage.removeItem("userInfo")
+    await localforage.removeItem("routes")
+
+    // 清空 Store 中菜单信息
+    let routesStore = useRoutesStore()
+    routesStore.menus = []
+    routesStore.routes = []
+
+    // 设置路由未授权状态
+    routesStore.hasLoadRoutes = false
 }
 
 /**

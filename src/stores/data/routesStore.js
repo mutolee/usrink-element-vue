@@ -18,6 +18,8 @@ export const useRoutesStore = defineStore('routesStore', () => {
     // 菜单部分路由
     const menus = ref([])
 
+    // 是否已经加载过路由信息
+    const hasLoadRoutes = ref(false)
 
-    return {routes, menus}
+    return {routes, menus, hasLoadRoutes}
 })
