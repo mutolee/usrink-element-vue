@@ -84,6 +84,13 @@
                                 "icon": "Memo",
                                 "path": "/example/shop-type",
                                 "component": "/example/page-shop-type"
+                            },
+                            {
+                                "id": "1-4-6",
+                                "label": "首页管理",
+                                "icon": "House",
+                                "path": "/example/index-manager",
+                                "component": "/example/page-index-manager"
                             }
                         ]
                     }

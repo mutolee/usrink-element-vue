@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from "vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
-import ImageCutter from "@/components/common/image-cutter.vue";
+import AddShopTypeDialog from "@/components/common/add-shop-type-dialog.vue";
 
 const documentWHStore = useDocumentWHStore()
 
@@ -85,74 +85,50 @@ const tableHeight = computed(() => documentWHStore.wh.h - 90 - 40 - 42 - 40)
 
 const labelWidth = '100px'
 
-// ---------------------------- 创建一级分类 ----------------------------
-// 是否显示创建一级分类弹框
-const isShowCreateTypeDialog = ref(false)
+// ---------------------------- 创建分类 ----------------------------
+// 是否显示创建分类弹框
+const isShowCreateTypeDialog = ref({show: false})
 
-// 是否显示创建一级分类中的图片裁剪弹框
-const isShowCreateTypeCutImgDialog = ref({val: false})
+// 打开创建分类弹框所需的参数
+const createTypeDialogParam = ref({
+    parent: {
+        id: 0,
+        name: '无',
+    }
+})
 
 /**
- * 打卡创建一级分类弹框
+ * 打开创建分类弹框
  */
 const showCreateTypeDialog = () => {
-    isShowCreateTypeDialog.value = true
-    createTypeForm.value = {}
+    // 初始化参数
+    createTypeDialogParam.value.parent.id = 0
+    createTypeDialogParam.value.parent.name = "无"
+
+    // 打开弹框
+    isShowCreateTypeDialog.value.show = true
 }
 
 /**
- * 打开创建分类中的图片裁剪弹框
+ * 打开创建二级分类弹框
  */
-const showCreateTypeCutImgDialog = () => {
-    isShowCreateTypeCutImgDialog.value.val = true
+const showCreateTypeSecondDialog = (e) => {
+    // 初始化参数
+    createTypeDialogParam.value.parent.id = e.id
+    createTypeDialogParam.value.parent.name = e.name
+
+    // 打开弹框
+    isShowCreateTypeDialog.value.show = true
 }
 
 /**
- * 一级分类图片裁剪事件
+ * 创建分类回调
+ * @param e
  */
-const createTypeCutImgCallback = (e) => {
-    createTypeForm.value.icon = e.dataURL
+const createTypeDialogCallback = (e) => {
+    console.log("创建分类：--> " + e)
 }
-
-// 一级分类表单
-const createTypeForm = ref({})
-// ---------------------------- 创建一级分类 ----------------------------
-
-
-// ---------------------------- 创建二级分类 ----------------------------
-// 是否显示创建二级分类弹框
-const isShowCreateTypeSecondDialog = ref(false)
-
-// 是否显示创建二级分类中的图片裁剪弹框
-const isShowCreateTypeSecondCutImgDialog = ref({val: false})
-
-/**
- * 打卡创建二级分类弹框
- */
-const showCreateTypeSecondDialog = (title) => {
-    isShowCreateTypeSecondDialog.value = true
-    createTypeSecondForm.value = {
-        dialogTit : title
-    }
-}
-
-/**
- * 打开创建二级分类中的图片裁剪弹框
- */
-const showCreateTypeSecondCutImgDialog = () => {
-    isShowCreateTypeSecondCutImgDialog.value.val = true
-}
-
-/**
- * 二级分类图片裁剪事件
- */
-const createTypeSecondCutImgCallback = (e) => {
-    createTypeSecondForm.value.icon = e.dataURL
-}
-
-// 一级分类表单
-const createTypeSecondForm = ref({})
-// ---------------------------- 创建二级分类 ----------------------------
+// ---------------------------- 创建分类 ----------------------------
 
 </script>
 
@@ -160,32 +136,7 @@ const createTypeSecondForm = ref({})
     <div class="page">
         <el-card shadow="never" class="vel_card_override">
             <el-row style="margin-bottom: 10px">
-                <el-button type="primary" plain @click="showCreateTypeDialog">创建分类</el-button>
-                <el-dialog v-model="isShowCreateTypeDialog" title="创建分类">
-                    <el-form v-model="createTypeForm">
-                        <el-form-item label="分类名称" :label-width="labelWidth">
-                            <el-input v-model="createTypeForm.name"/>
-                        </el-form-item>
-                        <el-form-item label="图标" :label-width="labelWidth" class="el-form-item-cutImg">
-                            <el-image :src="createTypeForm.icon"
-                                      style="width: 70px; height: 70px;background-color: #f0f2f5; display: flex;justify-content: center;align-items: center;">
-                                <template #error>
-                                    <p>预览</p>
-                                </template>
-                            </el-image>
-                            <el-button style="margin-left: 10px" @click="showCreateTypeCutImgDialog">选择图片</el-button>
-                            <image-cutter :dialog="isShowCreateTypeCutImgDialog" @cutDown="createTypeCutImgCallback"
-                                          :cut-width="100"
-                                          :cut-height="100"></image-cutter>
-                        </el-form-item>
-                    </el-form>
-                    <template #footer>
-                        <span class="dialog-footer">
-                            <el-button @click="isShowCreateTypeDialog = false">取消</el-button>
-                            <el-button type="primary" @click="isShowCreateTypeDialog = false">确定</el-button>
-                        </span>
-                    </template>
-                </el-dialog>
+                <el-button type="primary" @click="showCreateTypeDialog">创建分类</el-button>
             </el-row>
             <el-table
                 :data="tableData"
@@ -211,42 +162,19 @@ const createTypeSecondForm = ref({})
                 <el-table-column label="操作">
                     <template #default="scope">
                         <template v-if="scope.row.children">
-                            <el-button type="primary" plain @click="showCreateTypeSecondDialog(scope.row.name)">添加子分类</el-button>
+                            <el-button type="primary" plain @click="showCreateTypeSecondDialog(scope.row)">添加子分类
+                            </el-button>
                         </template>
                         <el-button type="success" plain>编辑</el-button>
                         <el-button type="danger" plain>删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
-            <el-dialog v-model="isShowCreateTypeSecondDialog" title="添加子分类">
-                <el-form v-model="createTypeSecondForm">
-                    <el-form-item label="一级分类" :label-width="labelWidth">
-                        <el-text style="font-weight: 700">{{createTypeSecondForm.dialogTit}}</el-text>
-                    </el-form-item>
-                    <el-form-item label="二级分类" :label-width="labelWidth">
-                        <el-input v-model="createTypeSecondForm.name"/>
-                    </el-form-item>
-                    <el-form-item label="图标" :label-width="labelWidth" class="el-form-item-cutImg">
-                        <el-image :src="createTypeSecondForm.icon"
-                                  style="width: 70px; height: 70px;background-color: #f0f2f5; display: flex;justify-content: center;align-items: center;">
-                            <template #error>
-                                <p>预览</p>
-                            </template>
-                        </el-image>
-                        <el-button style="margin-left: 10px" @click="showCreateTypeSecondCutImgDialog">选择图片</el-button>
-                        <image-cutter :dialog="isShowCreateTypeSecondCutImgDialog"
-                                      @cutDown="createTypeSecondCutImgCallback" :cut-width="100"
-                                      :cut-height="100"></image-cutter>
-                    </el-form-item>
-                </el-form>
-                <template #footer>
-                    <span class="dialog-footer">
-                        <el-button @click="isShowCreateTypeSecondDialog = false">取消</el-button>
-                        <el-button type="primary" @click="isShowCreateTypeSecondDialog = false">确定</el-button>
-                    </span>
-                </template>
-            </el-dialog>
         </el-card>
+        <add-shop-type-dialog
+            :paramData="createTypeDialogParam"
+            :dialog="isShowCreateTypeDialog"
+            @onConfirm="createTypeDialogCallback"></add-shop-type-dialog>
     </div>
 </template>
 
@@ -259,11 +187,4 @@ const createTypeSecondForm = ref({})
     height: calc(100vh - 90px - 20px - 20px - 2px);
 }
 
-.el-input {
-    width: 300px;
-}
-
-:deep(.el-form-item-cutImg) .el-form-item__content {
-    align-items: self-end;
-}
 </style>

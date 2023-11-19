@@ -1,5 +1,5 @@
 <script setup>
-import ImageCutter from "@/components/common/image-cutter.vue";
+import ImageCutterDialog from "@/components/common/image-cutter-dialog.vue";
 import {ref} from "vue";
 
 const cutterImgUrl = ref('')
@@ -27,9 +27,9 @@ const openDialog = () => {
             </el-image>
             <br>
             <el-button @click="openDialog">选择图片</el-button>
-            <image-cutter :dialog="dialog" @cutDown="cutDown" :cut-width="300" :cut-height="150"></image-cutter>
         </el-card>
     </div>
+    <image-cutter-dialog :dialog="dialog" @cutDown="cutDown" :cut-width="300" :cut-height="150"></image-cutter-dialog>
 </template>
 
 <style scoped>

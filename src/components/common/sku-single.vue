@@ -37,7 +37,7 @@ const delRow = (index) => {
 </script>
 
 <template>
-    <div class="sku_single">
+    <div class="vel_cpt_panel_drawer">
         <el-row :gutter="10">
             <el-col :span="8">
                 <el-text>规格名称</el-text>
@@ -82,7 +82,7 @@ const delRow = (index) => {
 
 <style scoped>
 
-.sku_single .el-row {
+.vel_cpt_panel_drawer .el-row {
     margin-bottom: 10px;
 }
 

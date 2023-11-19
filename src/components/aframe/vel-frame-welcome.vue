@@ -10,7 +10,7 @@ import TableDemo1 from '@/components/common/table-demo-1.vue'
 
 const userInfoStore = useUserInfoStore()
 
-const githubUrl = 'https://github.com/mutolee/vel-admin-web'
+const githubUrl = httpUtil.defaults.baseURL
 const avatarUrl = httpUtil.defaults.baseURL + '/res/imgs/jimeng.webp'
 
 // 用户名称
