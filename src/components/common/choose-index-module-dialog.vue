@@ -104,13 +104,15 @@ const closeDialog = () => {
             </template>
             <template #default>
                 <div class="dialog_con">
-                    <div class="con_list">
-                        <el-card v-for="data in dataArr" :key="data.type" :shadow="data.chooseEd ? 'always': 'hover'"
-                                 class="vel_card_thumb_override">
-                            <el-image @click="chooseItem(data)" class="img_thumb"
-                                      :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + data.type + '.jpg'"></el-image>
-                        </el-card>
-                    </div>
+                    <el-scrollbar>
+                        <div class="con_list">
+                            <el-card v-for="data in dataArr" :key="data.type" :shadow="data.chooseEd ? 'always': 'hover'"
+                                     class="vel_card_thumb_override">
+                                <el-image @click="chooseItem(data)" class="img_thumb"
+                                          :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + data.type + '.jpg'"></el-image>
+                            </el-card>
+                        </div>
+                    </el-scrollbar>
                 </div>
             </template>
             <template #footer>
@@ -126,29 +128,40 @@ const closeDialog = () => {
 <style scoped>
 
 :deep(.vel_drawer_override){
-    width: 380px !important;
+    width: 350px !important;
+}
+
+:deep(.vel_drawer_override) .el-drawer__body{
+    padding: 0;
 }
 
 :deep(.vel_drawer_override) .el-drawer__footer{
     padding: 20px;
 }
 
-.con_list {
+.dialog_con{
+    height: calc(100vh - 40px - 32px - 72px);
+    overflow: hidden;
+}
+
+.dialog_con .con_list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
+    padding: 0 15px;
 }
 
 .vel_card_thumb_override.is-always-shadow {
     border: 1px solid #409EFF;
 }
 
+
 :deep(.vel_card_thumb_override) .el-card__body {
     padding: 0;
     display: flex;
 }
 
-.img_thumb {
+.vel_card_thumb_override .img_thumb {
     width: 150px;
     height: 75px;
 }
