@@ -4,6 +4,16 @@ import {ref, watch} from "vue"
 import httpUtil from "@/utils/HttpUtil";
 import {VueDraggable} from 'vue-draggable-plus'
 import AddIndexModuleDialog from "@/components/common/add-index-module-dialog.vue";
+import IndexModule1 from "@/components/common/index-module/index-module-1.vue";
+import IndexModule2 from "@/components/common/index-module/index-module-2.vue";
+import IndexModule3 from "@/components/common/index-module/index-module-3.vue";
+import IndexModule4 from "@/components/common/index-module/index-module-4.vue";
+import IndexModule5 from "@/components/common/index-module/index-module-5.vue";
+import IndexModule6 from "@/components/common/index-module/index-module-6.vue";
+import IndexModule7 from "@/components/common/index-module/index-module-7.vue";
+import IndexModule8 from "@/components/common/index-module/index-module-8.vue";
+import IndexModule9 from "@/components/common/index-module/index-module-9.vue";
+
 
 const labelWidth = '100px'
 
@@ -43,51 +53,17 @@ watch(() => list.value, newVal => {
             <div class="preview">
                 <div class="preview_con">
                     <el-scrollbar>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
+                        <template v-for="item in list" :key="item">
+                            <index-module1 :width="360" v-if="item == 1"/>
+                            <index-module2 :width="360" v-else-if="item == 2"/>
+                            <index-module3 :width="360" v-else-if="item == 3"/>
+                            <index-module4 :width="360" v-else-if="item == 4"/>
+                            <index-module5 :width="360" v-else-if="item == 5"/>
+                            <index-module6 :width="360" v-else-if="item == 6"/>
+                            <index-module7 :width="360" v-else-if="item == 7"/>
+                            <index-module8 :width="360" v-else-if="item == 8"/>
+                            <index-module9 :width="360" v-else-if="item == 9"/>
+                        </template>
                     </el-scrollbar>
                 </div>
             </div>
@@ -175,7 +151,7 @@ watch(() => list.value, newVal => {
 }
 
 .page_left .preview_con {
-    background-color: #e9e9eb;
+    background-color: #ffffff;
     height: calc(100vh - 90px - 20px - 70px);
     overflow: hidden;
     border-radius: 4px 4px 0 0;
