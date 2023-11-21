@@ -46,7 +46,7 @@ const thirdPlugin = (app) => {
         Hljs: hljs,
     });
 
-    // 配置 VMdEditor
+    // 配置 VMdEditor 插件
     app.use(VMdEditor)
 
 
