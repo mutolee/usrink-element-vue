@@ -30,4 +30,29 @@ html body a {
     border: none !important;
 }
 
+/** 美化系统滚动条 Start **/
+::-webkit-scrollbar {
+    width: 6px
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 6px
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: #0000004d
+}
+/** 美化系统滚动条 End **/
+
 </style>

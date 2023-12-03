@@ -66,15 +66,15 @@ const closeDialog = () => {
 <template>
     <div class="vel_cpt_panel_dialog_add_module">
         <el-dialog v-model="dialog.show" title="添加模块">
-            <el-form v-model="addModuleForm">
-                <el-form-item label="编号" :label-width="labelWidth">
+            <el-form v-model="addModuleForm" :label-width="labelWidth">
+                <el-form-item label="编号">
                     <el-input v-model="addModuleForm.moduleNo"/>
                 </el-form-item>
-                <el-form-item label="标题" :label-width="labelWidth" class="vel_from_item_tit">
+                <el-form-item label="标题" class="vel_from_item_tit">
                     <el-input v-model="addModuleForm.moduleTit"/>
                     <el-checkbox v-model="addModuleForm.isShowTit" label="显示标题" size="large"/>
                 </el-form-item>
-                <el-form-item label="布局类型" :label-width="labelWidth" class="el_form_item_choose_module">
+                <el-form-item label="布局类型" class="el_form_item_choose_module">
                     <el-card shadow="never" class="vel_card_thumb_override">
                         <el-image
                             :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + addModuleForm.moduleType + '.jpg'"

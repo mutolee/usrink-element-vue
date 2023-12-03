@@ -1,8 +1,9 @@
 <script setup>
 import {ref, watch} from "vue"
-
-import httpUtil from "@/utils/HttpUtil";
+// 可拖拽组件
+// 文档地址：https://alfred-skyblue.github.io/vue-draggable-plus/demo/basic/
 import {VueDraggable} from 'vue-draggable-plus'
+import httpUtil from "@/utils/HttpUtil";
 import AddIndexModuleDialog from "@/components/common/add-index-module-dialog.vue";
 import IndexModule1 from "@/components/common/index-module/index-module-1.vue";
 import IndexModule2 from "@/components/common/index-module/index-module-2.vue";

@@ -31,7 +31,7 @@ const createTypeForm = ref({
 
 onMounted(() => {
     // 初始化表单数据，把打开弹框的参数和表单数据进行绑定
-    createTypeForm.value.parent = paramData.parent
+    createTypeForm.value = paramData
 })
 
 /**
@@ -54,7 +54,6 @@ const createTypeCutImgCallback = (e) => {
 const confirmDialog = () => {
     // 触发事件
     emit('onConfirm', createTypeForm.value)
-
     closeDialog()
 }
 
@@ -63,20 +62,27 @@ const confirmDialog = () => {
  */
 const closeDialog = () => {
     dialog.show = false
+
+    // 重置表单
+    createTypeForm.value.parent.id = 0
+    createTypeForm.value.parent.name = '无'
+    createTypeForm.value.name = ''
+    createTypeForm.value.icon = ''
 }
 </script>
 
 <template>
     <div class="vel_cpt_panel_dialog_add_shop_type">
-        <el-dialog v-model="dialog.show" :title="createTypeForm.parent.id == 0 ? '创建分类' : '添加子分类'">
-            <el-form v-model="createTypeForm">
-                <el-form-item label="父级分类" :label-width="labelWidth">
+        <el-dialog v-model="dialog.show"
+                   :title="createTypeForm.parent.id == 0 ? '创建分类' : '添加子分类'">
+            <el-form v-model="createTypeForm" :label-width="labelWidth">
+                <el-form-item label="父级分类">
                     <el-text style="font-weight: 700">{{ createTypeForm.parent.name }}</el-text>
                 </el-form-item>
-                <el-form-item label="分类名称" :label-width="labelWidth">
+                <el-form-item label="分类名称">
                     <el-input v-model="createTypeForm.name"/>
                 </el-form-item>
-                <el-form-item label="图标" :label-width="labelWidth" class="el_form_item_cut_img">
+                <el-form-item label="图标" class="el_form_item_cut_img">
                     <el-image :src="createTypeForm.icon"
                               style="width: 70px; height: 70px;background-color: #f0f2f5; display: flex;justify-content: center;align-items: center;">
                         <template #error>

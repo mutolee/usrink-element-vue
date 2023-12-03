@@ -3,14 +3,14 @@ import ImageCutterDialog from "@/components/common/image-cutter-dialog.vue";
 import {ref} from "vue";
 
 const cutterImgUrl = ref('')
-const dialog = ref({val: false})
+const dialog = ref({show: false})
 
 const cutDown = (e) => {
     cutterImgUrl.value = e.dataURL
 }
 
 const openDialog = () => {
-    dialog.value.val = true
+    dialog.value.show = true
 }
 
 

@@ -94,7 +94,9 @@ const createTypeDialogParam = ref({
     parent: {
         id: 0,
         name: '无',
-    }
+    },
+    name: '',
+    icon: ''
 })
 
 /**

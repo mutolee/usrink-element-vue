@@ -48,7 +48,7 @@
                     {
                         "id": "1-4",
                         "label": "常见示例",
-                        "icon": "Plus",
+                        "icon": "Files",
                         "children": [
                             {
                                 "id": "1-4-1",
@@ -91,6 +91,13 @@
                                 "icon": "House",
                                 "path": "/example/index-manager",
                                 "component": "/example/page-index-manager"
+                            },
+                            {
+                                "id": "1-4-7",
+                                "label": "添加商品",
+                                "icon": "Plus",
+                                "path": "/example/add-goods",
+                                "component": "/example/page-add-goods"
                             }
                         ]
                     }

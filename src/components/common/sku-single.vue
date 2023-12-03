@@ -37,8 +37,8 @@ const delRow = (index) => {
 </script>
 
 <template>
-    <div class="vel_cpt_panel_drawer">
-        <el-row :gutter="10">
+    <div class="vel_cpt_panel_add_sku">
+        <el-row>
             <el-col :span="8">
                 <el-text>规格名称</el-text>
             </el-col>
@@ -55,26 +55,26 @@ const delRow = (index) => {
                 <el-text>操作</el-text>
             </el-col>
         </el-row>
-        <el-row :gutter="10" v-for="(item, index) in skus" :key="index">
+        <el-row v-for="(item, index) in skus" :key="index">
             <el-col :span="8">
                 <el-input type="text" v-model="item.name"/>
             </el-col>
             <el-col :span="4">
-                <el-input type="number" v-model="item.price"/>
+                <el-input-number v-model="item.price" size="default" controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-input type="number" v-model="item.delPrice"/>
+                <el-input-number v-model="item.delPrice" size="default" controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-input type="number" v-model="item.count"/>
+                <el-input-number v-model="item.count" size="default" controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-button type="danger" icon="Delete" circle @click="delRow(index)" v-if="skus.length > 1"/>
+                <el-button type="danger" icon="Delete" circle @click="delRow(index)" v-if="skus.length > 1" />
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="24">
-                <el-button type="primary" @click="addRow" plain>添加一行</el-button>
+                <el-button @click="addRow" plain>添加一行</el-button>
             </el-col>
         </el-row>
     </div>
@@ -82,8 +82,17 @@ const delRow = (index) => {
 
 <style scoped>
 
-.vel_cpt_panel_drawer .el-row {
+.vel_cpt_panel_add_sku .el-row {
     margin-bottom: 10px;
+
+}
+
+.vel_cpt_panel_add_sku .el-col{
+    padding-right: 10px;
+}
+
+.vel_cpt_panel_add_sku .el-input-number{
+    width: 100%;
 }
 
 </style>
