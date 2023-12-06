@@ -87,7 +87,6 @@ router.beforeEach(async (to) => {
 
         // 验证用户当前请求是否拥有路由的权限，如果没有，页面跳转到`/404`
         if (!isPermThisRoute(to)) {
-            console.log("没有权限")
             return '/404'
         }
     }
