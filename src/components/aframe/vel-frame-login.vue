@@ -44,13 +44,11 @@ const submitLogin = () => {
     <section class="vel_login">
         <el-form
             :model="loginForm"
-            class="el_form_override"
-        >
+            class="el_form_override">
             <h3>
                 <el-icon
                     :size="36"
-                    color="#409EFF"
-                >
+                    color="#409EFF">
                     <ElementPlus/>
                 </el-icon>
                 Vel-Admin-Web
@@ -61,8 +59,7 @@ const submitLogin = () => {
                     placeholder="用户名"
                     size="large"
                     prefix-icon="UserFilled"
-                    clearable
-                />
+                    clearable/>
             </el-form-item>
             <el-form-item>
                 <el-input
@@ -71,8 +68,7 @@ const submitLogin = () => {
                     type="password"
                     size="large"
                     prefix-icon="Lock"
-                    show-password
-                />
+                    show-password/>
             </el-form-item>
             <el-form-item>
                 <el-button
@@ -80,8 +76,7 @@ const submitLogin = () => {
                     :loading="loading"
                     @click="submitLogin"
                     size="large"
-                    style="width: 100%"
-                >
+                    style="width: 100%">
                     登录
                 </el-button>
             </el-form-item>
