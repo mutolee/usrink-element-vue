@@ -16,7 +16,7 @@ const loginForm = ref({
 })
 
 // 登录事件
-const submitLogin = async () => {
+const submitLogin = () => {
     loading.value = true
     // 模拟登录请求
     // 实际项目应该为POST请求
