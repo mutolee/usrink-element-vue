@@ -109,7 +109,7 @@ const closeDialog = () => {
 }
 
 :deep(.vel_from_item_tit) .el-form-item__content {
-    gap: 10px;
+    column-gap: 10px;
 }
 
 :deep(.vel_card_thumb_override) .el-card__body {

@@ -112,10 +112,12 @@ watch(() => list.value, newVal => {
                                     <td>
                                         <el-text>限时推荐</el-text>
                                     </td>
-                                    <td>
-                                        <el-button type="success" plain>编辑</el-button>
-                                        <el-button type="primary" plain>数据</el-button>
-                                        <el-button type="danger" plain>删除</el-button>
+                                    <td class="module_item_action">
+                                        <div>
+                                            <el-button type="success" plain>编辑</el-button>
+                                            <el-button type="primary" plain>数据</el-button>
+                                            <el-button type="danger" plain>删除</el-button>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -216,6 +218,16 @@ watch(() => list.value, newVal => {
 .module_item_img {
     width: 70px;
     height: 35px;
+}
+
+.module_item_action div{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+
+.module_item_action div .el-button+.el-button{
+    margin-left: 0px;
 }
 
 .ghost {
