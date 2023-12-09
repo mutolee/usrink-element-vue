@@ -198,7 +198,7 @@ const createTypeDialogCallback = (e) => {
 }
 
 .table_col_action .el-button+.el-button{
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 :deep(.vel_card_override) .el-table__inner-wrapper::before{
