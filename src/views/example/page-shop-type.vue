@@ -163,12 +163,14 @@ const createTypeDialogCallback = (e) => {
                 </el-table-column>
                 <el-table-column label="操作">
                     <template #default="scope">
-                        <template v-if="scope.row.children">
-                            <el-button type="primary" plain @click="showCreateTypeSecondDialog(scope.row)">添加子分类
-                            </el-button>
-                        </template>
-                        <el-button type="success" plain>编辑</el-button>
-                        <el-button type="danger" plain>删除</el-button>
+                        <div class="table_col_action">
+                            <template v-if="scope.row.children">
+                                <el-button type="primary" plain @click="showCreateTypeSecondDialog(scope.row)">添加子分类
+                                </el-button>
+                            </template>
+                            <el-button type="success" plain>编辑</el-button>
+                            <el-button type="danger" plain>删除</el-button>
+                        </div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -187,6 +189,20 @@ const createTypeDialogCallback = (e) => {
 
 .vel_card_override {
     height: calc(100vh - 90px - 20px - 20px - 2px);
+}
+
+.table_col_action{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+
+.table_col_action .el-button+.el-button{
+    margin-left: 0px;
+}
+
+:deep(.vel_card_override) .el-table__inner-wrapper::before{
+    background-color: transparent !important;
 }
 
 </style>

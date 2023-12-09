@@ -98,6 +98,13 @@
                                 "icon": "Plus",
                                 "path": "/example/add-goods",
                                 "component": "/example/page-add-goods"
+                            },
+                            {
+                                "id": "1-4-8",
+                                "label": "商品管理",
+                                "icon": "Goods",
+                                "path": "/example/goods-manager",
+                                "component": "/example/page-goods-manager"
                             }
                         ]
                     }
