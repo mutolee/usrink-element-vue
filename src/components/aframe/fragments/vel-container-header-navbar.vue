@@ -32,7 +32,7 @@ watch(() => navStore.routeInfo, (routeInfo) => {
  * @param routeInfo 当前访问的路由信息
  */
 const tabsChange = (routeInfo) => {
-    if (Object.keys(routeInfo).length == 0) {
+    if (Object.keys(routeInfo).length === 0) {
         // routeInfo不为{}时候，才更改Tab信息
         return
     }
