@@ -38,21 +38,21 @@ const delRow = (index) => {
 
 <template>
     <div class="vel_cpt_panel_add_sku">
-        <el-row>
+        <el-row class="tit">
             <el-col :span="8">
-                <el-text>规格名称</el-text>
+                <el-text tag="i">规格名称</el-text>
             </el-col>
             <el-col :span="4">
-                <el-text>实际价格</el-text>
+                <el-text tag="i">实际价格</el-text>
             </el-col>
             <el-col :span="4">
-                <el-text>划线价格</el-text>
+                <el-text tag="i">划线价格</el-text>
             </el-col>
             <el-col :span="4">
-                <el-text>库存</el-text>
+                <el-text tag="i">库存</el-text>
             </el-col>
             <el-col :span="4">
-                <el-text>操作</el-text>
+                <el-text tag="i">操作</el-text>
             </el-col>
         </el-row>
         <el-row v-for="(item, index) in skus" :key="index">
@@ -82,9 +82,12 @@ const delRow = (index) => {
 
 <style scoped>
 
-.vel_cpt_panel_add_sku .el-row {
+.vel_cpt_panel_add_sku .el-row:not(.tit){
     margin-bottom: 10px;
+}
 
+.vel_cpt_panel_add_sku .el-row.tit .el-text{
+    color: #73767a;
 }
 
 .vel_cpt_panel_add_sku .el-col{

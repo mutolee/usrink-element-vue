@@ -3,7 +3,7 @@
 // 文档地址：https://www.wangeditor.com/v5/for-frame.html#安装-1
 // 引入 css
 import '@wangeditor/editor/dist/css/style.css'
-import {onBeforeUnmount, ref, shallowRef, nextTick} from 'vue'
+import {nextTick, onBeforeUnmount, ref, shallowRef} from 'vue'
 import {Editor, Toolbar} from '@wangeditor/editor-for-vue'
 import {ElMessage} from "element-plus";
 import SkuSingle from "@/components/common/sku-single.vue";
@@ -15,6 +15,7 @@ const form = ref({
     shopName: '',
     shopType: [],
     unit: '0',
+    status: '1'
 })
 
 const shopType = [
@@ -106,6 +107,7 @@ const toolbarConfig = {
 // 编辑区配置
 const editorConfig = {
     placeholder: '请输入内容...',
+    scroll: false,
     MENU_CONF: {
         uploadImage: {
             // 小于该值就插入 base64 格式（而不上传），默认为 0
@@ -325,20 +327,29 @@ const carouselHeight = preViewWidth * 0.7;
                                     </template>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="商品描述" class="shop_editor">
-                                <Toolbar
-                                    style="border-bottom: 1px solid #e0e0e0"
-                                    :editor="editorRef"
-                                    :defaultConfig="toolbarConfig"
-                                    mode="simple"
-                                />
-                                <Editor
-                                    style="height:400px;overflow-y: hidden;"
-                                    v-model="valueHtml"
-                                    :defaultConfig="editorConfig"
-                                    mode="simple"
-                                    @onCreated="handleCreated"
-                                />
+                            <el-form-item label="状态">
+                                <el-select v-model="form.status" size="default">
+                                    <el-option label="已上架" value="0"/>
+                                    <el-option label="待上架" value="1"/>
+                                    <el-option label="已下架" value="2"/>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="商品描述">
+                                <div class="shop_editor">
+                                    <Toolbar
+                                        style="border-bottom: 1px solid #e0e0e0"
+                                        :editor="editorRef"
+                                        :defaultConfig="toolbarConfig"
+                                        mode="simple"
+                                    />
+                                    <Editor
+                                        style="min-height:400px;overflow-y: hidden;"
+                                        v-model="valueHtml"
+                                        :defaultConfig="editorConfig"
+                                        mode="simple"
+                                        @onCreated="handleCreated"
+                                    />
+                                </div>
                             </el-form-item>
                         </el-form>
                     </el-scrollbar>
@@ -364,10 +375,15 @@ const carouselHeight = preViewWidth * 0.7;
                                         <el-text style="font-size: 22px" tag="b">{{ skus[0].price }}</el-text>
                                         <el-text>/{{ units[0].label }}</el-text>
                                     </span>
-                                    <el-text type="info" tag="del" size="small">￥{{ skus[0].delPrice }}/{{ units[0].label }}</el-text>
+                                    <el-text type="info" tag="del" size="small">￥{{
+                                            skus[0].delPrice
+                                        }}/{{ units[0].label }}
+                                    </el-text>
                                 </div>
                                 <div class="tit_item tit">
-                                    <el-text class="txt" tag="b" :style="{width:preViewWidth-20-40 + 'px'}">{{ form.shopName }}</el-text>
+                                    <el-text class="txt" tag="b" :style="{width:preViewWidth-20-40 + 'px'}">
+                                        {{ form.shopName }}
+                                    </el-text>
                                     <div class="share">
                                         <el-icon>
                                             <Share/>
@@ -375,11 +391,14 @@ const carouselHeight = preViewWidth * 0.7;
                                         <el-text size="small">分享</el-text>
                                     </div>
                                 </div>
-                                <div v-if="form.desc !== ''" class="tit_item desc" :style="{width:preViewWidth-20 + 'px'}">
+                                <div v-if="form.desc !== ''" class="tit_item desc"
+                                     :style="{width:preViewWidth-20 + 'px'}">
                                     <el-text type="info" size="small">{{ form.desc }}</el-text>
                                 </div>
                                 <div v-if="dynamicTags.length > 0" class="tit_item tags">
-                                    <el-tag v-for="tag in dynamicTags" :key="tag" type="danger" size="small" effect="plain">{{tag}}</el-tag>
+                                    <el-tag v-for="tag in dynamicTags" :key="tag" type="danger" size="small"
+                                            effect="plain">{{ tag }}
+                                    </el-tag>
                                 </div>
                             </div>
                             <div class="sku_panel">
@@ -387,12 +406,15 @@ const carouselHeight = preViewWidth * 0.7;
                                     <el-text tag="b">规格</el-text>
                                 </div>
                                 <div class="sku_info">
-                                    <el-text class="sku_name" type="info" :style="{width:preViewWidth-20-40*2 + 'px'}" size="small">
-                                        {{skus[0].name}}
+                                    <el-text class="sku_name" type="info" :style="{width:preViewWidth-20-40*2 + 'px'}"
+                                             size="small">
+                                        {{ skus[0].name }}
                                     </el-text>
                                     <el-text class="sku_num" type="info">x1</el-text>
                                     <div class="choose_more_arrow">
-                                        <el-icon><ArrowRight/></el-icon>
+                                        <el-icon>
+                                            <ArrowRight/>
+                                        </el-icon>
                                     </div>
                                 </div>
                             </div>
@@ -414,13 +436,15 @@ const carouselHeight = preViewWidth * 0.7;
                                         </el-step>
                                     </el-steps>
                                     <div class="choose_more_arrow">
-                                        <el-icon><ArrowRight/></el-icon>
+                                        <el-icon>
+                                            <ArrowRight/>
+                                        </el-icon>
                                     </div>
                                 </div>
                             </div>
                             <div class="detail_panel">
                                 <el-tabs :model="0">
-                                    <el-tab-pane label="商品详情">
+                                    <el-tab-pane label="商品详情" class="goods_detail">
                                         <div v-html="valueHtml" :style="{width:preViewWidth-20 + 'px'}"></div>
                                     </el-tab-pane>
                                     <el-tab-pane label="租赁流程">Config</el-tab-pane>
@@ -520,14 +544,12 @@ const carouselHeight = preViewWidth * 0.7;
 
 .shop_tags .el-tag,
 .shop_tags .el-button,
-.shop_tags .el-input{
+.shop_tags .el-input {
     margin-right: 5px;
     margin-bottom: 3px;
 }
 
-:deep(.shop_editor) .el-form-item__content {
-    flex-direction: column;
-    align-items: normal;
+.shop_editor {
     border: 1px solid #e9eaef;
     line-height: normal;
 }
@@ -566,9 +588,9 @@ const carouselHeight = preViewWidth * 0.7;
 }
 
 .tit_panel,
-.sku_panel,
+.shop_info_panel .sku_panel,
 .choose_time_panel,
-.detail_panel{
+.detail_panel {
     background-color: #ffffff;
     padding: 10px;
     margin-bottom: 10px;
@@ -578,25 +600,25 @@ const carouselHeight = preViewWidth * 0.7;
     padding-bottom: 10px;
 }
 
-.tit_item.tags .el-tag{
+.tit_item.tags .el-tag {
     margin-right: 5px;
     margin-bottom: 3px;
 }
 
-.price .price_real{
+.price .price_real {
     padding-right: 7px;
 }
 
-.price .el-text{
+.price .el-text {
     color: red;
 }
 
-.tit_panel .tit{
+.tit_panel .tit {
     display: flex;
     align-items: center;
 }
 
-.tit .txt{
+.tit .txt {
     flex-grow: 1;
     overflow: hidden; /* 超出部分隐藏 */
     display: -webkit-box;
@@ -604,7 +626,7 @@ const carouselHeight = preViewWidth * 0.7;
     -webkit-line-clamp: 2; /* 设置行数 */
 }
 
-.tit .share{
+.tit .share {
     width: 50px;
     display: flex;
     flex-direction: column;
@@ -612,11 +634,11 @@ const carouselHeight = preViewWidth * 0.7;
     align-items: center;
 }
 
-.sku_panel .sku_info{
+.sku_panel .sku_info {
     display: flex;
 }
 
-.sku_info .sku_name{
+.sku_info .sku_name {
     flex-grow: 1;
     overflow: hidden; /* 超出部分隐藏 */
     display: -webkit-box;
@@ -624,41 +646,57 @@ const carouselHeight = preViewWidth * 0.7;
     -webkit-line-clamp: 2; /* 设置行数 */
 }
 
-.sku_info .sku_num{
+.sku_info .sku_num {
     width: 40px;
     text-align: center;
 }
 
-.sku_info .choose_more_arrow{
+.sku_info .choose_more_arrow {
     width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-:deep(.choose_time_panel) .el-step:last-child{
+:deep(.choose_time_panel) .el-step:last-child {
     flex-basis: 0 !important;
 }
 
-.choose_time_panel .time_panel{
+.choose_time_panel .time_panel {
     display: flex;
 }
 
-.choose_time_panel .el-steps{
+.choose_time_panel .el-steps {
     flex-grow: 1;
 }
 
-.choose_time_panel .choose_more_arrow{
+.choose_time_panel .choose_more_arrow {
     width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-:deep(.detail_panel) .el-tab-pane img{
+:deep(.detail_panel) .el-tab-pane img {
     width: 100% !important;
     height: auto !important;
     vertical-align: bottom;
+}
+
+:deep(.goods_detail) table {
+    border-collapse: collapse;
+}
+
+:deep(.goods_detail) table th {
+    background-color: #f5f2f0;
+    padding: 5px 5px;
+    border: 1px solid #b2b2b2;
+}
+
+:deep(.goods_detail) table td {
+    padding: 5px 5px;
+    border: 1px solid #b2b2b2;
+    text-align: center;
 }
 
 .page_right .publish {

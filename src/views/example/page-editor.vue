@@ -17,7 +17,7 @@ const toolbarConfig = {
     toolbarKeys: [
         'headerSelect',
         '|',
-        'bold', 'italic', "through", 'underline', 'color', 'bgColor', 'fontSize', "blockquote",
+        'bold', 'italic', "through", 'underline', 'color', 'bgColor', 'fontSize', "blockquote","insertTable",
         '|',
         'uploadImage'
     ]
