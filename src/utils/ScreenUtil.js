@@ -1,13 +1,14 @@
 /**
  * 浏览器全屏模式
- * <p>
- * 参考文档：https://blog.csdn.net/weixin_43840289/article/details/124171403
- * @param isFull 是否全屏,true为全屏，false为非全屏
- * @param cb 回调函数
+ * @param cb 回调函数，返回当前是否为全屏状态
  */
-const screenFull = (isFull, cb) => {
+const screenFull = (cb) => {
+    let isFull = document.fullscreenElement
+        || document.mozFullScreenElement
+        || document.webkitFullscreenElement
+        || document.msFullscreenElement;
     let element = document.documentElement
-    if (!isFull) {
+    if (isFull) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitCancelFullScreen) {

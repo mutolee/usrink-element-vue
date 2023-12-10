@@ -13,9 +13,6 @@ const navStore = useNavStore()
 const userInfoStore = useUserInfoStore()
 const collapseStateStore = useCollapseStateStore()
 
-// 是否全屏
-let isScreenFull;
-
 onMounted(() => {
     // 获取用户信息
     localforage.getItem("userInfo").then((val) => {
@@ -60,7 +57,7 @@ const userMessageClick = () => {
  * 全屏
  */
 const screenFull = () => {
-    screenUtil.screenFull(!isScreenFull, val => isScreenFull = val)
+    screenUtil.screenFull(val => {})
 }
 
 /**
