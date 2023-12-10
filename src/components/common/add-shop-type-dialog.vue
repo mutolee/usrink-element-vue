@@ -74,7 +74,7 @@ const closeDialog = () => {
 <template>
     <div class="vel_cpt_panel_dialog_add_shop_type">
         <el-dialog v-model="dialog.show"
-                   :title="createTypeForm.parent.id == 0 ? '创建分类' : '添加子分类'">
+                   :title="createTypeForm.parent.id === 0 ? '创建分类' : '添加子分类'">
             <el-form v-model="createTypeForm" :label-width="labelWidth">
                 <el-form-item label="父级分类">
                     <el-text style="font-weight: 700">{{ createTypeForm.parent.name }}</el-text>
