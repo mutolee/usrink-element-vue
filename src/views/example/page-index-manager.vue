@@ -38,7 +38,7 @@ const addModuleDialogCallback = (e) => {
 }
 // ---------------------------- 添加模块 ----------------------------
 
-const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9])
+const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 3, 4, 5, 6, 7, 8])
 const publishBtnIsDisable = ref(true)
 
 // 监听数据是否修改，如果修改了则发布按钮可用
@@ -146,7 +146,7 @@ watch(() => list.value, newVal => {
 
 .page_right {
     width: 100%;
-    padding: 20px 20px 20px 0;
+    padding: 20px 20px 15px 0;
 }
 
 .page_left .preview {
@@ -184,7 +184,7 @@ watch(() => list.value, newVal => {
 }
 
 .right_content {
-    height: calc(100vh - 90px - 60px - 20px - 15px - 2px);
+    height: calc(100vh - 90px - 20px - 15px - 2px - 60px);
     overflow: hidden;
 }
 
