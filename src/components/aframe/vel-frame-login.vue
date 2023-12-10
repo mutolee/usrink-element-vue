@@ -20,21 +20,18 @@ const submitLogin = () => {
     loading.value = true
     // 模拟登录请求
     // 实际项目应该为POST请求
-    httpUtil.get('/data/login.json', {...loginForm}).then(async res => {
+    httpUtil.get('/data/login.json', {...loginForm.value}).then(async res => {
         // 缓存用户信息
         await loginUtil.cacheUserInfo(res.data.data)
         // 模拟登录耗时操作
-        await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve()
-            }, 1000)
-        })
+        await new Promise(resolve => setTimeout(resolve, 1000))
         router.push('/')
     }).catch(err => {
-        console.error(err)
-    }).finally(() => {
         // 关闭Loading
         loading.value = false
+        console.error(err)
+    }).finally(() => {
+
     })
 
 }

@@ -103,7 +103,7 @@ router.afterEach(() => {
 /**
  * 动态添加路由
  *
- * @return 返回动态路由是否添加成功，true添加成功，false添加失败
+ * @return true: 动态添加路由成功，false: 动态添加路由失败
  */
 const dynaAddRoute = async () => {
     // 获取routes缓存信息
