@@ -71,7 +71,7 @@ const chooseItem = (e) => {
     oldData.chooseEd = false
 
     // 选中当前
-    let newData = dataArr.value.find(data => data.type == e.type);
+    let newData = dataArr.value.find(data => data.type === e.type);
     newData.chooseEd = true
 }
 
@@ -128,7 +128,7 @@ const closeDialog = () => {
 <style scoped>
 
 :deep(.vel_drawer_override){
-    width: 350px !important;
+    width: 380px !important;
 }
 
 :deep(.vel_drawer_override) .el-drawer__body{
@@ -147,12 +147,17 @@ const closeDialog = () => {
 .dialog_con .con_list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    column-gap: 20px;
+    row-gap: 40px;
     padding: 0 15px;
 }
 
+.vel_card_thumb_override{
+    border: 3px solid transparent;
+}
+
 .vel_card_thumb_override.is-always-shadow {
-    border: 1px solid #409EFF;
+    border: 3px solid #409EFF;
 }
 
 

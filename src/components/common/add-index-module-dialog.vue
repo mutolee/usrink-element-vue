@@ -75,7 +75,7 @@ const closeDialog = () => {
                     <el-checkbox v-model="addModuleForm.isShowTit" label="显示标题" size="large"/>
                 </el-form-item>
                 <el-form-item label="布局类型" class="el_form_item_choose_module">
-                    <el-card shadow="never" class="vel_card_thumb_override">
+                    <el-card class="vel_card_thumb_override">
                         <el-image
                             :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + addModuleForm.moduleType + '.jpg'"
                             class="img_thumb"></el-image>
@@ -110,6 +110,10 @@ const closeDialog = () => {
 
 :deep(.vel_from_item_tit) .el-form-item__content {
     column-gap: 10px;
+}
+
+.vel_card_thumb_override{
+    border: 1px solid transparent;
 }
 
 :deep(.vel_card_thumb_override) .el-card__body {

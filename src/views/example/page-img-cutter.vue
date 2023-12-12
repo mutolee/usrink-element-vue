@@ -29,7 +29,7 @@ const openDialog = () => {
             <el-button @click="openDialog">选择图片</el-button>
         </el-card>
     </div>
-    <image-cutter-dialog :dialog="dialog" @cutDown="cutDown" :cut-width="300" :cut-height="150"></image-cutter-dialog>
+    <image-cutter-dialog :dialog="dialog" @onConfirm="cutDown" :cut-width="300" :cut-height="150"></image-cutter-dialog>
 </template>
 
 <style scoped>

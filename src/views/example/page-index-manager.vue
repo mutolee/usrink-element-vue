@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from "vue"
+import {onMounted, ref, watch} from "vue"
 // 可拖拽组件
 // 文档地址：https://alfred-skyblue.github.io/vue-draggable-plus/demo/basic/
 import {VueDraggable} from 'vue-draggable-plus'
@@ -38,8 +38,29 @@ const addModuleDialogCallback = (e) => {
 }
 // ---------------------------- 添加模块 ----------------------------
 
-const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 3, 4, 5, 6, 7, 8])
+const loading = ref(true)
+const list = ref([])
 const publishBtnIsDisable = ref(true)
+
+onMounted(() => {
+    // 初始化首页模块数据
+    initData()
+})
+
+/**
+ * 获取首页模块列表
+ */
+const initData = ()=>{
+    httpUtil.get('/data/indexModule.json').then( async res => {
+        // 模拟请求耗时
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        list.value = res.data.data
+    }).catch(err => {
+        console.error(err)
+    }).finally(() => {
+        loading.value = false
+    })
+}
 
 // 监听数据是否修改，如果修改了则发布按钮可用
 watch(() => list.value, newVal => {
@@ -55,15 +76,15 @@ watch(() => list.value, newVal => {
                 <div class="preview_con">
                     <el-scrollbar>
                         <template v-for="item in list" :key="item">
-                            <index-module1 :width="360" v-if="item == 1"/>
-                            <index-module2 :width="360" v-else-if="item == 2"/>
-                            <index-module3 :width="360" v-else-if="item == 3"/>
-                            <index-module4 :width="360" v-else-if="item == 4"/>
-                            <index-module5 :width="360" v-else-if="item == 5"/>
-                            <index-module6 :width="360" v-else-if="item == 6"/>
-                            <index-module7 :width="360" v-else-if="item == 7"/>
-                            <index-module8 :width="360" v-else-if="item == 8"/>
-                            <index-module9 :width="360" v-else-if="item == 9"/>
+                            <index-module1 :width="360" v-if="item.id === 1"/>
+                            <index-module2 :width="360" v-else-if="item.id === 2"/>
+                            <index-module3 :width="360" v-else-if="item.id === 3"/>
+                            <index-module4 :width="360" v-else-if="item.id === 4"/>
+                            <index-module5 :width="360" v-else-if="item.id === 5"/>
+                            <index-module6 :width="360" v-else-if="item.id === 6"/>
+                            <index-module7 :width="360" v-else-if="item.id === 7"/>
+                            <index-module8 :width="360" v-else-if="item.id === 8"/>
+                            <index-module9 :width="360" v-else-if="item.id === 9"/>
                         </template>
                     </el-scrollbar>
                 </div>
@@ -74,7 +95,7 @@ watch(() => list.value, newVal => {
             </div>
         </div>
         <div class="page_right">
-            <el-card shadow="never" class="vel_card_override">
+            <el-card shadow="never" class="vel_card_override" v-loading="loading">
                 <div class="right_header">
                     <el-button type="primary" @click="showAddModuleDialog">添加模块</el-button>
                 </div>
@@ -104,13 +125,13 @@ watch(() => list.value, newVal => {
                                     </td>
                                     <td>
                                         <el-image class="module_item_img"
-                                                  :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + item + '.jpg'"></el-image>
+                                                  :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + item.id + '.jpg'"></el-image>
                                     </td>
                                     <td>
-                                        <el-text># 1</el-text>
+                                        <el-text>{{item.no}}</el-text>
                                     </td>
                                     <td>
-                                        <el-text>限时推荐</el-text>
+                                        <el-text>{{item.title}}</el-text>
                                     </td>
                                     <td class="module_item_action">
                                         <div>
@@ -123,6 +144,9 @@ watch(() => list.value, newVal => {
                                 </tbody>
                             </table>
                         </VueDraggable>
+                        <div class="no_content" v-if="list.length === 0">
+                            <el-text type="info">暂无数据</el-text>
+                        </div>
                     </el-scrollbar>
                 </div>
             </el-card>
@@ -194,6 +218,14 @@ watch(() => list.value, newVal => {
     flex-direction: column;
 }
 
+.no_content{
+    padding: 0 20px 20px 20px;
+    height: 100px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
 .right_content_panel table {
     border-collapse: collapse;
 }
@@ -202,6 +234,7 @@ watch(() => list.value, newVal => {
     text-align: left;
     padding: 10px;
     border-bottom: 1px solid #e9e9eb;
+    color: #909399;
 }
 
 .right_content_panel tbody {
