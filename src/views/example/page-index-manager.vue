@@ -134,7 +134,7 @@ watch(() => list.value, newVal => {
                                         <el-text>{{item.title}}</el-text>
                                     </td>
                                     <td class="module_item_action">
-                                        <div>
+                                        <div class="action_btn">
                                             <el-button type="success" plain>编辑</el-button>
                                             <el-button type="primary" plain>数据</el-button>
                                             <el-button type="danger" plain>删除</el-button>
@@ -145,7 +145,7 @@ watch(() => list.value, newVal => {
                             </table>
                         </VueDraggable>
                         <div class="no_content" v-if="list.length === 0">
-                            <el-text type="info">暂无数据</el-text>
+                            <el-empty description="暂无数据" />
                         </div>
                     </el-scrollbar>
                 </div>
@@ -220,10 +220,6 @@ watch(() => list.value, newVal => {
 
 .no_content{
     padding: 0 20px 20px 20px;
-    height: 100px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
 }
 
 .right_content_panel table {
@@ -237,6 +233,10 @@ watch(() => list.value, newVal => {
     color: #909399;
 }
 
+.right_content_panel table .ghost {
+    opacity: 0.3;
+}
+
 .right_content_panel tbody {
     background: rgba(200, 235, 251, 0.99);
 }
@@ -248,27 +248,23 @@ watch(() => list.value, newVal => {
     background-color: #fff;
 }
 
-.module_item_img {
+.right_content_panel .cursor-move {
+    cursor: move;
+}
+
+.right_content_panel .module_item_img {
     width: 70px;
     height: 35px;
 }
 
-.module_item_action div{
+.right_content_panel .module_item_action .action_btn{
     display: flex;
     flex-wrap: wrap;
     column-gap: 10px;
 }
 
-.module_item_action div .el-button+.el-button{
-    margin-left: 0px;
-}
-
-.ghost {
-    opacity: 0.3;
-}
-
-.cursor-move {
-    cursor: move;
+.module_item_action .action_btn .el-button+.el-button{
+    margin-left: 0;
 }
 
 </style>

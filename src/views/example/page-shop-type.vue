@@ -92,10 +92,11 @@ const createTypeDialogCallback = (e) => {
             <el-table
                 :data="tableData"
                 :height="tableHeight"
-                style="width: 100%;"
-                empty-text="暂无数据"
                 row-key="id"
                 default-expand-all>
+                <template #empty>
+                    <el-empty description="暂无数据" />
+                </template>
                 <el-table-column prop="name" label="分类名称" width="200">
                     <template #default="scope">
                         <template v-if="scope.row.parent">
