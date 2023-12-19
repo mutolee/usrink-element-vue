@@ -1,4 +1,6 @@
 <script setup>
+// 定义抛出事件
+const emit = defineEmits(['onDelSkuRow'])
 
 // 定义传入参数
 const props = defineProps(['skus'])
@@ -8,9 +10,9 @@ const skus = props.skus
 // skus 数据结构：
 // [{
 //     name: '',
-//     price: 0.01,
-//     delPrice: 0.02,
-//     count: 99
+//     price: "0.01",
+//     delPrice: "0.02",
+//     count: "99"
 // }]
 
 /**
@@ -19,9 +21,9 @@ const skus = props.skus
 const addRow = () => {
     skus.push({
         name: '',
-        price: 0.01,
-        delPrice: 0.02,
-        count: 99
+        price: "0.01",
+        delPrice: "0.02",
+        count: "99"
     })
 }
 
@@ -32,6 +34,8 @@ const addRow = () => {
 const delRow = (index) => {
     // 删除指定下标的元素
     skus.splice(index, 1)
+
+    emit('onDelSkuRow')
 }
 
 </script>
@@ -57,19 +61,22 @@ const delRow = (index) => {
         </el-row>
         <el-row v-for="(item, index) in skus" :key="index">
             <el-col :span="8">
-                <el-input type="text" v-model="item.name"/>
+                <el-input type="text" v-model="item.name" :class="item.name !== '' ? 'no_error' : '' " clearable/>
             </el-col>
             <el-col :span="4">
-                <el-input-number v-model="item.price" size="default" controls-position="right"/>
+                <el-input-number v-model="item.price" size="default" :class="item.price !== null ? 'no_error' : '' "
+                                 controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-input-number v-model="item.delPrice" size="default" controls-position="right"/>
+                <el-input-number v-model="item.delPrice" size="default" :class="item.delPrice !== null ? 'no_error' : '' "
+                                 controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-input-number v-model="item.count" size="default" controls-position="right"/>
+                <el-input-number v-model="item.count" size="default" :class="item.count !== null ? 'no_error' : '' "
+                                 controls-position="right"/>
             </el-col>
             <el-col :span="4">
-                <el-button type="danger" icon="Delete" circle @click="delRow(index)" v-if="skus.length > 1" />
+                <el-button type="danger" icon="Delete" circle @click="delRow(index)" v-if="skus.length > 1"/>
             </el-col>
         </el-row>
         <el-row>
@@ -82,19 +89,19 @@ const delRow = (index) => {
 
 <style scoped>
 
-.vel_cpt_panel_add_sku .el-row:not(.tit){
+.vel_cpt_panel_add_sku .el-row:not(.tit) {
     margin-bottom: 10px;
 }
 
-.vel_cpt_panel_add_sku .el-row.tit .el-text{
+.vel_cpt_panel_add_sku .el-row.tit .el-text {
     color: #73767a;
 }
 
-.vel_cpt_panel_add_sku .el-col{
+.vel_cpt_panel_add_sku .el-col {
     padding-right: 10px;
 }
 
-.vel_cpt_panel_add_sku .el-input-number{
+.vel_cpt_panel_add_sku .el-input-number {
     width: 100%;
 }
 

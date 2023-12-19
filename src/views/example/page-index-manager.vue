@@ -113,6 +113,7 @@ watch(() => list.value, newVal => {
                                     <th>布局类型</th>
                                     <th>编号</th>
                                     <th>标题</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -120,7 +121,7 @@ watch(() => list.value, newVal => {
                                 <tr v-for="item in list" :key="item">
                                     <td class="cursor-move">
                                         <el-icon>
-                                            <Switch/>
+                                            <Switch />
                                         </el-icon>
                                     </td>
                                     <td>
@@ -131,7 +132,13 @@ watch(() => list.value, newVal => {
                                         <el-text>{{item.no}}</el-text>
                                     </td>
                                     <td>
-                                        <el-text>{{item.title}}</el-text>
+                                        <div class="item_title">
+                                            <el-text>{{item.title}}</el-text>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <el-tag v-if="item.status === 0">正常</el-tag>
+                                        <el-tag v-else-if="item.status === -1" type="info">停用</el-tag>
                                     </td>
                                     <td class="module_item_action">
                                         <div class="action_btn">
@@ -223,6 +230,7 @@ watch(() => list.value, newVal => {
 }
 
 .right_content_panel table {
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -255,6 +263,14 @@ watch(() => list.value, newVal => {
 .right_content_panel .module_item_img {
     width: 70px;
     height: 35px;
+}
+
+.right_content_panel .item_title {
+    width: 100px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 .right_content_panel .module_item_action .action_btn{

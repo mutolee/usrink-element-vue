@@ -3,7 +3,7 @@
 // 文档地址：https://www.wangeditor.com/v5/for-frame.html#安装-1
 // 引入 css
 import '@wangeditor/editor/dist/css/style.css'
-import {computed, ref, shallowRef, onBeforeUnmount,nextTick} from "vue";
+import {computed, nextTick, onBeforeUnmount, ref, shallowRef, watch} from "vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
 import SkuSingle from "@/components/common/sku-single.vue";
 import {ArrowRight, Delete, Share} from "@element-plus/icons-vue";
@@ -22,7 +22,9 @@ const form = ref({
     shopNo: '',
     shopName: '',
     shopType: [],
+    thumbs: [],
     unit: '0',
+    skus: [],
     status: '1'
 })
 
@@ -88,11 +90,18 @@ const skus = ref([
     // 数据结构：
     {
         name: '',
-        price: 0.01,
-        delPrice: 0.02,
-        count: 99,
+        price: "0.01",
+        delPrice: "0.02",
+        count: "99",
     }
 ])
+
+
+// 监听skus变化
+watch(skus.value, newVal => {
+    form.value.skus = newVal
+})
+
 
 // ------- 富文本编辑器 --Start---------------------------------
 
@@ -162,7 +171,7 @@ const imgUpload = (file, cb) => {
  */
 const handleCreated = (editor) => {
     editorRef.value = editor
-    console.log(editor.getAllMenuKeys())
+    // console.log(editor.getAllMenuKeys())
 }
 
 // 组件销毁时，也及时销毁编辑器，重要！
@@ -218,10 +227,13 @@ const isShowChooseShopImgCutImgDialog = ref({show: false})
 let imageId = 0;
 const chooseShopImgCutImgCallback = (e) => {
     imageId++
-    images.value.push({
+    form.value.thumbs.push({
         id: imageId,
         src: e.dataURL
     })
+
+    // 验证表单字段，把error隐藏掉
+    formRef.value.validateField('thumbs')
 }
 
 const openChooseShopImgCutImgDialog = () => {
@@ -254,6 +266,76 @@ const carouselHeight = preViewWidth * 0.7;
 
 // ----------- 商品预览 --End-----------------------
 
+const validateSkus = (rule, value, callback) => {
+    let validated = true;
+    value.forEach(item => {
+        if (item.name === ''
+            || item.price === null
+            || item.delPrice === null
+            || item.count === null) {
+            validated = false;
+        }
+    })
+
+    if (!validated) {
+        callback(new Error('请完善规格信息！'));
+    } else {
+        console.log("规格验证通过")
+        callback();
+    }
+}
+
+const formRules = ref({
+    shopNo: [
+        {required: true, message: '编号不能为空！', trigger: 'blur'}
+    ],
+    shopName: [
+        {required: true, message: '商品名称不能为空！', trigger: 'blur'},
+        {min: 8, max: 40, message: '长度在 8 到 40 个字符', trigger: 'blur'}
+        // 其他验证规则
+    ],
+    thumbs: [
+        {required: true, message: '商品图不能为空，请选择商品图！', trigger: 'change'},
+    ],
+    shopType: [
+        {required: true, message: '请选择商品分类', trigger: 'change'}
+    ],
+    unit: [
+        {required: true, message: '请选择价格单位', trigger: 'change'}
+    ],
+    skus: [
+        {required:true, validator: validateSkus, trigger: 'blur'}
+    ],
+    status: [
+        {required: true, message: '请选择状态', trigger: 'change'}
+    ]
+});
+
+const formRef = ref(null)
+
+/**
+ * 保存商品信息
+ */
+const onConfirm = async () => {
+    try {
+        await formRef.value.validate();
+
+        console.log("表单验证通过")
+
+    } catch (error) {
+        // 表单验证未通过，不执行提交操作
+        console.log('表单验证未通过');
+    }
+}
+
+/**
+ * 删除sku事件
+ */
+const skuDelEvent = () => {
+    // 验证表单字段，把error隐藏掉
+    formRef.value.validateField('skus')
+}
+
 
 </script>
 
@@ -269,12 +351,12 @@ const carouselHeight = preViewWidth * 0.7;
                         <el-card shadow="never" class="vel_card_override">
                             <div class="add_goods_panel">
                                 <el-scrollbar>
-                                    <el-form :model="form" label-width="120px">
-                                        <el-form-item label="商品编号" style="padding-top: 20px">
-                                            <el-input v-model="form.shopNo" style="width: 150px"/>
+                                    <el-form :model="form" ref="formRef" :rules="formRules" label-width="120px">
+                                        <el-form-item label="商品编号" prop="shopNo" style="padding-top: 20px">
+                                            <el-input v-model="form.shopNo" clearable style="width: 150px"/>
                                         </el-form-item>
-                                        <el-form-item label="商品名称">
-                                            <el-input v-model="form.shopName"/>
+                                        <el-form-item label="商品名称" prop="shopName">
+                                            <el-input v-model="form.shopName" clearable style="width: 400px"/>
                                         </el-form-item>
                                         <el-form-item label="促销信息">
                                             <el-input
@@ -284,20 +366,22 @@ const carouselHeight = preViewWidth * 0.7;
                                                 placeholder="请输入简短的描述信息，100个字符以内！"
                                             />
                                         </el-form-item>
-                                        <el-form-item label="商品图" class="shop_images">
-                                            <div class="shop_img_list" v-for="img in images" :key="img.id">
-                                                <el-image class="shop_img" :src="img.src" fit="fill"/>
-                                                <span class="mask">
-                                        <el-icon>
-                                            <Delete/>
-                                        </el-icon>
-                                    </span>
-                                            </div>
-                                            <div v-if="images.length < 7" class="el-upload--picture-card"
-                                                 @click="openChooseShopImgCutImgDialog">
-                                                <el-icon>
-                                                    <Plus/>
-                                                </el-icon>
+                                        <el-form-item label="商品图" prop="thumbs" class="shop_images">
+                                            <div class="shop_thumbs">
+                                                <div class="shop_img_list" v-for="img in form.thumbs" :key="img.id">
+                                                    <el-image class="shop_img" :src="img.src" fit="fill"/>
+                                                    <span class="mask">
+                                                    <el-icon>
+                                                        <Delete/>
+                                                    </el-icon>
+                                                </span>
+                                                </div>
+                                                <div v-if="form.thumbs.length < 7" class="el-upload--picture-card"
+                                                     @click="openChooseShopImgCutImgDialog">
+                                                    <el-icon>
+                                                        <Plus/>
+                                                    </el-icon>
+                                                </div>
                                             </div>
                                         </el-form-item>
                                         <el-form-item class="shop_tags" label="商品标签">
@@ -323,26 +407,28 @@ const carouselHeight = preViewWidth * 0.7;
                                                 + 添加标签
                                             </el-button>
                                         </el-form-item>
-                                        <el-form-item label="商品分类">
+                                        <el-form-item label="商品分类" prop="shopType">
                                             <el-cascader
                                                 :props="{expandTrigger:'hover'}"
                                                 :options="shopType"
                                                 size="default"
                                                 v-model="form.shopType" clearable placeholder="选择分类"/>
                                         </el-form-item>
-                                        <el-form-item label="规格" class="sku_panel">
-                                            <sku-single :skus="skus"></sku-single>
+                                        <el-form-item label="规格" prop="skus" class="sku_panel">
+                                            <sku-single :skus="skus" @onDelSkuRow="skuDelEvent"></sku-single>
                                         </el-form-item>
-                                        <el-form-item label="价格单位">
-                                            <el-select v-model="form.unit" size="default" placeholder="Select">
+                                        <el-form-item label="价格单位" prop="unit">
+                                            <el-select v-model="form.unit" size="default" clearable
+                                                       placeholder="选择单位">
                                                 <template v-for="option in units" :key="option.value">
                                                     <el-option :label="option.label" :value="option.value"
                                                                :disabled="option.disabled"/>
                                                 </template>
                                             </el-select>
                                         </el-form-item>
-                                        <el-form-item label="状态">
-                                            <el-select v-model="form.status" size="default">
+                                        <el-form-item label="状态" prop="status">
+                                            <el-select v-model="form.status" clearable size="default"
+                                                       placeholder="选择状态">
                                                 <el-option label="已上架" value="0"/>
                                                 <el-option label="待上架" value="1"/>
                                                 <el-option label="已下架" value="2"/>
@@ -376,7 +462,7 @@ const carouselHeight = preViewWidth * 0.7;
                                 <el-scrollbar>
                                     <div class="shop_carousel_list">
                                         <el-carousel :height="carouselHeight + 'px'">
-                                            <el-carousel-item v-for="img in images" :key="img.id">
+                                            <el-carousel-item v-for="img in form.thumbs" :key="img.id">
                                                 <el-image :src="img.src" fit="fill" style="width: 100%"/>
                                             </el-carousel-item>
                                         </el-carousel>
@@ -420,7 +506,8 @@ const carouselHeight = preViewWidth * 0.7;
                                                 <el-text tag="b">规格</el-text>
                                             </div>
                                             <div class="sku_info">
-                                                <el-text class="sku_name" type="info" :style="{width:preViewWidth-20-40*2 + 'px'}"
+                                                <el-text class="sku_name" type="info"
+                                                         :style="{width:preViewWidth-20-40*2 + 'px'}"
                                                          size="small">
                                                     {{ skus[0].name }}
                                                 </el-text>
@@ -459,7 +546,8 @@ const carouselHeight = preViewWidth * 0.7;
                                         <div class="detail_panel">
                                             <el-tabs :model="0">
                                                 <el-tab-pane label="商品详情" class="goods_detail">
-                                                    <div v-html="valueHtml" :style="{width:preViewWidth-20 + 'px'}"></div>
+                                                    <div v-html="valueHtml"
+                                                         :style="{width:preViewWidth-20 + 'px'}"></div>
                                                 </el-tab-pane>
                                                 <el-tab-pane label="租赁流程">Config</el-tab-pane>
                                             </el-tabs>
@@ -469,11 +557,12 @@ const carouselHeight = preViewWidth * 0.7;
                             </div>
                         </div>
                         <div class="publish">
-                            <el-button type="primary" size="large" style="width: 100%">立即发布
+                            <el-button type="primary" size="large" @click="onConfirm">保存
                             </el-button>
                         </div>
                     </div>
-                    <image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog" @onConfirm="chooseShopImgCutImgCallback"
+                    <image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
+                                         @onConfirm="chooseShopImgCutImgCallback"
                                          :cut-width="300"
                                          :cut-height="210"></image-cutter-dialog>
                 </div>
@@ -484,11 +573,15 @@ const carouselHeight = preViewWidth * 0.7;
 
 <style scoped>
 
-.vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__header{
+.vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__header {
     margin-bottom: 0;
 }
 
-:deep(.vel_drawer_override){
+.vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__body {
+    padding: 20px 0 20px 20px;
+}
+
+:deep(.vel_drawer_override) {
     background-color: #f6f8f9;
 }
 
@@ -519,8 +612,11 @@ const carouselHeight = preViewWidth * 0.7;
     background-color: #f8faff;
 }
 
-.shop_images {
-    padding: 10px 0;
+.add_goods_panel .shop_thumbs {
+    padding: 10px 0 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .shop_img_list {
@@ -564,15 +660,19 @@ const carouselHeight = preViewWidth * 0.7;
     --el-upload-picture-card-size: 84px;
 }
 
-:deep(.shop_images) .el-form-item__content {
-    gap: 10px;
-}
-
 .shop_tags .el-tag,
 .shop_tags .el-button,
 .shop_tags .el-input {
     margin-right: 5px;
     margin-bottom: 3px;
+}
+
+:deep(.vel_card_override) .el-form-item .no_error .el-input__wrapper {
+    box-shadow: 0 0 0 1px var(--el-border-color) inset;
+}
+
+:deep(.vel_card_override) .el-form-item .no_error .el-input__wrapper.is-focus {
+    box-shadow: 0 0 0 1px var(--el-border-color) inset !important;
 }
 
 .shop_editor {
@@ -581,13 +681,13 @@ const carouselHeight = preViewWidth * 0.7;
 }
 
 .page_right {
-    min-width: 380px;
+    width: 380px;
     display: flex;
     flex-direction: column;
 }
 
 .page_right .preview {
-    padding: 0 0 0 20px;
+    padding: 0 20px 0 20px;
 }
 
 .page_right .preview_con {
@@ -725,9 +825,13 @@ const carouselHeight = preViewWidth * 0.7;
 }
 
 .page_right .publish {
-    padding: 20px 0 0 20px;
+    padding: 20px 20px 0 20px;
     display: flex;
     align-items: center;
+}
+
+.page_right .publish .el-button {
+    width: 100%;
 }
 
 

@@ -5,8 +5,9 @@
         {
             "id": 1,
             "no": "#1",
-            "title": "限时抢购",
+            "title": "限时抢购数据加载成功",
             "moduleType": 1,
+            "status":-1,
             "isShowTit": true
         },
         {
@@ -14,6 +15,7 @@
             "no": "#2",
             "title": "新品上市",
             "moduleType": 2,
+            "status":-1,
             "isShowTit": true
         },
         {
@@ -21,6 +23,7 @@
             "no": "#3",
             "title": "热销商品",
             "moduleType": 3,
+            "status":0,
             "isShowTit": true
         },
         {
@@ -28,6 +31,7 @@
             "no": "#4",
             "title": "猜你喜欢",
             "moduleType": 4,
+            "status":0,
             "isShowTit": true
         },
         {
@@ -35,6 +39,7 @@
             "no": "#5",
             "title": "热门推荐",
             "moduleType": 5,
+            "status":-1,
             "isShowTit": true
         },
         {
@@ -42,6 +47,7 @@
             "no": "#6",
             "title": "热门推荐",
             "moduleType": 6,
+            "status":0,
             "isShowTit": true
         },
         {
@@ -49,6 +55,7 @@
             "no": "#7",
             "title": "热门推荐",
             "moduleType": 7,
+            "status":0,
             "isShowTit": true
         },
         {
@@ -56,6 +63,7 @@
             "no": "#8",
             "title": "热门推荐",
             "moduleType": 8,
+            "status":0,
             "isShowTit": true
         },
         {
@@ -63,6 +71,7 @@
             "no": "#9",
             "title": "热门推荐",
             "moduleType": 9,
+            "status":0,
             "isShowTit": true
         }
     ]

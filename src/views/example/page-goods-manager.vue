@@ -61,10 +61,10 @@ const showAddGoodsDialog = () => {
         <el-card shadow="never" class="vel_card_override top">
             <el-form :inline="true" :model="queryForm" class="-form-inline">
                 <el-form-item label="编号">
-                    <el-input v-model="queryForm.shopNo" placeholder="商品编号" clearable/>
+                    <el-input v-model="queryForm.shopNo" placeholder="商品编号" clearable style="width: 180px"/>
                 </el-form-item>
                 <el-form-item label="名称">
-                    <el-input v-model="queryForm.shopName" placeholder="商品名称" clearable/>
+                    <el-input v-model="queryForm.shopName" placeholder="商品名称" clearable style="width: 180px"/>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-select v-model="queryForm.status" size="default" placeholder="选择状态" clearable>

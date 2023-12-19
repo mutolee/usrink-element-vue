@@ -21,7 +21,7 @@ onMounted(() => {
 /**
  * 初始化表格数据
  */
-const initTableData = () =>{
+const initTableData = () => {
     loading.value = true
     httpUtil.get('data/shopType.json').then(async res => {
         // 模拟请求耗时
@@ -45,6 +45,8 @@ const createTypeDialogParam = ref({
         name: '无',
     },
     name: '',
+    status: "0",
+    sort: 1,
     icon: ''
 })
 
@@ -95,7 +97,7 @@ const createTypeDialogCallback = (e) => {
                 row-key="id"
                 default-expand-all>
                 <template #empty>
-                    <el-empty description="暂无数据" />
+                    <el-empty description="暂无数据"/>
                 </template>
                 <el-table-column prop="name" label="分类名称" width="200">
                     <template #default="scope">
@@ -107,12 +109,19 @@ const createTypeDialogCallback = (e) => {
                         </template>
                     </template>
                 </el-table-column>
-                <el-table-column prop="icon" label="图标">
+                <el-table-column prop="icon" label="图标" align="center">
                     <template #default="scope">
                         <el-image :src="scope.row.icon" style="width: 50px; height: 50px"></el-image>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作">
+                <el-table-column prop="sort" label="排序" align="center"></el-table-column>
+                <el-table-column label="状态" align="center">
+                    <template #default="scope">
+                        <el-tag v-if="scope.row.status === 0">正常</el-tag>
+                        <el-tag v-else-if="scope.row.status === -1" type="info">停用</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" fixed="right" min-width="200">
                     <template #default="scope">
                         <div class="table_col_action">
                             <template v-if="scope.row.children">
@@ -138,21 +147,21 @@ const createTypeDialogCallback = (e) => {
     padding: 20px;
 }
 
-.vel_card_override{
+.vel_card_override {
 
 }
 
-.table_col_action{
+.table_col_action {
     display: flex;
     flex-wrap: wrap;
     column-gap: 10px;
 }
 
-.table_col_action .el-button+.el-button{
+.table_col_action .el-button + .el-button {
     margin-left: 0;
 }
 
-:deep(.vel_card_override) .el-table__inner-wrapper::before{
+:deep(.vel_card_override) .el-table__inner-wrapper::before {
     background-color: transparent !important;
 }
 

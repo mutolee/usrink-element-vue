@@ -19,7 +19,8 @@ const addModuleFormDefault = {
     moduleNo: '',
     moduleTit: '',
     isShowTit: false,
-    moduleType: 5
+    moduleType: 5,
+    status: "0"
 }
 
 // 添加模块数据表单
@@ -48,10 +49,16 @@ const chooseIndexModuleCallback = (e) => {
 /**
  * 确定事件
  */
-const confirmDialog = () => {
-    // 触发事件
-    emit('onConfirm', addModuleForm.value)
-    closeDialog()
+const confirmDialog = async () => {
+    try {
+        await formRef.value.validate();
+        // 触发事件
+        emit('onConfirm', addModuleForm.value)
+        closeDialog()
+    } catch (error) {
+        // 表单验证未通过，不执行提交操作
+        console.log('表单验证未通过');
+    }
 }
 
 /**
@@ -61,18 +68,41 @@ const closeDialog = () => {
     dialog.show = false
     addModuleForm.value = addModuleFormDefault
 }
+
+const formRules = ref({
+    moduleNo: [
+        {required: true, message: '编号不能为空！', trigger: 'blur'}
+    ],
+    moduleTit: [
+        {required: true, message: '模块名称不能为空！', trigger: 'blur'},
+        {min: 2, max: 4, message: '长度在 2 到 4 个字符', trigger: 'blur'}
+        // 其他验证规则
+    ],
+    status: [
+        {required: true, message: '请选择状态', trigger: 'change'}
+    ]
+});
+
+const formRef = ref(null)
+
 </script>
 
 <template>
     <div class="vel_cpt_panel_dialog_add_module">
         <el-dialog v-model="dialog.show" title="添加模块">
-            <el-form v-model="addModuleForm" :label-width="labelWidth">
-                <el-form-item label="编号">
-                    <el-input v-model="addModuleForm.moduleNo"/>
+            <el-form :model="addModuleForm" ref="formRef" :rules="formRules" :label-width="labelWidth">
+                <el-form-item label="编号" prop="moduleNo">
+                    <el-input v-model="addModuleForm.moduleNo" clearable/>
                 </el-form-item>
-                <el-form-item label="标题" class="vel_from_item_tit">
-                    <el-input v-model="addModuleForm.moduleTit"/>
+                <el-form-item label="标题" prop="moduleTit" class="vel_from_item_tit">
+                    <el-input v-model="addModuleForm.moduleTit" clearable/>
                     <el-checkbox v-model="addModuleForm.isShowTit" label="显示标题" size="large"/>
+                </el-form-item>
+                <el-form-item label="状态" prop="status">
+                    <el-select v-model="addModuleForm.status" size="default" placeholder="选择状态">
+                        <el-option label="正常" value="0"/>
+                        <el-option label="停用" value="1"/>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="布局类型" class="el_form_item_choose_module">
                     <el-card class="vel_card_thumb_override">
@@ -86,14 +116,14 @@ const closeDialog = () => {
             <template #footer>
             <span class="dialog-footer">
                 <el-button @click="closeDialog">取消</el-button>
-                <el-button type="primary" @click="confirmDialog()">确定</el-button>
+                <el-button type="primary" @click="confirmDialog">确定</el-button>
             </span>
             </template>
         </el-dialog>
 
         <!-- 选择模块类型 -->
         <choose-index-module-dialog :dialog="isShowChooseIndexModuleDialog"
-                             @onChoose="chooseIndexModuleCallback"></choose-index-module-dialog>
+                                    @onChoose="chooseIndexModuleCallback"></choose-index-module-dialog>
     </div>
 </template>
 
@@ -112,7 +142,7 @@ const closeDialog = () => {
     column-gap: 10px;
 }
 
-.vel_card_thumb_override{
+.vel_card_thumb_override {
     border: 1px solid transparent;
 }
 
