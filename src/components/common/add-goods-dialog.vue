@@ -261,8 +261,8 @@ const units = ref([
 ])
 
 // ----------- 商品预览 --Start-----------------------
-const preViewWidth = 360;
-const carouselHeight = preViewWidth * 0.7;
+const preViewWidth = 400;
+const carouselHeight = (preViewWidth - 40) * 0.7;
 
 // ----------- 商品预览 --End-----------------------
 
@@ -349,226 +349,233 @@ const skuDelEvent = () => {
                 <h4>添加商品</h4>
             </template>
             <template #default>
-                <div class="dialog_con">
-                    <div class="page_left">
-                        <el-card shadow="never" class="vel_card_override">
-                            <div class="add_goods_panel">
-                                <el-scrollbar>
-                                    <el-form :model="form" ref="formRef" :rules="formRules" label-width="120px">
-                                        <el-form-item label="商品编号" prop="shopNo" style="padding-top: 20px">
-                                            <el-input v-model="form.shopNo" clearable style="width: 150px"/>
-                                        </el-form-item>
-                                        <el-form-item label="商品名称" prop="shopName">
-                                            <el-input v-model="form.shopName" clearable style="width: 400px"/>
-                                        </el-form-item>
-                                        <el-form-item label="促销信息">
-                                            <el-input
-                                                v-model="form.desc"
-                                                :autosize="{ minRows: 2, maxRows: 4 }"
-                                                type="textarea"
-                                                placeholder="请输入简短的描述信息，100个字符以内！"
-                                            />
-                                        </el-form-item>
-                                        <el-form-item label="商品图" prop="thumbs" class="shop_images">
-                                            <div class="shop_thumbs">
-                                                <div class="shop_img_list" v-for="img in form.thumbs" :key="img.id">
-                                                    <el-image class="shop_img" :src="img.src" fit="fill"/>
-                                                    <span class="mask">
-                                                    <el-icon>
-                                                        <Delete/>
-                                                    </el-icon>
-                                                </span>
+                <el-scrollbar>
+                    <div class="dialog_con">
+                        <div class="page_left" :style="{width:preViewWidth + 'px', minWidth:preViewWidth + 'px'}">
+                            <div class="page_left_con">
+                                <div class="preview">
+                                    <div class="preview_con">
+                                        <el-scrollbar>
+                                            <div class="shop_carousel_list">
+                                                <el-carousel :height="carouselHeight + 'px'">
+                                                    <el-carousel-item v-for="img in form.thumbs" :key="img.id">
+                                                        <el-image :src="img.src" fit="fill" style="width: 100%"/>
+                                                    </el-carousel-item>
+                                                </el-carousel>
+                                            </div>
+                                            <div class="shop_info_panel">
+                                                <div class="tit_panel">
+                                                    <div class="tit_item price">
+                                                    <span class="price_real">
+                                                        <el-text>￥</el-text>
+                                                        <el-text style="font-size: 22px" tag="b">{{ skus[0].price }}</el-text>
+                                                        <el-text>/{{ units[0].label }}</el-text>
+                                                    </span>
+                                                        <el-text type="info" tag="del" size="small">￥{{
+                                                                skus[0].delPrice
+                                                            }}/{{ units[0].label }}
+                                                        </el-text>
+                                                    </div>
+                                                    <div class="tit_item tit">
+                                                        <el-text class="txt" tag="b">
+                                                            {{ form.shopName }}
+                                                        </el-text>
+                                                        <div class="share">
+                                                            <div class="share_con">
+                                                                <el-icon>
+                                                                    <Share/>
+                                                                </el-icon>
+                                                                <el-text size="small">分享</el-text>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div v-if="form.desc !== ''" class="tit_item desc">
+                                                        <el-text type="info" size="small">{{ form.desc }}</el-text>
+                                                    </div>
+                                                    <div v-if="dynamicTags.length > 0" class="tit_item tags">
+                                                        <el-tag v-for="tag in dynamicTags" :key="tag" type="danger" size="small"
+                                                                effect="plain">{{ tag }}
+                                                        </el-tag>
+                                                    </div>
                                                 </div>
-                                                <div v-if="form.thumbs.length < 7" class="el-upload--picture-card"
-                                                     @click="openChooseShopImgCutImgDialog">
-                                                    <el-icon>
-                                                        <Plus/>
-                                                    </el-icon>
+                                                <div class="sku_panel">
+                                                    <div style="padding-bottom: 10px">
+                                                        <el-text tag="b">规格</el-text>
+                                                    </div>
+                                                    <div class="sku_info">
+                                                        <el-text class="sku_name" type="info"
+                                                                 size="small">
+                                                            {{ skus[0].name }}
+                                                        </el-text>
+                                                        <div class="sku_right">
+                                                            <el-text class="sku_num" type="info">x1</el-text>
+                                                            <div class="choose_more_arrow">
+                                                                <el-icon>
+                                                                    <ArrowRight/>
+                                                                </el-icon>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="choose_time_panel">
+                                                    <div style="padding-bottom: 10px">
+                                                        <el-text tag="b">租赁周期</el-text>
+                                                    </div>
+                                                    <div class="time_panel">
+                                                        <el-steps direction="vertical" :active="1" :space="40">
+                                                            <el-step status="wait">
+                                                                <template #description>
+                                                                    开始时间 : 2023-11-26
+                                                                </template>
+                                                            </el-step>
+                                                            <el-step status="wait">
+                                                                <template #description>
+                                                                    结束时间 : 2023-11-26
+                                                                </template>
+                                                            </el-step>
+                                                        </el-steps>
+                                                        <div class="choose_more_arrow">
+                                                            <el-icon>
+                                                                <ArrowRight/>
+                                                            </el-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="detail_panel">
+                                                    <el-tabs :model="0">
+                                                        <el-tab-pane label="商品详情" class="goods_detail">
+                                                            <div v-html="valueHtml"></div>
+                                                        </el-tab-pane>
+                                                        <el-tab-pane label="租赁流程">Config</el-tab-pane>
+                                                    </el-tabs>
                                                 </div>
                                             </div>
-                                        </el-form-item>
-                                        <el-form-item class="shop_tags" label="商品标签">
-                                            <el-tag
-                                                v-for="tag in dynamicTags"
-                                                :key="tag"
-                                                size="large"
-                                                closable
-                                                :disable-transitions="false"
-                                                @close="handleCloseTag(tag)">
-                                                {{ tag }}
-                                            </el-tag>
-                                            <el-input
-                                                v-if="inputVisible"
-                                                v-model="inputValue"
-                                                size="default"
-                                                ref="inputRef"
-                                                @keyup.enter="handleInputTagConfirm"
-                                                @blur="handleInputTagConfirm"
-                                                style="width: 100px"
-                                            />
-                                            <el-button v-else size="default" @click="showInput">
-                                                + 添加标签
-                                            </el-button>
-                                        </el-form-item>
-                                        <el-form-item label="商品分类" prop="shopType">
-                                            <el-cascader
-                                                :props="{expandTrigger:'hover'}"
-                                                :options="shopType"
-                                                size="default"
-                                                v-model="form.shopType" clearable placeholder="选择分类"/>
-                                        </el-form-item>
-                                        <el-form-item label="规格" prop="skus" class="sku_panel">
-                                            <sku-single :skus="skus" @onDelSkuRow="skuDelEvent"></sku-single>
-                                        </el-form-item>
-                                        <el-form-item label="价格单位" prop="unit">
-                                            <el-select v-model="form.unit" size="default" clearable
-                                                       placeholder="选择单位">
-                                                <template v-for="option in units" :key="option.value">
-                                                    <el-option :label="option.label" :value="option.value"
-                                                               :disabled="option.disabled"/>
-                                                </template>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="状态" prop="status">
-                                            <el-select v-model="form.status" clearable size="default"
-                                                       placeholder="选择状态">
-                                                <el-option label="已上架" value="0"/>
-                                                <el-option label="待上架" value="1"/>
-                                                <el-option label="已下架" value="2"/>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="商品描述">
-                                            <div class="shop_editor">
-                                                <Toolbar
-                                                    style="border-bottom: 1px solid #e0e0e0"
-                                                    :editor="editorRef"
-                                                    :defaultConfig="toolbarConfig"
-                                                    mode="simple"
-                                                />
-                                                <Editor
-                                                    style="min-height:400px;overflow-y: hidden;"
-                                                    v-model="valueHtml"
-                                                    :defaultConfig="editorConfig"
-                                                    mode="simple"
-                                                    @onCreated="handleCreated"
-                                                />
-                                            </div>
-                                        </el-form-item>
-                                    </el-form>
-                                </el-scrollbar>
-                            </div>
-                        </el-card>
-                    </div>
-                    <div class="page_right">
-                        <div class="preview">
-                            <div class="preview_con">
-                                <el-scrollbar>
-                                    <div class="shop_carousel_list">
-                                        <el-carousel :height="carouselHeight + 'px'">
-                                            <el-carousel-item v-for="img in form.thumbs" :key="img.id">
-                                                <el-image :src="img.src" fit="fill" style="width: 100%"/>
-                                            </el-carousel-item>
-                                        </el-carousel>
+                                        </el-scrollbar>
                                     </div>
-                                    <div class="shop_info_panel">
-                                        <div class="tit_panel">
-                                            <div class="tit_item price">
-                                    <span class="price_real">
-                                        <el-text>￥</el-text>
-                                        <el-text style="font-size: 22px" tag="b">{{ skus[0].price }}</el-text>
-                                        <el-text>/{{ units[0].label }}</el-text>
-                                    </span>
-                                                <el-text type="info" tag="del" size="small">￥{{
-                                                        skus[0].delPrice
-                                                    }}/{{ units[0].label }}
-                                                </el-text>
-                                            </div>
-                                            <div class="tit_item tit">
-                                                <el-text class="txt" tag="b" :style="{width:preViewWidth-20-40 + 'px'}">
-                                                    {{ form.shopName }}
-                                                </el-text>
-                                                <div class="share">
-                                                    <el-icon>
-                                                        <Share/>
-                                                    </el-icon>
-                                                    <el-text size="small">分享</el-text>
-                                                </div>
-                                            </div>
-                                            <div v-if="form.desc !== ''" class="tit_item desc"
-                                                 :style="{width:preViewWidth-20 + 'px'}">
-                                                <el-text type="info" size="small">{{ form.desc }}</el-text>
-                                            </div>
-                                            <div v-if="dynamicTags.length > 0" class="tit_item tags">
-                                                <el-tag v-for="tag in dynamicTags" :key="tag" type="danger" size="small"
-                                                        effect="plain">{{ tag }}
-                                                </el-tag>
-                                            </div>
-                                        </div>
-                                        <div class="sku_panel">
-                                            <div style="padding-bottom: 10px">
-                                                <el-text tag="b">规格</el-text>
-                                            </div>
-                                            <div class="sku_info">
-                                                <el-text class="sku_name" type="info"
-                                                         :style="{width:preViewWidth-20-40*2 + 'px'}"
-                                                         size="small">
-                                                    {{ skus[0].name }}
-                                                </el-text>
-                                                <el-text class="sku_num" type="info">x1</el-text>
-                                                <div class="choose_more_arrow">
-                                                    <el-icon>
-                                                        <ArrowRight/>
-                                                    </el-icon>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="choose_time_panel">
-                                            <div style="padding-bottom: 10px">
-                                                <el-text tag="b">租赁周期</el-text>
-                                            </div>
-                                            <div class="time_panel">
-                                                <el-steps direction="vertical" :active="1" :space="40">
-                                                    <el-step status="wait">
-                                                        <template #description>
-                                                            开始时间 : 2023-11-26
-                                                        </template>
-                                                    </el-step>
-                                                    <el-step status="wait">
-                                                        <template #description>
-                                                            结束时间 : 2023-11-26
-                                                        </template>
-                                                    </el-step>
-                                                </el-steps>
-                                                <div class="choose_more_arrow">
-                                                    <el-icon>
-                                                        <ArrowRight/>
-                                                    </el-icon>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="detail_panel">
-                                            <el-tabs :model="0">
-                                                <el-tab-pane label="商品详情" class="goods_detail">
-                                                    <div v-html="valueHtml"
-                                                         :style="{width:preViewWidth-20 + 'px'}"></div>
-                                                </el-tab-pane>
-                                                <el-tab-pane label="租赁流程">Config</el-tab-pane>
-                                            </el-tabs>
-                                        </div>
+                                    <div class="preview_publish">
+                                        <el-button type="primary" size="large" @click="onConfirm">保存
+                                        </el-button>
                                     </div>
-                                </el-scrollbar>
+                                </div>
                             </div>
                         </div>
-                        <div class="publish">
-                            <el-button type="primary" size="large" @click="onConfirm">保存
-                            </el-button>
+                        <div class="page_right" :style="{width:drawerWidth - preViewWidth + 'px'}">
+                            <div class="page_right_con">
+                                <el-card shadow="never" class="vel_card_override">
+                                    <div class="add_goods_panel">
+                                        <el-scrollbar>
+                                            <el-form :model="form" ref="formRef" :rules="formRules" label-width="120px">
+                                                <el-form-item label="商品编号" prop="shopNo" style="padding-top: 20px">
+                                                    <el-input v-model="form.shopNo" clearable style="width: 150px"/>
+                                                </el-form-item>
+                                                <el-form-item label="商品名称" prop="shopName">
+                                                    <el-input v-model="form.shopName" clearable style="width: 400px"/>
+                                                </el-form-item>
+                                                <el-form-item label="促销信息">
+                                                    <el-input
+                                                        v-model="form.desc"
+                                                        :autosize="{ minRows: 2, maxRows: 4 }"
+                                                        type="textarea"
+                                                        placeholder="请输入简短的描述信息，100个字符以内！"
+                                                    />
+                                                </el-form-item>
+                                                <el-form-item label="商品图" prop="thumbs" class="shop_images">
+                                                    <div class="shop_thumbs">
+                                                        <div class="shop_img_list" v-for="img in form.thumbs" :key="img.id">
+                                                            <el-image class="shop_img" :src="img.src" fit="fill"/>
+                                                            <span class="mask">
+                                                        <el-icon>
+                                                            <Delete/>
+                                                        </el-icon>
+                                                    </span>
+                                                        </div>
+                                                        <div v-if="form.thumbs.length < 7" class="el-upload--picture-card"
+                                                             @click="openChooseShopImgCutImgDialog">
+                                                            <el-icon>
+                                                                <Plus/>
+                                                            </el-icon>
+                                                        </div>
+                                                    </div>
+                                                </el-form-item>
+                                                <el-form-item class="shop_tags" label="商品标签">
+                                                    <el-tag
+                                                        v-for="tag in dynamicTags"
+                                                        :key="tag"
+                                                        size="large"
+                                                        closable
+                                                        :disable-transitions="false"
+                                                        @close="handleCloseTag(tag)">
+                                                        {{ tag }}
+                                                    </el-tag>
+                                                    <el-input
+                                                        v-if="inputVisible"
+                                                        v-model="inputValue"
+                                                        size="default"
+                                                        ref="inputRef"
+                                                        @keyup.enter="handleInputTagConfirm"
+                                                        @blur="handleInputTagConfirm"
+                                                        style="width: 100px"
+                                                    />
+                                                    <el-button v-else size="default" @click="showInput">
+                                                        + 添加标签
+                                                    </el-button>
+                                                </el-form-item>
+                                                <el-form-item label="商品分类" prop="shopType">
+                                                    <el-cascader
+                                                        :props="{expandTrigger:'hover'}"
+                                                        :options="shopType"
+                                                        size="default"
+                                                        v-model="form.shopType" clearable placeholder="选择分类"/>
+                                                </el-form-item>
+                                                <el-form-item label="规格" prop="skus" class="sku_panel">
+                                                    <sku-single :skus="skus" @onDelSkuRow="skuDelEvent"></sku-single>
+                                                </el-form-item>
+                                                <el-form-item label="价格单位" prop="unit">
+                                                    <el-select v-model="form.unit" size="default" clearable
+                                                               placeholder="选择单位">
+                                                        <template v-for="option in units" :key="option.value">
+                                                            <el-option :label="option.label" :value="option.value"
+                                                                       :disabled="option.disabled"/>
+                                                        </template>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="状态" prop="status">
+                                                    <el-select v-model="form.status" clearable size="default"
+                                                               placeholder="选择状态">
+                                                        <el-option label="已上架" value="0"/>
+                                                        <el-option label="待上架" value="1"/>
+                                                        <el-option label="已下架" value="2"/>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="商品描述">
+                                                    <div class="shop_editor" :style="{maxWidth:drawerWidth - preViewWidth - 200 + 'px'}">
+                                                        <Toolbar
+                                                            style="border-bottom: 1px solid #e0e0e0"
+                                                            :editor="editorRef"
+                                                            :defaultConfig="toolbarConfig"
+                                                            mode="simple"
+                                                        />
+                                                        <Editor
+                                                            style="min-height:400px;overflow-y: hidden;"
+                                                            v-model="valueHtml"
+                                                            :defaultConfig="editorConfig"
+                                                            mode="simple"
+                                                            @onCreated="handleCreated"
+                                                        />
+                                                    </div>
+                                                </el-form-item>
+                                            </el-form>
+                                        </el-scrollbar>
+                                    </div>
+                                </el-card>
+                            </div>
                         </div>
+                        <image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
+                                             @onConfirm="chooseShopImgCutImgCallback"
+                                             :cut-width="300"
+                                             :cut-height="210"></image-cutter-dialog>
                     </div>
-                    <image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
-                                         @onConfirm="chooseShopImgCutImgCallback"
-                                         :cut-width="300"
-                                         :cut-height="210"></image-cutter-dialog>
-                </div>
+                </el-scrollbar>
             </template>
         </el-drawer>
     </div>
@@ -581,7 +588,7 @@ const skuDelEvent = () => {
 }
 
 .vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__body {
-    padding: 20px 0 20px 20px;
+    padding: 0;
 }
 
 :deep(.vel_drawer_override) {
@@ -589,14 +596,196 @@ const skuDelEvent = () => {
 }
 
 .dialog_con {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 40px);
     display: flex;
 }
 
 .page_left {
-    width: 100%;
-    padding: 0;
 }
+
+.page_left_con{
+    padding: 20px;
+}
+
+.page_left_con .preview_con {
+    background-color: #ffffff;
+    height: calc(100vh - 40px - 20px - 20px - 60px);
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+}
+
+.page_left_con .preview_publish {
+    padding: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.page_left_con .preview_publish .el-button {
+    width: 100%;
+}
+
+.page_right {
+}
+
+.page_right_con{
+    padding: 20px 20px 20px 0;
+}
+
+.shop_carousel_list .el-carousel {
+    background-color: #f0f2f5;
+}
+
+:deep(.shop_carousel_list) .el-carousel__indicators--horizontal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: none;
+    left: 0;
+}
+
+.shop_info_panel {
+    background-color: #f0f2f5;
+}
+
+.tit_panel,
+.shop_info_panel .sku_panel,
+.choose_time_panel,
+.detail_panel {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tit_item:not(:last-child) {
+    padding-bottom: 10px;
+}
+
+.tit_item.tags{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tit_item.tags .el-tag {
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.price .price_real {
+    padding-right: 7px;
+}
+
+.price .el-text {
+    color: red;
+}
+
+.tit_panel .tit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tit .txt {
+    flex-grow: 1;
+    overflow: hidden; /* 超出部分隐藏 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 设置行数 */
+}
+
+.tit .share{
+    min-width: 50px;
+}
+
+.tit .share_con {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tit_item.desc{
+    display: flex;
+}
+
+.tit_item.desc .el-text{
+    flex-grow: 1;
+}
+
+.sku_panel .sku_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sku_info .sku_name {
+    flex-grow: 1;
+    overflow: hidden; /* 超出部分隐藏 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 设置行数 */
+}
+
+.sku_right{
+    display: flex;
+}
+
+.sku_right .sku_num {
+    width: 40px;
+    text-align: center;
+}
+
+.sku_right .choose_more_arrow {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:deep(.choose_time_panel) .el-step:last-child {
+    flex-basis: 0 !important;
+}
+
+.choose_time_panel .time_panel {
+    display: flex;
+}
+
+.choose_time_panel .el-steps {
+    flex-grow: 1;
+}
+
+.choose_time_panel .choose_more_arrow {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:deep(.detail_panel) .el-tab-pane img {
+    width: 100% !important;
+    height: auto !important;
+    vertical-align: bottom;
+}
+
+:deep(.goods_detail) p{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+:deep(.goods_detail) table {
+    border-collapse: collapse;
+}
+
+:deep(.goods_detail) table th {
+    background-color: #f5f2f0;
+    padding: 5px 5px;
+    border: 1px solid #b2b2b2;
+}
+
+:deep(.goods_detail) table td {
+    padding: 5px 5px;
+    border: 1px solid #b2b2b2;
+    text-align: center;
+}
+
 
 :deep(.vel_card_override) .el-card__body {
     padding: 0;
@@ -681,160 +870,6 @@ const skuDelEvent = () => {
 .shop_editor {
     border: 1px solid #e9eaef;
     line-height: normal;
-}
-
-.page_right {
-    width: 380px;
-    display: flex;
-    flex-direction: column;
-}
-
-.page_right .preview {
-    padding: 0 20px 0 20px;
-}
-
-.page_right .preview_con {
-    background-color: #ffffff;
-    height: calc(100vh - 40px - 20px - 20px - 60px);
-    overflow: hidden;
-    border-radius: 4px 4px 0 0;
-}
-
-.el-carousel {
-    background-color: #f0f2f5;
-}
-
-:deep(.shop_carousel_list) .el-carousel__indicators--horizontal {
-    width: 360px;
-    display: flex;
-    justify-content: center;
-    transform: none;
-    left: 0;
-}
-
-.shop_info_panel {
-    background-color: #f0f2f5;
-}
-
-.tit_panel,
-.shop_info_panel .sku_panel,
-.choose_time_panel,
-.detail_panel {
-    background-color: #ffffff;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.tit_item:not(:last-child) {
-    padding-bottom: 10px;
-}
-
-.tit_item.tags .el-tag {
-    margin-right: 5px;
-    margin-bottom: 3px;
-}
-
-.price .price_real {
-    padding-right: 7px;
-}
-
-.price .el-text {
-    color: red;
-}
-
-.tit_panel .tit {
-    display: flex;
-    align-items: center;
-}
-
-.tit .txt {
-    overflow: hidden; /* 超出部分隐藏 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 设置行数 */
-}
-
-.tit .share {
-    width: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.sku_panel .sku_info {
-    display: flex;
-}
-
-.sku_info .sku_name {
-    flex-grow: 1;
-    overflow: hidden; /* 超出部分隐藏 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 设置行数 */
-}
-
-.sku_info .sku_num {
-    width: 40px;
-    text-align: center;
-}
-
-.sku_info .choose_more_arrow {
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-:deep(.choose_time_panel) .el-step:last-child {
-    flex-basis: 0 !important;
-}
-
-.choose_time_panel .time_panel {
-    display: flex;
-}
-
-.choose_time_panel .el-steps {
-    flex-grow: 1;
-}
-
-.choose_time_panel .choose_more_arrow {
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-:deep(.detail_panel) .el-tab-pane img {
-    width: 100% !important;
-    height: auto !important;
-    vertical-align: bottom;
-}
-
-:deep(.goods_detail) table {
-    border-collapse: collapse;
-}
-
-:deep(.goods_detail) table th {
-    background-color: #f5f2f0;
-    padding: 5px 5px;
-    border: 1px solid #b2b2b2;
-}
-
-:deep(.goods_detail) table td {
-    padding: 5px 5px;
-    border: 1px solid #b2b2b2;
-    text-align: center;
-}
-
-.page_right .publish {
-    padding: 20px 20px 0 20px;
-    display: flex;
-    align-items: center;
-}
-
-.page_right .publish .el-button {
-    width: 100%;
 }
 
 
