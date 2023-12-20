@@ -90,9 +90,9 @@ const skus = ref([
     // 数据结构：
     {
         name: '',
-        price: "0.01",
-        delPrice: "0.02",
-        count: "99",
+        price: 0.01,
+        delPrice: 0.02,
+        count: 99,
     }
 ])
 
@@ -268,14 +268,19 @@ const carouselHeight = preViewWidth * 0.7;
 
 const validateSkus = (rule, value, callback) => {
     let validated = true;
-    value.forEach(item => {
-        if (item.name === ''
-            || item.price === null
-            || item.delPrice === null
-            || item.count === null) {
-            validated = false;
+    if(value.length === 0) {
+        validated = false;
+    }else{
+        for(let i = 0; i < value.length; i++) {
+            if (value[i].name === ''
+                || value[i].price === null
+                || value[i].delPrice === null
+                || value[i].count === null) {
+                validated = false;
+                break;
+            }
         }
-    })
+    }
 
     if (!validated) {
         callback(new Error('请完善规格信息！'));
@@ -304,7 +309,7 @@ const formRules = ref({
         {required: true, message: '请选择价格单位', trigger: 'change'}
     ],
     skus: [
-        {required:true, validator: validateSkus, trigger: 'blur'}
+        {required: true, validator: validateSkus, trigger: 'blur'}
     ],
     status: [
         {required: true, message: '请选择状态', trigger: 'change'}
@@ -319,9 +324,7 @@ const formRef = ref(null)
 const onConfirm = async () => {
     try {
         await formRef.value.validate();
-
         console.log("表单验证通过")
-
     } catch (error) {
         // 表单验证未通过，不执行提交操作
         console.log('表单验证未通过');
@@ -332,7 +335,7 @@ const onConfirm = async () => {
  * 删除sku事件
  */
 const skuDelEvent = () => {
-    // 验证表单字段，把error隐藏掉
+    // sku数据行发生变化，重新验证
     formRef.value.validateField('skus')
 }
 

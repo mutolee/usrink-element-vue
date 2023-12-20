@@ -10,9 +10,9 @@ const skus = props.skus
 // skus 数据结构：
 // [{
 //     name: '',
-//     price: "0.01",
-//     delPrice: "0.02",
-//     count: "99"
+//     price: 0.01,
+//     delPrice: 0.02,
+//     count: 99
 // }]
 
 /**
@@ -21,9 +21,9 @@ const skus = props.skus
 const addRow = () => {
     skus.push({
         name: '',
-        price: "0.01",
-        delPrice: "0.02",
-        count: "99"
+        price: 0.01,
+        delPrice: 0.02,
+        count: 99
     })
 }
 
