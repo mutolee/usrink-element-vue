@@ -3,12 +3,13 @@
 // 文档地址：https://www.wangeditor.com/v5/for-frame.html#安装-1
 // 引入 css
 import '@wangeditor/editor/dist/css/style.css'
-import {computed, nextTick, onBeforeUnmount, ref, shallowRef, watch} from "vue";
+import {computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch} from "vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
 import SkuSingle from "@/components/common/sku-single.vue";
 import {ArrowRight, Delete, Share} from "@element-plus/icons-vue";
 import {Editor, Toolbar} from "@wangeditor/editor-for-vue";
 import ImageCutterDialog from "@/components/common/image-cutter-dialog.vue";
+import cacheUtil from "@/utils/CacheUtil";
 
 const documentWHStore = useDocumentWHStore()
 
@@ -28,62 +29,20 @@ const form = ref({
     status: '1'
 })
 
-const shopType = [
-    {
-        value: 1,
-        label: '笔记本',
-    },
-    {
-        value: 2,
-        label: '台式机',
-    },
-    {
-        value: 3,
-        label: '电脑组件',
-        children: [
-            {
-                value: 31,
-                label: '显示器',
-            },
-            {
-                value: 32,
-                label: '主板',
-            },
-        ],
-    },
-    {
-        value: 4,
-        label: '外设产品',
-    },
-    {
-        value: 5,
-        label: '电脑组件-2',
-        children: [
-            {
-                value: 51,
-                label: '显示器-2-1',
-            },
-            {
-                value: 52,
-                label: '主板-2-2',
-            },
-        ],
-    },
-    {
-        value: 6,
-        label: '电脑组件-3',
-        children: [
-            {
-                value: 61,
-                label: '显示器-3-1',
-            },
-            {
-                value: 62,
-                label: '主板-3-2',
-            },
-        ],
-    },
-]
+const shopType = ref([])
+
+onMounted(() => {
+    // 初始化商品分类
+    initShopType()
+})
+
+const initShopType = () => {
+    cacheUtil.getShopTypeExcludeDisabled().then(res => {
+        shopType.value.push(...res)
+    }).catch(err => {
+        console.error(err)
+    })
+}
 
 // 初始化sku
 const skus = ref([
@@ -268,10 +227,10 @@ const carouselHeight = (preViewWidth - 40) * 0.7;
 
 const validateSkus = (rule, value, callback) => {
     let validated = true;
-    if(value.length === 0) {
+    if (value.length === 0) {
         validated = false;
-    }else{
-        for(let i = 0; i < value.length; i++) {
+    } else {
+        for (let i = 0; i < value.length; i++) {
             if (value[i].name === ''
                 || value[i].price === null
                 || value[i].delPrice === null
@@ -368,7 +327,9 @@ const skuDelEvent = () => {
                                                     <div class="tit_item price">
                                                     <span class="price_real">
                                                         <el-text>￥</el-text>
-                                                        <el-text style="font-size: 22px" tag="b">{{ skus[0].price }}</el-text>
+                                                        <el-text style="font-size: 22px" tag="b">{{
+                                                                skus[0].price
+                                                            }}</el-text>
                                                         <el-text>/{{ units[0].label }}</el-text>
                                                     </span>
                                                         <el-text type="info" tag="del" size="small">￥{{
@@ -393,7 +354,8 @@ const skuDelEvent = () => {
                                                         <el-text type="info" size="small">{{ form.desc }}</el-text>
                                                     </div>
                                                     <div v-if="dynamicTags.length > 0" class="tit_item tags">
-                                                        <el-tag v-for="tag in dynamicTags" :key="tag" type="danger" size="small"
+                                                        <el-tag v-for="tag in dynamicTags" :key="tag" type="danger"
+                                                                size="small"
                                                                 effect="plain">{{ tag }}
                                                         </el-tag>
                                                     </div>
@@ -481,7 +443,8 @@ const skuDelEvent = () => {
                                                 </el-form-item>
                                                 <el-form-item label="商品图" prop="thumbs" class="shop_images">
                                                     <div class="shop_thumbs">
-                                                        <div class="shop_img_list" v-for="img in form.thumbs" :key="img.id">
+                                                        <div class="shop_img_list" v-for="img in form.thumbs"
+                                                             :key="img.id">
                                                             <el-image class="shop_img" :src="img.src" fit="fill"/>
                                                             <span class="mask">
                                                         <el-icon>
@@ -489,7 +452,8 @@ const skuDelEvent = () => {
                                                         </el-icon>
                                                     </span>
                                                         </div>
-                                                        <div v-if="form.thumbs.length < 7" class="el-upload--picture-card"
+                                                        <div v-if="form.thumbs.length < 7"
+                                                             class="el-upload--picture-card"
                                                              @click="openChooseShopImgCutImgDialog">
                                                             <el-icon>
                                                                 <Plus/>
@@ -522,7 +486,7 @@ const skuDelEvent = () => {
                                                 </el-form-item>
                                                 <el-form-item label="商品分类" prop="shopType">
                                                     <el-cascader
-                                                        :props="{expandTrigger:'hover'}"
+                                                        :props="{expandTrigger:'hover',value:'id',label:'name'}"
                                                         :options="shopType"
                                                         size="default"
                                                         v-model="form.shopType" clearable placeholder="选择分类"/>
@@ -548,7 +512,8 @@ const skuDelEvent = () => {
                                                     </el-select>
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
-                                                    <div class="shop_editor" :style="{maxWidth:drawerWidth - preViewWidth - 200 + 'px'}">
+                                                    <div class="shop_editor"
+                                                         :style="{maxWidth:drawerWidth - preViewWidth - 200 + 'px'}">
                                                         <Toolbar
                                                             style="border-bottom: 1px solid #e0e0e0"
                                                             :editor="editorRef"
@@ -603,7 +568,7 @@ const skuDelEvent = () => {
 .page_left {
 }
 
-.page_left_con{
+.page_left_con {
     padding: 20px;
 }
 
@@ -627,7 +592,7 @@ const skuDelEvent = () => {
 .page_right {
 }
 
-.page_right_con{
+.page_right_con {
     padding: 20px 20px 20px 0;
 }
 
@@ -660,7 +625,7 @@ const skuDelEvent = () => {
     padding-bottom: 10px;
 }
 
-.tit_item.tags{
+.tit_item.tags {
     display: flex;
     flex-wrap: wrap;
 }
@@ -692,7 +657,7 @@ const skuDelEvent = () => {
     -webkit-line-clamp: 2; /* 设置行数 */
 }
 
-.tit .share{
+.tit .share {
     min-width: 50px;
 }
 
@@ -703,11 +668,11 @@ const skuDelEvent = () => {
     align-items: center;
 }
 
-.tit_item.desc{
+.tit_item.desc {
     display: flex;
 }
 
-.tit_item.desc .el-text{
+.tit_item.desc .el-text {
     flex-grow: 1;
 }
 
@@ -724,7 +689,7 @@ const skuDelEvent = () => {
     -webkit-line-clamp: 2; /* 设置行数 */
 }
 
-.sku_right{
+.sku_right {
     display: flex;
 }
 
@@ -765,7 +730,7 @@ const skuDelEvent = () => {
     vertical-align: bottom;
 }
 
-:deep(.goods_detail) p{
+:deep(.goods_detail) p {
     word-wrap: break-word;
     white-space: pre-wrap;
 }

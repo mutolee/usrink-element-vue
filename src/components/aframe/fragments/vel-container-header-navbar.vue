@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch, onMounted} from "vue"
+import {onMounted, ref, watch} from "vue"
 import {useNavStore} from "@/stores/data/navStore"
 import {useRouter} from "vue-router"
 
@@ -96,8 +96,7 @@ const removeTab = (tabName) => {
     tabs.value = tabs.value.filter(tab => tab.path !== tabName);
 
     // 销毁被删页面组件的缓存
-    let newIncludes = navStore.includes.filter(item => item.path !== tabName)
-    navStore.includes = newIncludes
+    navStore.includes = navStore.includes.filter(item => item.path !== tabName)
 }
 
 /**
@@ -202,7 +201,7 @@ const dropdownEvent = (command) => {
                     :closable="tab.closable"
                     :key="tab.path">
                     <template #label>
-                        <el-icon class="vel_el_icon_home" :size="16" v-if="tab.path == '/welcome'">
+                        <el-icon class="vel_el_icon_home" :size="16" v-if="tab.path === '/welcome'">
                             <HomeFilled/>
                         </el-icon>
                         <span>{{ tab.label }}</span>

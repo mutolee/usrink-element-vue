@@ -7,7 +7,7 @@ const screenFull = (cb) => {
         || document.mozFullScreenElement
         || document.webkitFullscreenElement
         || document.msFullscreenElement;
-    let element = document.documentElement
+
     if (isFull) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -19,6 +19,8 @@ const screenFull = (cb) => {
             document.msExitFullscreen();
         }
     } else {
+        let element = document.documentElement
+        
         if (element.requestFullscreen) {
             element.requestFullscreen();
         } else if (element.webkitRequestFullScreen) {

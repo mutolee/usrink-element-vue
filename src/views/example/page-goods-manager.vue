@@ -1,11 +1,13 @@
 <script setup>
 
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import AddGoodsDialog from "@/components/common/add-goods-dialog.vue";
+import cacheUtil from "@/utils/CacheUtil";
 
 const queryForm = ref({
     shopNo: '',
     shopName: '',
+    shopType: [],
     status: ''
 })
 
@@ -47,6 +49,23 @@ const goodsList = ref([
     }
 ])
 
+const shopType = ref([])
+
+onMounted(() => {
+    // 初始化商品分类
+    initShopType()
+})
+
+const initShopType = () => {
+    cacheUtil.getShopTypeExcludeDisabled().then(res => {
+        console.log(res)
+        shopType.value.push(...res)
+    }).catch(err => {
+        console.error(err)
+    })
+}
+
+
 const isShowAddGoodsDialog = ref({show: false})
 
 const showAddGoodsDialog = () => {
@@ -65,6 +84,13 @@ const showAddGoodsDialog = () => {
                 </el-form-item>
                 <el-form-item label="名称">
                     <el-input v-model="queryForm.shopName" placeholder="商品名称" clearable style="width: 180px"/>
+                </el-form-item>
+                <el-form-item label="分类">
+                    <el-cascader
+                        :props="{expandTrigger:'hover',value:'id',label:'name'}"
+                        :options="shopType"
+                        size="default"
+                        v-model="queryForm.shopType" clearable placeholder="选择分类"/>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-select v-model="queryForm.status" size="default" placeholder="选择状态" clearable>
@@ -127,7 +153,7 @@ const showAddGoodsDialog = () => {
             </el-table>
             <el-pagination background layout="prev, pager, next" :total="1000"/>
         </el-card>
-        <add-goods-dialog :dialog="isShowAddGoodsDialog" @onConfirm=""></add-goods-dialog>
+        <add-goods-dialog v-if="isShowAddGoodsDialog.show" :dialog="isShowAddGoodsDialog" @onConfirm=""></add-goods-dialog>
     </div>
 </template>
 
