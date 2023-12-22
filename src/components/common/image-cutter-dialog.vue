@@ -57,6 +57,7 @@ const closeDialog = () => {
                                :box-width="480"
                                :cutWidth="props.cutWidth"
                                :cutHeight="props.cutHeight"
+                               :tool="false"
                                accept="image/jpeg ,image/png"
                                fileType="png">
                         <template #scaleReset>
