@@ -1,54 +1,29 @@
 <script setup>
-
 import {onMounted, ref} from "vue";
-import AddGoodsDialog from "@/components/common/add-goods-dialog.vue";
-import cacheUtil from "@/utils/CacheUtil";
 import httpUtil from "@/utils/HttpUtil";
 
 const queryForm = ref({
-    shopNo: '',
-    shopName: '',
-    shopType: [],
+    articleNo: '',
+    articleTitle: '',
     status: ''
 })
-
 const loading = ref(true)
-const goodsList = ref([])
-const shopType = ref([])
+const articleList = ref([])
 
 onMounted(() => {
-    // 初始化商品分类
-    initShopType()
-    // 初始化商品数据
-    initGoodsData()
+    // 初始化文章数据
+    initArticleData()
 })
 
-const initShopType = () => {
-    cacheUtil.getShopTypeExcludeDisabled().then(res => {
-        shopType.value.push(...res)
-    }).catch(err => {
-        console.error(err)
-    })
-}
-
-const initGoodsData = () => {
-    loading.value = true
-    httpUtil.get("data/goods.json").then(res => {
-        goodsList.value = res.data.data
+const initArticleData = () => {
+    httpUtil.get("data/articles.json").then(res => {
+        articleList.value = res.data.data
     }).catch(err => {
         console.error(err)
     }).finally(() => {
         loading.value = false
     })
 }
-
-
-const isShowAddGoodsDialog = ref({show: false})
-
-const showAddGoodsDialog = () => {
-    isShowAddGoodsDialog.value.show = true
-}
-
 
 </script>
 
@@ -57,17 +32,10 @@ const showAddGoodsDialog = () => {
         <el-card shadow="never" class="vel_card_override top">
             <el-form :inline="true" :model="queryForm">
                 <el-form-item label="编号">
-                    <el-input v-model="queryForm.shopNo" placeholder="商品编号" clearable style="width: 180px"/>
+                    <el-input v-model="queryForm.articleNo" placeholder="编号" clearable style="width: 180px"/>
                 </el-form-item>
-                <el-form-item label="名称">
-                    <el-input v-model="queryForm.shopName" placeholder="商品名称" clearable style="width: 180px"/>
-                </el-form-item>
-                <el-form-item label="分类">
-                    <el-cascader
-                        :props="{expandTrigger:'hover',value:'id',label:'name'}"
-                        :options="shopType"
-                        size="default"
-                        v-model="queryForm.shopType" clearable placeholder="选择分类"/>
+                <el-form-item label="标题">
+                    <el-input v-model="queryForm.articleTitle" placeholder="标题" clearable style="width: 180px"/>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-select v-model="queryForm.status" size="default" placeholder="选择状态" clearable>
@@ -82,30 +50,23 @@ const showAddGoodsDialog = () => {
             </el-form>
         </el-card>
         <el-row class="top_btn_panel">
-            <el-button type="primary" @click="showAddGoodsDialog">添加商品</el-button>
+            <el-button type="primary" @click="showAddArticleDialog">添加文章</el-button>
         </el-row>
         <el-card v-loading="loading" shadow="never" class="vel_card_override content">
             <el-table
-                class="shop_table"
-                :data="goodsList">
-                <el-table-column prop="shopNo" label="编号" sortable width="100"/>
-                <el-table-column label="商品名称" min-width="250">
+                class="article_table"
+                :data="articleList">
+                <el-table-column prop="articleNo" label="编号" sortable width="100"/>
+                <el-table-column label="文章标题" min-width="250">
                     <template #default="scope">
-                        <div class="shop_name">
-                            <el-text>{{ scope.row.shopName }}</el-text>
+                        <div class="article_title">
+                            <el-text>{{ scope.row.articleTitle }}</el-text>
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="thumb" label="缩略图" min-width="150">
+                <el-table-column label="时间">
                     <template #default="scope">
-                        <el-image class="goods_thumb" :src="scope.row.thumb"></el-image>
-                    </template>
-                </el-table-column>
-                <el-table-column label="分类" width="180">
-                    <template #default="scope">
-                        <div class="shop_type">
-                            <el-text>{{ scope.row.shopTypeName }}</el-text>
-                        </div>
+                        <el-text type="info">{{scope.row.createTime}}</el-text>
                     </template>
                 </el-table-column>
                 <el-table-column prop="status" label="状态" sortable width="120">
@@ -130,7 +91,6 @@ const showAddGoodsDialog = () => {
             </el-table>
             <el-pagination background layout="prev, pager, next" :total="1000"/>
         </el-card>
-        <add-goods-dialog v-if="isShowAddGoodsDialog.show" :dialog="isShowAddGoodsDialog" @onConfirm=""></add-goods-dialog>
     </div>
 </template>
 
@@ -159,35 +119,20 @@ const showAddGoodsDialog = () => {
     margin-bottom: 20px;
 }
 
-:deep(.shop_table) .shop_name{
-    overflow: hidden; /* 超出部分隐藏 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 设置行数 */
-}
-
-:deep(.shop_table) .shop_type{
+:deep(.article_table) .article_title{
     overflow: hidden; /* 超出部分隐藏 */
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1; /* 设置行数 */
 }
 
-:deep(.shop_table) .goods_thumb {
-    width: 100px;
-    height: 70px;
-    border: 1px solid #eaeaea;
-}
-
-:deep(.shop_table) .action_btn{
+:deep(.article_table) .action_btn{
     display: flex;
     flex-wrap: wrap;
     column-gap: 10px;
 }
 
-:deep(.shop_table) .action_btn .el-button+.el-button{
+:deep(.article_table) .action_btn .el-button+.el-button{
     margin-left: 0;
 }
-
-
 </style>

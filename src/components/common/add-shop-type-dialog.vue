@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import ImageCutterDialog from "@/components/common/image-cutter-dialog.vue";
+import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
 
 // 定义传入参数
 const props = defineProps(['dialog', 'paramData'])
@@ -135,9 +135,9 @@ const formRules = ref({
             </span>
             </template>
         </el-dialog>
-        <image-cutter-dialog :dialog="isShowCreateTypeCutImgDialog" @onConfirm="createTypeCutImgCallback"
+        <vel-image-cutter-dialog :dialog="isShowCreateTypeCutImgDialog" @onConfirm="createTypeCutImgCallback"
                              :cut-width="100"
-                             :cut-height="100"></image-cutter-dialog>
+                             :cut-height="100"></vel-image-cutter-dialog>
     </div>
 </template>
 

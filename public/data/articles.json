@@ -1,0 +1,66 @@
+{
+    "statusCode": 200,
+    "message": "数据加载成功",
+    "data": [
+        {
+            "articleNo": "#1",
+            "articleTitle": "在漫漫征程中，我们披荆斩棘，挑战未知，用智慧和勇气，开创属于自己的新天地",
+            "createTime": "2021-12-03 07:09:14",
+            "status": "2"
+        },
+        {
+            "articleNo": "#2",
+            "articleTitle": "静谧大自然，品味阳光照射下的世界，每一片绿叶，都是自然的呢喃与温柔",
+            "createTime": "2020-05-04 17:59:24",
+            "status": "1"
+        },
+        {
+            "articleNo": "#3",
+            "articleTitle": "用热爱的心，品味美食的艺术，感受厨房里的幸福时光与家的温暖",
+            "createTime": "2022-12-12 22:39:36",
+            "status": "0"
+        },
+        {
+            "articleNo": "#4",
+            "articleTitle": "汗水与决心，塑造健康的身体，让坚持与毅力铸就完美的体魄",
+            "createTime": "2021-03-10 21:52:28",
+            "status": "2"
+        },
+        {
+            "articleNo": "#5",
+            "articleTitle": "行万里路，感受世界的广阔与文化的多样，每一段旅途都是心灵的历练",
+            "createTime": "2021-03-08 14:18:02",
+            "status": "0"
+        },
+        {
+            "articleNo": "#6",
+            "articleTitle": "音乐的魅力，情感的表达，用音符弹奏心灵的细腻与深情",
+            "createTime": "2023-01-05 18:45:05",
+            "status": "1"
+        },
+        {
+            "articleNo": "#7",
+            "articleTitle": "摄影心得分享，镜头下的瞬间，捕捉生活中的温柔和美好",
+            "createTime": "2022-04-21 13:27:17",
+            "status": "0"
+        },
+        {
+            "articleNo": "#8",
+            "articleTitle": "健康生活，关注身体健康，用心感悟生命中的幸福与满足",
+            "createTime": "2020-01-11 11:14:45",
+            "status": "1"
+        },
+        {
+            "articleNo": "#9",
+            "articleTitle": "沟通的艺术，增进情感，开启心灵之门，打开内心的智慧",
+            "createTime": "2022-02-16 04:55:06",
+            "status": "1"
+        },
+        {
+            "articleNo": "#10",
+            "articleTitle": "合理安排时间，提高工作效率，为理想的未来勾勒完美的蓝图",
+            "createTime": "2021-09-24 20:10:34",
+            "status": "1"
+        }
+    ]
+}

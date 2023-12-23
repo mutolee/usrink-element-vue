@@ -6,8 +6,10 @@ import {useRoutesStore} from "@/stores/data/routesStore";
 import {useNavStore} from '@/stores/data/navStore'
 import {useRoute} from 'vue-router'
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
+import {useCollapseStateStore} from "@/stores/data/collapseStateStore";
 
 const routesStore = useRoutesStore()
+const collapseStateStore = useCollapseStateStore()
 const navStore = useNavStore()
 const documentWHStore = useDocumentWHStore()
 const route = useRoute()
@@ -77,6 +79,13 @@ const pageCache = () => {
 const documentWHRecord = () => {
     documentWHStore.wh.w = document.documentElement.clientWidth
     documentWHStore.wh.h = document.documentElement.clientHeight
+
+    // 如果是移动端，隐藏左侧菜单
+    if (documentWHStore.wh.w < 768) {
+        if(!collapseStateStore.collapseState){
+            collapseStateStore.setCollapseState(true)
+        }
+    }
 }
 
 </script>

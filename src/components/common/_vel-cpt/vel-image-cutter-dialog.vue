@@ -93,7 +93,6 @@ const closeDialog = () => {
 </template>
 
 <style scoped>
-
 .img_cut_panel{
     display: flex;
     gap: 20px;

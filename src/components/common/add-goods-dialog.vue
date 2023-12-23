@@ -1,206 +1,45 @@
 <script setup>
-// Vue3 Wangeditor 富文本编辑器
-// 文档地址：https://www.wangeditor.com/v5/for-frame.html#安装-1
-// 引入 css
-import '@wangeditor/editor/dist/css/style.css'
-import {computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch} from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
-import SkuSingle from "@/components/common/sku-single.vue";
-import {ArrowRight, Delete, Share} from "@element-plus/icons-vue";
-import {Editor, Toolbar} from "@wangeditor/editor-for-vue";
-import ImageCutterDialog from "@/components/common/image-cutter-dialog.vue";
+import VelSkuSingle from "@/components/common/_vel-cpt/vel-sku-single.vue";
+import {Delete, Plus, Warning} from "@element-plus/icons-vue";
+import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
 import cacheUtil from "@/utils/CacheUtil";
-
-const documentWHStore = useDocumentWHStore()
+import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
+import Preview_shop from "@/components/common/preview_shop.vue";
 
 const props = defineProps(['dialog'])
+const documentWHStore = useDocumentWHStore()
 // 定义抛出事件
 const emit = defineEmits(['onConfirm'])
 
+// 添加商品抽屉宽度
 const drawerWidth = computed(() => documentWHStore.wh.w - 260)
+// 商品预览宽度
+const preViewWidth = ref(400);
+// 商品表单
+const formRef = ref(null)
 
-const form = ref({
+// 商品表单信息
+const shopInfo = ref({
     shopNo: '',
     shopName: '',
+    shopDesc:'',
+    tags:[],
     shopType: [],
     thumbs: [],
     unit: '0',
-    skus: [],
-    status: '1'
-})
-
-const shopType = ref([])
-
-onMounted(() => {
-    // 初始化商品分类
-    initShopType()
-})
-
-const initShopType = () => {
-    cacheUtil.getShopTypeExcludeDisabled().then(res => {
-        shopType.value.push(...res)
-    }).catch(err => {
-        console.error(err)
-    })
-}
-
-// 初始化sku
-const skus = ref([
-    // 数据结构：
-    {
+    skus: [{
         name: '',
-        price: 0.01,
-        delPrice: 0.02,
-        count: 99,
-    }
-])
-
-
-// 监听skus变化
-watch(skus.value, newVal => {
-    form.value.skus = newVal
+        price: null,
+        delPrice: null,
+        count: null,
+    }],
+    status: '1',
+    shopDetail: {val: '<p></p>'},
 })
 
-
-// ------- 富文本编辑器 --Start---------------------------------
-
-// 编辑器实例，必须用 shallowRef
-const editorRef = shallowRef()
-
-// 内容 HTML
-const valueHtml = ref('<p></p>')
-// 工具栏配置
-const toolbarConfig = {
-    toolbarKeys: [
-        'headerSelect',
-        '|',
-        'bold', 'italic', "through", 'underline', 'color', 'bgColor', 'fontSize', "blockquote",
-        '|',
-        "insertTable",
-        'uploadImage'
-    ]
-}
-// 编辑区配置
-const editorConfig = {
-    placeholder: '请输入内容...',
-    scroll: false,
-    MENU_CONF: {
-        uploadImage: {
-            // 小于该值就插入 base64 格式（而不上传），默认为 0
-            base64LimitSize: 5 * 1024, // 5kb
-            async customUpload(file, insertFn) {
-                // file 即选中的文件
-                imgUpload(file, (src) => {
-                    // 自己实现上传，并得到图片 url alt href
-                    // 最后插入图片
-                    insertFn(src, '', 'javascript:(0);')
-                })
-            }
-        }
-    },
-    hoverbarKeys: {
-        'image': {
-            // 清空 image 元素的 hoverbar
-            menuKeys: [],
-        }
-    }
-}
-
-
-/**
- * 图片上传
- * @param file 选择的文件
- * @param cb 回调
- */
-const imgUpload = (file, cb) => {
-    // 文件大小限制，1M
-    let maxFileSize = 1 * 1024 * 1024
-    console.log(file)
-    if (file.size > maxFileSize) {
-        ElMessage.error("单张图片不能大于1M！");
-        return;
-    }
-    cb('https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg');
-}
-
-
-/**
- * 记录 editor 实例，重要！
- * @param editor
- */
-const handleCreated = (editor) => {
-    editorRef.value = editor
-    // console.log(editor.getAllMenuKeys())
-}
-
-// 组件销毁时，也及时销毁编辑器，重要！
-onBeforeUnmount(() => {
-    const editor = editorRef.value
-    if (editor == null) return
-    editor.destroy()
-})
-// ------- 富文本编辑器 --End---------------------------------
-
-// 商品标签
-const dynamicTags = ref([])
-const inputValue = ref('')
-const inputVisible = ref(false)
-
-const inputRef = ref(null); // 创建一个ref来引用el-input
-
-/**
- * 删除Tag
- * @param tag
- */
-const handleCloseTag = tag => {
-    dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1)
-}
-
-/**
- * 添加Tag
- */
-const handleInputTagConfirm = () => {
-    if (inputValue.value) {
-        dynamicTags.value.push(inputValue.value)
-    }
-    inputVisible.value = false
-    inputValue.value = ''
-}
-
-/**
- * 显示添加Tag
- */
-const showInput = () => {
-    inputVisible.value = true
-    nextTick(() => {
-        if (inputRef.value) {
-            inputRef.value.focus()
-        }
-    })
-}
-
-// ----------- 添加商品图片 --Start-----------------------
-const images = ref([])
-const isShowChooseShopImgCutImgDialog = ref({show: false})
-
-let imageId = 0;
-const chooseShopImgCutImgCallback = (e) => {
-    imageId++
-    form.value.thumbs.push({
-        id: imageId,
-        src: e.dataURL
-    })
-
-    // 验证表单字段，把error隐藏掉
-    formRef.value.validateField('thumbs')
-}
-
-const openChooseShopImgCutImgDialog = () => {
-    isShowChooseShopImgCutImgDialog.value.show = true
-}
-
-// ----------- 添加商品图片 --End-----------------------
-
+// 商品单位
 const units = ref([
     {
         label: '天',
@@ -219,12 +58,107 @@ const units = ref([
     },
 ])
 
-// ----------- 商品预览 --Start-----------------------
-const preViewWidth = 400;
-const carouselHeight = (preViewWidth - 40) * 0.7;
+onMounted(() => {
+    // 初始化商品分类
+    initShopType()
+})
 
-// ----------- 商品预览 --End-----------------------
+// region -------------------- 商品分类 --------------------
+const shopType = ref([])
 
+/**
+ * 初始化商品分类
+ */
+const initShopType = () => {
+    cacheUtil.getShopTypeExcludeDisabled().then(res => {
+        shopType.value.push(...res)
+    }).catch(err => {
+        console.error(err)
+    })
+}
+// endregion
+
+// region -------------------- 商品标签 --------------------
+// 商品标签
+const tagInputValue = ref('')
+const tagInputVisible = ref(false)
+const tagInputRef = ref(null);
+
+/**
+ * 删除Tag
+ * @param tag
+ */
+const handleCloseTag = tag => {
+    shopInfo.value.tags.splice(shopInfo.value.tags.indexOf(tag), 1)
+}
+
+/**
+ * 添加Tag
+ */
+const handleInputTagConfirm = () => {
+    if (shopInfo.value.tags) {
+        shopInfo.value.tags.push(tagInputValue.value)
+    }
+    tagInputVisible.value = false
+    tagInputValue.value = ''
+}
+
+/**
+ * 显示添加Tag
+ */
+const showTagInput = () => {
+    tagInputVisible.value = true
+    nextTick(() => {
+        if (tagInputRef.value) {
+            tagInputRef.value.focus()
+        }
+    })
+}
+// endregion
+
+// region -------------------- 商品图片 --------------------
+const isShowChooseShopImgCutImgDialog = ref({show: false})
+// 图片序号
+let imageId = 0;
+
+/**
+ * 图片裁剪回调
+ */
+const chooseShopImgCutImgCallback = (e) => {
+    imageId++
+    shopInfo.value.thumbs.push({
+        id: imageId,
+        src: e.dataURL
+    })
+
+    // 验证表单字段，把error隐藏掉
+    formRef.value.validateField('thumbs')
+}
+
+/**
+ * 打开图片裁剪弹框
+ */
+const openChooseShopImgCutImgDialog = () => {
+    isShowChooseShopImgCutImgDialog.value.show = true
+}
+// endregion
+
+// region -------------------- 商品规格 --------------------
+
+/**
+ * 删除sku事件
+ */
+const skuDelEvent = () => {
+    // sku数据行发生变化，重新验证
+    formRef.value.validateField('skus')
+}
+// endregion
+
+// region -------------------- 验证表单 --------------------
+
+/**
+ * 验证规格
+ */
 const validateSkus = (rule, value, callback) => {
     let validated = true;
     if (value.length === 0) {
@@ -249,6 +183,9 @@ const validateSkus = (rule, value, callback) => {
     }
 }
 
+/**
+ * 表单验证规则
+ */
 const formRules = ref({
     shopNo: [
         {required: true, message: '编号不能为空！', trigger: 'blur'}
@@ -274,8 +211,8 @@ const formRules = ref({
         {required: true, message: '请选择状态', trigger: 'change'}
     ]
 });
+// endregion
 
-const formRef = ref(null)
 
 /**
  * 保存商品信息
@@ -289,15 +226,6 @@ const onConfirm = async () => {
         console.log('表单验证未通过');
     }
 }
-
-/**
- * 删除sku事件
- */
-const skuDelEvent = () => {
-    // sku数据行发生变化，重新验证
-    formRef.value.validateField('skus')
-}
-
 
 </script>
 
@@ -313,107 +241,7 @@ const skuDelEvent = () => {
                         <div class="page_left" :style="{width:preViewWidth + 'px', minWidth:preViewWidth + 'px'}">
                             <div class="page_left_con">
                                 <div class="preview">
-                                    <div class="preview_con">
-                                        <el-scrollbar>
-                                            <div class="shop_carousel_list">
-                                                <el-carousel :height="carouselHeight + 'px'">
-                                                    <el-carousel-item v-for="img in form.thumbs" :key="img.id">
-                                                        <el-image :src="img.src" fit="fill" style="width: 100%"/>
-                                                    </el-carousel-item>
-                                                </el-carousel>
-                                            </div>
-                                            <div class="shop_info_panel">
-                                                <div class="tit_panel">
-                                                    <div class="tit_item price">
-                                                    <span class="price_real">
-                                                        <el-text>￥</el-text>
-                                                        <el-text style="font-size: 22px" tag="b">{{
-                                                                skus[0].price
-                                                            }}</el-text>
-                                                        <el-text>/{{ units[0].label }}</el-text>
-                                                    </span>
-                                                        <el-text type="info" tag="del" size="small">￥{{
-                                                                skus[0].delPrice
-                                                            }}/{{ units[0].label }}
-                                                        </el-text>
-                                                    </div>
-                                                    <div class="tit_item tit">
-                                                        <el-text class="txt" tag="b">
-                                                            {{ form.shopName }}
-                                                        </el-text>
-                                                        <div class="share">
-                                                            <div class="share_con">
-                                                                <el-icon>
-                                                                    <Share/>
-                                                                </el-icon>
-                                                                <el-text size="small">分享</el-text>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div v-if="form.desc !== ''" class="tit_item desc">
-                                                        <el-text type="info" size="small">{{ form.desc }}</el-text>
-                                                    </div>
-                                                    <div v-if="dynamicTags.length > 0" class="tit_item tags">
-                                                        <el-tag v-for="tag in dynamicTags" :key="tag" type="danger"
-                                                                size="small"
-                                                                effect="plain">{{ tag }}
-                                                        </el-tag>
-                                                    </div>
-                                                </div>
-                                                <div class="sku_panel">
-                                                    <div style="padding-bottom: 10px">
-                                                        <el-text tag="b">规格</el-text>
-                                                    </div>
-                                                    <div class="sku_info">
-                                                        <el-text class="sku_name" type="info"
-                                                                 size="small">
-                                                            {{ skus[0].name }}
-                                                        </el-text>
-                                                        <div class="sku_right">
-                                                            <el-text class="sku_num" type="info">x1</el-text>
-                                                            <div class="choose_more_arrow">
-                                                                <el-icon>
-                                                                    <ArrowRight/>
-                                                                </el-icon>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="choose_time_panel">
-                                                    <div style="padding-bottom: 10px">
-                                                        <el-text tag="b">租赁周期</el-text>
-                                                    </div>
-                                                    <div class="time_panel">
-                                                        <el-steps direction="vertical" :active="1" :space="40">
-                                                            <el-step status="wait">
-                                                                <template #description>
-                                                                    开始时间 : 2023-11-26
-                                                                </template>
-                                                            </el-step>
-                                                            <el-step status="wait">
-                                                                <template #description>
-                                                                    结束时间 : 2023-11-26
-                                                                </template>
-                                                            </el-step>
-                                                        </el-steps>
-                                                        <div class="choose_more_arrow">
-                                                            <el-icon>
-                                                                <ArrowRight/>
-                                                            </el-icon>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="detail_panel">
-                                                    <el-tabs :model="0">
-                                                        <el-tab-pane label="商品详情" class="goods_detail">
-                                                            <div v-html="valueHtml"></div>
-                                                        </el-tab-pane>
-                                                        <el-tab-pane label="租赁流程">Config</el-tab-pane>
-                                                    </el-tabs>
-                                                </div>
-                                            </div>
-                                        </el-scrollbar>
-                                    </div>
+                                    <preview_shop :pre-view-width="400" :shop-info="shopInfo"></preview_shop>
                                     <div class="preview_publish">
                                         <el-button type="primary" size="large" @click="onConfirm">保存
                                         </el-button>
@@ -426,33 +254,43 @@ const skuDelEvent = () => {
                                 <el-card shadow="never" class="vel_card_override">
                                     <div class="add_goods_panel">
                                         <el-scrollbar>
-                                            <el-form :model="form" ref="formRef" :rules="formRules" label-width="120px">
-                                                <el-form-item label="商品编号" prop="shopNo" style="padding-top: 20px">
-                                                    <el-input v-model="form.shopNo" clearable style="width: 150px"/>
+                                            <el-form :model="shopInfo" ref="formRef" :rules="formRules" label-width="120px">
+                                                <el-form-item label="商品编号" prop="shopNo" style="padding-top: 20px"
+                                                              class="shop_no">
+                                                    <el-input v-model="shopInfo.shopNo" placeholder="如：#123456" clearable
+                                                              style="width: 150px"/>
+                                                    <el-tooltip
+                                                        content="商品编号为商品唯一标识，和其他商品不能重复！">
+                                                        <el-icon :size="18" color="#b1b3b8">
+                                                            <Warning/>
+                                                        </el-icon>
+                                                    </el-tooltip>
                                                 </el-form-item>
                                                 <el-form-item label="商品名称" prop="shopName">
-                                                    <el-input v-model="form.shopName" clearable style="width: 400px"/>
+                                                    <el-input v-model="shopInfo.shopName" clearable style="width: 400px"/>
                                                 </el-form-item>
                                                 <el-form-item label="促销信息">
                                                     <el-input
-                                                        v-model="form.desc"
+                                                        v-model="shopInfo.shopDesc"
                                                         :autosize="{ minRows: 2, maxRows: 4 }"
                                                         type="textarea"
+                                                        maxlength="100"
+                                                        show-word-limit
                                                         placeholder="请输入简短的描述信息，100个字符以内！"
                                                     />
                                                 </el-form-item>
                                                 <el-form-item label="商品图" prop="thumbs" class="shop_images">
                                                     <div class="shop_thumbs">
-                                                        <div class="shop_img_list" v-for="img in form.thumbs"
+                                                        <div class="shop_img_list" v-for="img in shopInfo.thumbs"
                                                              :key="img.id">
                                                             <el-image class="shop_img" :src="img.src" fit="fill"/>
                                                             <span class="mask">
-                                                        <el-icon>
-                                                            <Delete/>
-                                                        </el-icon>
-                                                    </span>
+                                                                <el-icon>
+                                                                    <Delete/>
+                                                                </el-icon>
+                                                            </span>
                                                         </div>
-                                                        <div v-if="form.thumbs.length < 7"
+                                                        <div v-if="shopInfo.thumbs.length < 7"
                                                              class="el-upload--picture-card"
                                                              @click="openChooseShopImgCutImgDialog">
                                                             <el-icon>
@@ -463,7 +301,7 @@ const skuDelEvent = () => {
                                                 </el-form-item>
                                                 <el-form-item class="shop_tags" label="商品标签">
                                                     <el-tag
-                                                        v-for="tag in dynamicTags"
+                                                        v-for="tag in shopInfo.tags"
                                                         :key="tag"
                                                         size="large"
                                                         closable
@@ -472,15 +310,15 @@ const skuDelEvent = () => {
                                                         {{ tag }}
                                                     </el-tag>
                                                     <el-input
-                                                        v-if="inputVisible"
-                                                        v-model="inputValue"
+                                                        v-if="tagInputVisible"
+                                                        v-model="tagInputValue"
                                                         size="default"
-                                                        ref="inputRef"
+                                                        ref="tagInputRef"
                                                         @keyup.enter="handleInputTagConfirm"
                                                         @blur="handleInputTagConfirm"
                                                         style="width: 100px"
                                                     />
-                                                    <el-button v-else size="default" @click="showInput">
+                                                    <el-button v-else size="default" @click="showTagInput">
                                                         + 添加标签
                                                     </el-button>
                                                 </el-form-item>
@@ -489,13 +327,14 @@ const skuDelEvent = () => {
                                                         :props="{expandTrigger:'hover',value:'id',label:'name'}"
                                                         :options="shopType"
                                                         size="default"
-                                                        v-model="form.shopType" clearable placeholder="选择分类"/>
+                                                        v-model="shopInfo.shopType" clearable placeholder="选择分类"/>
                                                 </el-form-item>
                                                 <el-form-item label="规格" prop="skus" class="sku_panel">
-                                                    <sku-single :skus="skus" @onDelSkuRow="skuDelEvent"></sku-single>
+                                                    <vel-sku-single :skus="shopInfo.skus"
+                                                                    @onDelSkuRow="skuDelEvent"></vel-sku-single>
                                                 </el-form-item>
                                                 <el-form-item label="价格单位" prop="unit">
-                                                    <el-select v-model="form.unit" size="default" clearable
+                                                    <el-select v-model="shopInfo.unit" size="default" clearable
                                                                placeholder="选择单位">
                                                         <template v-for="option in units" :key="option.value">
                                                             <el-option :label="option.label" :value="option.value"
@@ -504,7 +343,7 @@ const skuDelEvent = () => {
                                                     </el-select>
                                                 </el-form-item>
                                                 <el-form-item label="状态" prop="status">
-                                                    <el-select v-model="form.status" clearable size="default"
+                                                    <el-select v-model="shopInfo.status" clearable size="default"
                                                                placeholder="选择状态">
                                                         <el-option label="已上架" value="0"/>
                                                         <el-option label="待上架" value="1"/>
@@ -512,22 +351,8 @@ const skuDelEvent = () => {
                                                     </el-select>
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
-                                                    <div class="shop_editor"
-                                                         :style="{maxWidth:drawerWidth - preViewWidth - 200 + 'px'}">
-                                                        <Toolbar
-                                                            style="border-bottom: 1px solid #e0e0e0"
-                                                            :editor="editorRef"
-                                                            :defaultConfig="toolbarConfig"
-                                                            mode="simple"
-                                                        />
-                                                        <Editor
-                                                            style="min-height:400px;overflow-y: hidden;"
-                                                            v-model="valueHtml"
-                                                            :defaultConfig="editorConfig"
-                                                            mode="simple"
-                                                            @onCreated="handleCreated"
-                                                        />
-                                                    </div>
+                                                    <vel-editor :content="shopInfo.shopDetail"
+                                                                :editor_width="drawerWidth - preViewWidth - 200"></vel-editor>
                                                 </el-form-item>
                                             </el-form>
                                         </el-scrollbar>
@@ -535,10 +360,10 @@ const skuDelEvent = () => {
                                 </el-card>
                             </div>
                         </div>
-                        <image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
+                        <vel-image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
                                              @onConfirm="chooseShopImgCutImgCallback"
                                              :cut-width="300"
-                                             :cut-height="210"></image-cutter-dialog>
+                                             :cut-height="210"></vel-image-cutter-dialog>
                     </div>
                 </el-scrollbar>
             </template>
@@ -572,13 +397,6 @@ const skuDelEvent = () => {
     padding: 20px;
 }
 
-.page_left_con .preview_con {
-    background-color: #ffffff;
-    height: calc(100vh - 40px - 20px - 20px - 60px);
-    overflow: hidden;
-    border-radius: 4px 4px 0 0;
-}
-
 .page_left_con .preview_publish {
     padding: 20px 0 0 0;
     display: flex;
@@ -596,162 +414,6 @@ const skuDelEvent = () => {
     padding: 20px 20px 20px 0;
 }
 
-.shop_carousel_list .el-carousel {
-    background-color: #f0f2f5;
-}
-
-:deep(.shop_carousel_list) .el-carousel__indicators--horizontal {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    transform: none;
-    left: 0;
-}
-
-.shop_info_panel {
-    background-color: #f0f2f5;
-}
-
-.tit_panel,
-.shop_info_panel .sku_panel,
-.choose_time_panel,
-.detail_panel {
-    background-color: #ffffff;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.tit_item:not(:last-child) {
-    padding-bottom: 10px;
-}
-
-.tit_item.tags {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.tit_item.tags .el-tag {
-    margin-right: 5px;
-    margin-bottom: 3px;
-}
-
-.price .price_real {
-    padding-right: 7px;
-}
-
-.price .el-text {
-    color: red;
-}
-
-.tit_panel .tit {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.tit .txt {
-    flex-grow: 1;
-    overflow: hidden; /* 超出部分隐藏 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 设置行数 */
-}
-
-.tit .share {
-    min-width: 50px;
-}
-
-.tit .share_con {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.tit_item.desc {
-    display: flex;
-}
-
-.tit_item.desc .el-text {
-    flex-grow: 1;
-}
-
-.sku_panel .sku_info {
-    display: flex;
-    justify-content: space-between;
-}
-
-.sku_info .sku_name {
-    flex-grow: 1;
-    overflow: hidden; /* 超出部分隐藏 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 设置行数 */
-}
-
-.sku_right {
-    display: flex;
-}
-
-.sku_right .sku_num {
-    width: 40px;
-    text-align: center;
-}
-
-.sku_right .choose_more_arrow {
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-:deep(.choose_time_panel) .el-step:last-child {
-    flex-basis: 0 !important;
-}
-
-.choose_time_panel .time_panel {
-    display: flex;
-}
-
-.choose_time_panel .el-steps {
-    flex-grow: 1;
-}
-
-.choose_time_panel .choose_more_arrow {
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-:deep(.detail_panel) .el-tab-pane img {
-    width: 100% !important;
-    height: auto !important;
-    vertical-align: bottom;
-}
-
-:deep(.goods_detail) p {
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}
-
-:deep(.goods_detail) table {
-    border-collapse: collapse;
-}
-
-:deep(.goods_detail) table th {
-    background-color: #f5f2f0;
-    padding: 5px 5px;
-    border: 1px solid #b2b2b2;
-}
-
-:deep(.goods_detail) table td {
-    padding: 5px 5px;
-    border: 1px solid #b2b2b2;
-    text-align: center;
-}
-
-
 :deep(.vel_card_override) .el-card__body {
     padding: 0;
 }
@@ -763,6 +425,10 @@ const skuDelEvent = () => {
 
 .add_goods_panel .el-form-item {
     padding-right: 20px;
+}
+
+:deep(.add_goods_panel) .shop_no .el-form-item__content {
+    column-gap: 10px;
 }
 
 .add_goods_panel .shop_images, .add_goods_panel .sku_panel {
@@ -830,11 +496,6 @@ const skuDelEvent = () => {
 
 :deep(.vel_card_override) .el-form-item .no_error .el-input__wrapper.is-focus {
     box-shadow: 0 0 0 1px var(--el-border-color) inset !important;
-}
-
-.shop_editor {
-    border: 1px solid #e9eaef;
-    line-height: normal;
 }
 
 

@@ -75,6 +75,9 @@ watch(() => list.value, newVal => {
             <div class="preview">
                 <div class="preview_con">
                     <el-scrollbar>
+                        <div class="minapp_header">
+                            <span>首页</span>
+                        </div>
                         <template v-for="item in list" :key="item">
                             <index-module1 :width="360" v-if="item.id === 1"/>
                             <index-module2 :width="360" v-else-if="item.id === 2"/>
@@ -189,6 +192,21 @@ watch(() => list.value, newVal => {
     height: calc(100vh - 90px - 20px - 70px);
     overflow: hidden;
     border-radius: 4px 4px 0 0;
+}
+
+.preview_con .minapp_header{
+    background: url("/res/imgs/minapp-header-bg.png") no-repeat 50%/cover;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.preview_con .minapp_header span{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
 }
 
 .page_left .publish {

@@ -94,10 +94,10 @@
                             },
                             {
                                 "id": "1-4-7",
-                                "label": "添加商品",
-                                "icon": "Plus",
-                                "path": "/example/add-goods",
-                                "component": "/example/page-add-goods"
+                                "label": "商品管理",
+                                "icon": "Goods",
+                                "path": "/example/goods-manager",
+                                "component": "/example/page-goods-manager"
                             }
                         ]
                     }

@@ -1,5 +1,5 @@
 <script setup>
-import SkuSingle from "@/components/common/sku-single.vue";
+import VelSkuSingle from "@/components/common/_vel-cpt/vel-sku-single.vue";
 import {ref} from "vue";
 
 // 初始化sku
@@ -18,7 +18,7 @@ const skus = ref([
 <template>
     <div class="page">
         <el-card shadow="never" class="vel_card_override">
-            <sku-single :skus="skus"></sku-single>
+            <vel-sku-single :skus="skus"></vel-sku-single>
             {{skus}}
         </el-card>
     </div>

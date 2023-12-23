@@ -1,19 +1,22 @@
 <script setup>
+// 定义传入参数
+const props = defineProps(['skus'])
 // 定义抛出事件
 const emit = defineEmits(['onDelSkuRow'])
 
-// 定义传入参数
-const props = defineProps(['skus'])
-
-// 规格数组，由父节点传进来
+/**
+ * 规格数组，由父节点传进来，<br/>
+ * 数据结构：
+ * ```
+ * [{
+ *    name: '',
+ *    price: 0.01,
+ *    delPrice: 0.02,
+ *    count: 99
+ * }]
+ * ```
+ */
 const skus = props.skus
-// skus 数据结构：
-// [{
-//     name: '',
-//     price: 0.01,
-//     delPrice: 0.02,
-//     count: 99
-// }]
 
 /**
  * 添加一行
@@ -21,9 +24,9 @@ const skus = props.skus
 const addRow = () => {
     skus.push({
         name: '',
-        price: 0.01,
-        delPrice: 0.02,
-        count: 99
+        price: null,
+        delPrice: null,
+        count: null
     })
 }
 
@@ -34,10 +37,8 @@ const addRow = () => {
 const delRow = (index) => {
     // 删除指定下标的元素
     skus.splice(index, 1)
-
     emit('onDelSkuRow')
 }
-
 </script>
 
 <template>
@@ -88,7 +89,6 @@ const delRow = (index) => {
 </template>
 
 <style scoped>
-
 .vel_cpt_panel_add_sku .el-row:not(.tit) {
     margin-bottom: 10px;
 }
@@ -104,5 +104,4 @@ const delRow = (index) => {
 .vel_cpt_panel_add_sku .el-input-number {
     width: 100%;
 }
-
 </style>
