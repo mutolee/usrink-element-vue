@@ -1,0 +1,78 @@
+{
+    "statusCode": 200,
+    "message": "数据加载成功",
+    "data": [
+        {
+            "id": 1,
+            "no": "#1",
+            "title": "限时抢购数据加载成功",
+            "moduleType": 1,
+            "status":-1,
+            "isShowTit": true
+        },
+        {
+            "id": 2,
+            "no": "#2",
+            "title": "新品上市",
+            "moduleType": 2,
+            "status":-1,
+            "isShowTit": true
+        },
+        {
+            "id": 3,
+            "no": "#3",
+            "title": "热销商品",
+            "moduleType": 3,
+            "status":0,
+            "isShowTit": true
+        },
+        {
+            "id": 4,
+            "no": "#4",
+            "title": "猜你喜欢",
+            "moduleType": 4,
+            "status":0,
+            "isShowTit": true
+        },
+        {
+            "id": 5,
+            "no": "#5",
+            "title": "热门推荐",
+            "moduleType": 5,
+            "status":-1,
+            "isShowTit": true
+        },
+        {
+            "id": 6,
+            "no": "#6",
+            "title": "热门推荐",
+            "moduleType": 6,
+            "status":0,
+            "isShowTit": true
+        },
+        {
+            "id": 7,
+            "no": "#7",
+            "title": "热门推荐",
+            "moduleType": 7,
+            "status":0,
+            "isShowTit": true
+        },
+        {
+            "id": 8,
+            "no": "#8",
+            "title": "热门推荐",
+            "moduleType": 8,
+            "status":0,
+            "isShowTit": true
+        },
+        {
+            "id": 9,
+            "no": "#9",
+            "title": "热门推荐",
+            "moduleType": 9,
+            "status":0,
+            "isShowTit": true
+        }
+    ]
+}

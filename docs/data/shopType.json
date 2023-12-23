@@ -1,0 +1,102 @@
+{
+    "statusCode": 200,
+    "message": "数据加载成功",
+    "data": [
+        {
+            "id": 1,
+            "parent": true,
+            "name": "笔记本",
+            "icon": "https://img13.360buyimg.com/focus/s140x140_jfs/t11071/195/2462134264/9117/cd0688bf/5a17ba79N18b9f3d4.png",
+            "sort": 1,
+            "status": -1
+        },
+        {
+            "id": 2,
+            "parent": true,
+            "name": "台式机",
+            "icon": "https://img10.360buyimg.com/focus/s140x140_jfs/t12865/295/960489437/5723/4f38f11/5a17ba8bN911b7264.jpg",
+            "sort": 2,
+            "status": 0
+        },
+        {
+            "id": 3,
+            "parent": true,
+            "name": "电脑组件",
+            "icon": "https://img10.360buyimg.com/focus/s140x140_jfs/t14101/325/978287093/8836/e142aa53/5a17ba73N07b12f0c.jpg",
+            "sort": 3,
+            "status": 0,
+            "children": [
+                {
+                    "id": 31,
+                    "name": "显示器",
+                    "icon": "https://img20.360buyimg.com/focus/s140x140_jfs/t12679/262/982342141/7023/d05a11e5/5a17ba57Nf179b4e4.jpg",
+                    "sort": 1,
+                    "status": 0
+                },
+                {
+                    "id": 32,
+                    "name": "主板",
+                    "icon": "https://img12.360buyimg.com/focus/s140x140_jfs/t13228/333/989759736/4764/2a312c2e/5a17ba7fN0740c051.jpg",
+                    "sort": 2,
+                    "status": -1
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "parent": true,
+            "name": "外设产品",
+            "icon": "https://img14.360buyimg.com/focus/s140x140_jfs/t1/98581/29/13884/5125/5e5f1d66E8357cf2e/7232090502f87411.jpg",
+            "sort": 4,
+            "status": 0
+        },
+        {
+            "id": 5,
+            "parent": true,
+            "name": "电脑组件-2",
+            "icon": "https://img10.360buyimg.com/focus/s140x140_jfs/t14101/325/978287093/8836/e142aa53/5a17ba73N07b12f0c.jpg",
+            "sort": 5,
+            "status": 0,
+            "children": [
+                {
+                    "id": 51,
+                    "name": "显示器-2-1",
+                    "icon": "https://img20.360buyimg.com/focus/s140x140_jfs/t12679/262/982342141/7023/d05a11e5/5a17ba57Nf179b4e4.jpg",
+                    "sort": 1,
+                    "status": -1
+                },
+                {
+                    "id": 52,
+                    "name": "主板-2-2",
+                    "icon": "https://img12.360buyimg.com/focus/s140x140_jfs/t13228/333/989759736/4764/2a312c2e/5a17ba7fN0740c051.jpg",
+                    "sort": 2,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "parent": true,
+            "name": "电脑组件-3",
+            "icon": "https://img10.360buyimg.com/focus/s140x140_jfs/t14101/325/978287093/8836/e142aa53/5a17ba73N07b12f0c.jpg",
+            "status": 0,
+            "sort": 6,
+            "children": [
+                {
+                    "id": 61,
+                    "name": "显示器-3-1",
+                    "icon": "https://img20.360buyimg.com/focus/s140x140_jfs/t12679/262/982342141/7023/d05a11e5/5a17ba57Nf179b4e4.jpg",
+                    "sort": 1,
+                    "status": -1
+                },
+                {
+                    "id": 62,
+                    "name": "主板-3-2",
+                    "icon": "https://img12.360buyimg.com/focus/s140x140_jfs/t13228/333/989759736/4764/2a312c2e/5a17ba7fN0740c051.jpg",
+                    "sort": 2,
+                    "status": 0
+                }
+            ]
+        }
+    ]
+}
