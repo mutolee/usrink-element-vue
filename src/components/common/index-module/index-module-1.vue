@@ -22,7 +22,10 @@ const height = width / 2;
 </template>
 
 <style scoped>
-    .vel_cpt_panel_index_module_1 .item_con{
+.vel_cpt_panel_index_module_1{
+    padding-bottom: 10px;
+}
+.vel_cpt_panel_index_module_1 .item_con{
         background-color: #f0f2f5;
     }
 

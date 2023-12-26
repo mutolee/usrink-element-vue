@@ -22,6 +22,7 @@ const height = width / 4;
     .vel_cpt_panel_index_module_2{
         display: flex;
         flex-wrap:wrap;
+        justify-content: center;
         padding: 10px 0;
     }
     .vel_cpt_panel_index_module_2 .item_con{
