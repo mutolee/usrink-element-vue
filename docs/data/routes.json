@@ -98,6 +98,13 @@
                                 "icon": "Goods",
                                 "path": "/example/goods-manager",
                                 "component": "/example/page-goods-manager"
+                            },
+                            {
+                                "id": "1-4-8",
+                                "label": "文章库",
+                                "icon": "Tickets",
+                                "path": "/example/article-manager",
+                                "component": "/example/page-article-manager"
                             }
                         ]
                     }

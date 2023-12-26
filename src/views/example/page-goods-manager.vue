@@ -1,7 +1,7 @@
 <script setup>
 
 import {onMounted, ref} from "vue";
-import AddGoodsDialog from "@/components/common/add-goods-dialog.vue";
+import GoodsDialogAdd from "@/components/common/goods-dialog-add.vue";
 import cacheUtil from "@/utils/CacheUtil";
 import httpUtil from "@/utils/HttpUtil";
 
@@ -130,7 +130,7 @@ const showAddGoodsDialog = () => {
             </el-table>
             <el-pagination background layout="prev, pager, next" :total="1000"/>
         </el-card>
-        <add-goods-dialog v-if="isShowAddGoodsDialog.show" :dialog="isShowAddGoodsDialog" @onConfirm=""></add-goods-dialog>
+        <goods-dialog-add v-if="isShowAddGoodsDialog.show" :dialog="isShowAddGoodsDialog" @onConfirm=""/>
     </div>
 </template>
 

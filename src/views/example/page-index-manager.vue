@@ -4,7 +4,7 @@ import {onMounted, ref, watch} from "vue"
 // 文档地址：https://alfred-skyblue.github.io/vue-draggable-plus/demo/basic/
 import {VueDraggable} from 'vue-draggable-plus'
 import httpUtil from "@/utils/HttpUtil";
-import AddIndexModuleDialog from "@/components/common/add-index-module-dialog.vue";
+import IndexModuleDialogAdd from "@/components/common/index-module-dialog-add.vue";
 import IndexModule1 from "@/components/common/index-module/index-module-1.vue";
 import IndexModule2 from "@/components/common/index-module/index-module-2.vue";
 import IndexModule3 from "@/components/common/index-module/index-module-3.vue";
@@ -161,8 +161,8 @@ watch(() => list.value, newVal => {
                 </div>
             </el-card>
         </div>
-        <add-index-module-dialog :dialog="isShowAddModuleDialog"
-                                 @onConfirm="addModuleDialogCallback"></add-index-module-dialog>
+        <index-module-dialog-add :dialog="isShowAddModuleDialog"
+                                 @onConfirm="addModuleDialogCallback"/>
     </div>
 </template>
 

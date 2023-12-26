@@ -1,8 +1,7 @@
 <script setup>
 import {computed, onMounted, ref} from "vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
-import AddShopTypeDialog from "@/components/common/add-shop-type-dialog.vue";
-import httpUtil from "@/utils/HttpUtil";
+import ShopTypeDialogAdd from "@/components/common/shop-type-dialog-add.vue";
 import cacheUtil from "@/utils/CacheUtil";
 
 const documentWHStore = useDocumentWHStore()
@@ -134,10 +133,10 @@ const createTypeDialogCallback = (e) => {
                 </el-table-column>
             </el-table>
         </el-card>
-        <add-shop-type-dialog
+        <shop-type-dialog-add
             :paramData="createTypeDialogParam"
             :dialog="isShowCreateTypeDialog"
-            @onConfirm="createTypeDialogCallback"></add-shop-type-dialog>
+            @onConfirm="createTypeDialogCallback"/>
     </div>
 </template>
 

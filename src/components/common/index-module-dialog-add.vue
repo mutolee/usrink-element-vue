@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import httpUtil from "@/utils/HttpUtil";
-import ChooseIndexModuleDialog from "@/components/common/choose-index-module-dialog.vue";
+import IndexModuleDialogChoose from "@/components/common/index-module-dialog-choose.vue";
 
 // 定义传入参数
 const props = defineProps(['dialog'])
@@ -122,8 +122,8 @@ const formRef = ref(null)
         </el-dialog>
 
         <!-- 选择模块类型 -->
-        <choose-index-module-dialog :dialog="isShowChooseIndexModuleDialog"
-                                    @onChoose="chooseIndexModuleCallback"></choose-index-module-dialog>
+        <index-module-dialog-choose :dialog="isShowChooseIndexModuleDialog"
+                                    @onChoose="chooseIndexModuleCallback"/>
     </div>
 </template>
 

@@ -1,0 +1,76 @@
+{
+    "statusCode": 200,
+    "message": "数据加载成功",
+    "data": [
+        {
+            "shopNo": "#1",
+            "shopName": "联想拯救者R9000X 15.6英寸游戏笔记本电脑 i7-10750H 16GB 1TB SSD RTX 2060 6GB",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "2"
+        },
+        {
+            "shopNo": "#2",
+            "shopName": "华硕灵耀Pro14X 14英寸轻薄笔记本电脑 英特尔酷睿i5 16GB 512GB PCIESSD",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "1"
+        },
+        {
+            "shopNo": "#3",
+            "shopName": "小米RedmiG 16.1英寸游戏笔记本电脑 i5-10300H 16GB 512GB GTX1650Ti 4GB",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "0"
+        },
+        {
+            "shopNo": "#4",
+            "shopName": "戴尔成就Vostro 15.6英寸商务笔记本电脑 英特尔酷睿i5 8GB 256GB固态硬盘",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "2"
+        },
+        {
+            "shopNo": "#5",
+            "shopName": "惠普Envy 15.6英寸高色域触控笔记本电脑 英特尔酷睿i7 16GB 512GB SSD MX450 2GB独显",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "0"
+        },
+        {
+            "shopNo": "#6",
+            "shopName": "联想天逸510S 23英寸一体机电脑 英特尔赛扬G4900 4GB 1TB 三星23.8英寸IPS屏幕",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-台式机",
+            "status": "1"
+        },
+        {
+            "shopNo": "#7",
+            "shopName": "华硕飞行堡垒4Pro 15.6英寸游戏笔记本电脑 R7-5800H 16GB 1TB SSD RTX 3060 6GB",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "1"
+        },
+        {
+            "shopNo": "#8",
+            "shopName": "戴尔灵越 14英寸高清轻薄笔记本电脑 英特尔酷睿i5 8GB 512GB PCIe SSD 高色域屏",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "0"
+        },
+        {
+            "shopNo": "#9",
+            "shopName": "神舟战神X15S-RTX3080 15.6英寸游戏笔记本电脑 R7-5800H 16GB 1TB SSD RTX 3080 16GB",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "0"
+        },
+        {
+            "shopNo": "#10",
+            "shopName": "雷神911 Air 14英寸轻薄笔记本电脑 AMD锐龙R5 16GB 512GB PCIe SSD 独显版",
+            "thumb": "https://img1.360buyimg.com/da/jfs/t1/206354/38/39088/64192/6577c7adFfe90680e/5fad216f3b2bf8d3.jpg!q70.jpg",
+            "shopTypeName": "电脑-笔记本",
+            "status": "1"
+        }
+    ]
+}

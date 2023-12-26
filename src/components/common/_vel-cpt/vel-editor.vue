@@ -8,7 +8,7 @@ import {onBeforeUnmount, shallowRef} from "vue";
 import {ElMessage} from "element-plus";
 
 // 定义传入参数
-const props = defineProps(['content', 'editor_width'])
+const props = defineProps(['content', 'editor_width', 'editor_height'])
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
@@ -97,7 +97,7 @@ onBeforeUnmount(() => {
             mode="simple"
         />
         <Editor
-            style="min-height:400px; overflow-y: hidden; background-color: #ffffff"
+            :style="{minHeight:(editor_height ? editor_height : 400) + 'px',overflowY: 'hidden', backgroundColor: '#ffffff'}"
             v-model="content.val"
             :defaultConfig="editorConfig"
             mode="simple"

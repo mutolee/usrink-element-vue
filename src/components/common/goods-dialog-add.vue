@@ -6,7 +6,7 @@ import {Delete, Plus, Warning} from "@element-plus/icons-vue";
 import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
 import cacheUtil from "@/utils/CacheUtil";
 import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
-import Preview_shop from "@/components/common/preview_shop.vue";
+import Preview_shop from "@/components/common/preview-shop.vue";
 
 const props = defineProps(['dialog'])
 const documentWHStore = useDocumentWHStore()
@@ -15,7 +15,7 @@ const emit = defineEmits(['onConfirm'])
 
 // 添加商品抽屉宽度
 const drawerWidth = computed(() => documentWHStore.wh.w - 260)
-// 商品预览宽度
+// 预览宽度
 const preViewWidth = ref(400);
 // 商品表单
 const formRef = ref(null)
@@ -221,6 +221,7 @@ const onConfirm = async () => {
     try {
         await formRef.value.validate();
         console.log("表单验证通过")
+        emit('onConfirm', shopInfo.value)
     } catch (error) {
         // 表单验证未通过，不执行提交操作
         console.log('表单验证未通过');

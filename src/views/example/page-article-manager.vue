@@ -1,6 +1,8 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import httpUtil from "@/utils/HttpUtil";
+import ArticleDialogAdd from "@/components/common/article-dialog-add.vue";
+import ArticleDialogInfo from "@/components/common/article-dialog-info.vue";
 
 const queryForm = ref({
     articleNo: '',
@@ -23,6 +25,18 @@ const initArticleData = () => {
     }).finally(() => {
         loading.value = false
     })
+}
+
+const isShowAddArticleDialog = ref({show: false})
+
+const showAddArticleDialog = () => {
+    isShowAddArticleDialog.value.show = true
+}
+
+const isShowInfoArticleDialog = ref({show: false})
+
+const showInfoArticleDialog = () => {
+    isShowInfoArticleDialog.value.show = true
 }
 
 </script>
@@ -80,7 +94,7 @@ const initArticleData = () => {
                     <template #default="scope">
                         <div class="action_btn">
                             <el-button type="success" plain>编辑</el-button>
-                            <el-button type="primary" plain>详情</el-button>
+                            <el-button type="primary" plain @click="showInfoArticleDialog">详情</el-button>
                             <el-button type="danger" plain>删除</el-button>
                         </div>
                     </template>
@@ -91,6 +105,8 @@ const initArticleData = () => {
             </el-table>
             <el-pagination background layout="prev, pager, next" :total="1000"/>
         </el-card>
+        <article-dialog-add v-if="isShowAddArticleDialog.show" :dialog="isShowAddArticleDialog" @onConfirm=""/>
+        <article-dialog-info v-if="isShowInfoArticleDialog.show" :dialog="isShowInfoArticleDialog"/>
     </div>
 </template>
 
