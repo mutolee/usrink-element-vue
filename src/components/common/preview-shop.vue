@@ -33,7 +33,7 @@ const units = ref([
     <div class="preview_con_shop">
         <el-scrollbar>
             <div class="minapp_header">
-                <span>商品详情</span>
+                <span>商品详情<el-text type="info">(预览)</el-text></span>
             </div>
             <div class="shop_carousel_list">
                 <el-carousel :height="carouselHeight + 'px'">
@@ -153,7 +153,6 @@ const units = ref([
 }
 
 .preview_con_shop .minapp_header span {
-    display: block;
     height: 40px;
     line-height: 40px;
     font-size: 16px;

@@ -9,7 +9,7 @@ const props = defineProps(['articleInfo', 'preViewWidth'])
     <div class="preview_con_article">
         <el-scrollbar>
             <div class="minapp_header">
-                <span>文章</span>
+                <span>文章<el-text type="info">(预览)</el-text></span>
             </div>
             <div class="article_info_panel">
                 <div class="tit_panel" v-if="articleInfo.showTit && articleInfo.articleTitle">
@@ -42,7 +42,6 @@ const props = defineProps(['articleInfo', 'preViewWidth'])
 }
 
 .preview_con_article .minapp_header span {
-    display: block;
     height: 40px;
     line-height: 40px;
     font-size: 16px;
