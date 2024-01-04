@@ -1,6 +1,5 @@
 <script setup>
-import {computed, nextTick, onMounted, ref} from "vue";
-import {useDocumentWHStore} from "@/stores/data/documentWHStore";
+import {nextTick, onMounted, ref} from "vue";
 import VelSkuSingle from "@/components/common/_vel-cpt/vel-sku-single.vue";
 import {Delete, Plus, Warning} from "@element-plus/icons-vue";
 import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
@@ -9,12 +8,9 @@ import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
 import Preview_shop from "@/components/common/preview-shop.vue";
 
 const props = defineProps(['dialog'])
-const documentWHStore = useDocumentWHStore()
 // 定义抛出事件
 const emit = defineEmits(['onConfirm'])
 
-// 添加商品抽屉宽度
-const drawerWidth = computed(() => documentWHStore.wh.w - 260)
 // 预览宽度
 const preViewWidth = ref(400);
 // 商品表单
@@ -232,7 +228,7 @@ const onConfirm = async () => {
 
 <template>
     <div class="vel_cpt_panel_drawer_add_goods">
-        <el-drawer v-model="dialog.show" :size="drawerWidth" direction="rtl" class="vel_drawer_override">
+        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="vel_drawer_override">
             <template #header>
                 <h4>添加商品</h4>
             </template>
@@ -250,7 +246,7 @@ const onConfirm = async () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="page_right" :style="{width:drawerWidth - preViewWidth + 'px'}">
+                        <div class="page_right" style="flex: 1">
                             <div class="page_right_con">
                                 <el-card shadow="never" class="vel_card_override">
                                     <div class="add_goods_panel">
@@ -353,7 +349,7 @@ const onConfirm = async () => {
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
                                                     <vel-editor :content="shopInfo.shopDetail"
-                                                                :editor_width="drawerWidth - preViewWidth - 200"></vel-editor>
+                                                                editor_width=""></vel-editor>
                                                 </el-form-item>
                                             </el-form>
                                         </el-scrollbar>

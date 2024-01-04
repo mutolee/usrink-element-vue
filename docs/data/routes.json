@@ -105,6 +105,13 @@
                                 "icon": "Tickets",
                                 "path": "/example/article-manager",
                                 "component": "/example/page-article-manager"
+                            },
+                            {
+                                "id": "1-4-9",
+                                "label": "订单管理",
+                                "icon": "Van",
+                                "path": "/example/order-manager",
+                                "component": "/example/page-order-manager"
                             }
                         ]
                     }

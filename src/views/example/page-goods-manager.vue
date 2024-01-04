@@ -89,16 +89,16 @@ const showAddGoodsDialog = () => {
                 class="shop_table"
                 :data="goodsList">
                 <el-table-column prop="shopNo" label="编号" sortable width="100"/>
+                <el-table-column prop="thumb" label="缩略图" min-width="150">
+                    <template #default="scope">
+                        <el-image class="goods_thumb" :src="scope.row.thumb"></el-image>
+                    </template>
+                </el-table-column>
                 <el-table-column label="商品名称" min-width="250">
                     <template #default="scope">
                         <div class="shop_name">
                             <el-text>{{ scope.row.shopName }}</el-text>
                         </div>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="thumb" label="缩略图" min-width="150">
-                    <template #default="scope">
-                        <el-image class="goods_thumb" :src="scope.row.thumb"></el-image>
                     </template>
                 </el-table-column>
                 <el-table-column label="分类" width="180">
@@ -108,7 +108,7 @@ const showAddGoodsDialog = () => {
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="状态" sortable width="120">
+                <el-table-column label="状态" sortable width="120">
                     <template #default="scope">
                         <el-tag v-if="scope.row.status === '0'">已上架</el-tag>
                         <el-tag v-else-if="scope.row.status === '1'" type="warning">待上架</el-tag>

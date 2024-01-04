@@ -22,15 +22,16 @@ html, body, #app {
 }
 
 html body a {
-    color: #1890ff;
+    color: #409EFF;
     text-decoration: none;
 }
 
-.el-popper.is-light{
-    border: none !important;
+li{
+    list-style: none;
 }
 
-/** 美化系统滚动条 Start **/
+
+/** ------------------------ 美化系统滚动条 Start ------------------------ **/
 ::-webkit-scrollbar {
     width: 6px
 }
@@ -53,6 +54,24 @@ html body a {
     cursor: pointer;
     background-color: #0000004d
 }
-/** 美化系统滚动条 End **/
+/** ------------------------ 美化系统滚动条 End ------------------------ **/
+
+
+/** ------------------------ NProgress 样式 Start ------------------------ **/
+#nprogress .bar {
+    background: #409EFF !important;
+}
+/** ------------------------ NProgress 样式 End ------------------------ **/
+
+
+/** ------------------------ ElementUI 样式 Start ------------------------ **/
+.el-date-table td.in-range .el-date-table-cell {
+    background-color: #c6e2ff !important;
+}
+.el-date-table td.disabled .el-date-table-cell {
+    background-color:#fff !important;
+    color: #dedfe0 !important;
+}
+/** ------------------------ ElementUI 样式 End ------------------------ **/
 
 </style>

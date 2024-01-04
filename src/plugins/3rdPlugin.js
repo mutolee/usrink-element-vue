@@ -2,6 +2,7 @@
 // 文档地址：https://element-plus.gitee.io/zh-CN/guide/installation.html
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 // ElementPlus Icon
 // 文档地址：https://element-plus.gitee.io/zh-CN/component/icon.html
@@ -30,7 +31,7 @@ import hljs from 'highlight.js';
  */
 const thirdPlugin = (app) => {
     // ElementPlus 插件配置
-    app.use(ElementPlus, {size: 'medium', zIndex: 3000})
+    app.use(ElementPlus, {size: 'medium', zIndex: 3000,locale: zhCn})
 
     // ElementPlus Icon 组件注册
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

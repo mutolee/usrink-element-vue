@@ -97,7 +97,7 @@ const createTypeDialogCallback = (e) => {
                 <template #empty>
                     <el-empty description="暂无数据"/>
                 </template>
-                <el-table-column prop="name" label="分类名称" width="200">
+                <el-table-column label="分类名称" width="200">
                     <template #default="scope">
                         <template v-if="scope.row.parent">
                             <el-text tag="b">{{ scope.row.name }}</el-text>
@@ -107,7 +107,7 @@ const createTypeDialogCallback = (e) => {
                         </template>
                     </template>
                 </el-table-column>
-                <el-table-column prop="icon" label="图标" align="center">
+                <el-table-column label="图标" align="center">
                     <template #default="scope">
                         <el-image :src="scope.row.icon" style="width: 50px; height: 50px"></el-image>
                     </template>

@@ -1,16 +1,13 @@
 <script setup>
 import DateUtil from "@/utils/DateUtil.js";
-import {useDocumentWHStore} from "@/stores/data/documentWHStore";
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import PreviewArticle from "@/components/common/preview-article.vue";
 import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
 
-const documentWHStore = useDocumentWHStore()
 const props = defineProps(['dialog'])
 // 定义抛出事件
 const emit = defineEmits(['onConfirm'])
 
-const drawerWidth = computed(() => documentWHStore.wh.w - 260)
 // 预览宽度
 const preViewWidth = ref(400);
 // 文章表单
@@ -60,7 +57,7 @@ const onConfirm = async () => {
 
 <template>
     <div class="vel_cpt_panel_drawer_add_article">
-        <el-drawer v-model="dialog.show" :size="drawerWidth" direction="rtl" class="vel_drawer_override">
+        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="vel_drawer_override">
             <template #header>
                 <h4>添加文章</h4>
             </template>
@@ -78,7 +75,7 @@ const onConfirm = async () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="page_right" :style="{width:drawerWidth - preViewWidth + 'px'}">
+                        <div class="page_right" style="flex: 1">
                             <div class="page_right_con">
                                 <el-card shadow="never" class="vel_card_override">
                                     <div class="add_article_panel">
@@ -106,7 +103,7 @@ const onConfirm = async () => {
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
                                                     <vel-editor :content="articleForm.articleDetail"
-                                                                :editor_width="drawerWidth - preViewWidth - 200"
+                                                                editor_width=""
                                                                 :editor_height="450"></vel-editor>
                                                 </el-form-item>
                                             </el-form>

@@ -83,7 +83,7 @@ const showInfoArticleDialog = () => {
                         <el-text type="info">{{scope.row.createTime}}</el-text>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="状态" sortable width="120">
+                <el-table-column label="状态" sortable width="120">
                     <template #default="scope">
                         <el-tag v-if="scope.row.status === '0'">已上架</el-tag>
                         <el-tag v-else-if="scope.row.status === '1'" type="warning">待上架</el-tag>
@@ -151,4 +151,5 @@ const showInfoArticleDialog = () => {
 :deep(.article_table) .action_btn .el-button+.el-button{
     margin-left: 0;
 }
+
 </style>

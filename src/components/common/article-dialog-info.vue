@@ -1,7 +1,7 @@
 <script setup>
 import PreviewArticle from "@/components/common/preview-article.vue";
 import {useDocumentWHStore} from "@/stores/data/documentWHStore";
-import {computed, ref} from "vue";
+import {ref} from "vue";
 
 const documentWHStore = useDocumentWHStore()
 const props = defineProps(['dialog'])
