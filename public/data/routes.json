@@ -112,6 +112,13 @@
                                 "icon": "Van",
                                 "path": "/example/order-manager",
                                 "component": "/example/page-order-manager"
+                            },
+                            {
+                                "id": "1-4-10",
+                                "label": "图片标注",
+                                "icon": "Picture",
+                                "path": "/example/image-mark",
+                                "component": "/example/page-image-mark"
                             }
                         ]
                     }
