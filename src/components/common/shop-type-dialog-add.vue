@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
+import usrImageCutterDialog from "@/components/common/_usr-cpt/usr-image-cutter-dialog.vue";
 
 // 定义传入参数
 const props = defineProps(['dialog', 'paramData'])
@@ -100,7 +100,7 @@ const formRules = ref({
 </script>
 
 <template>
-    <div class="vel_cpt_panel_dialog_add_shop_type">
+    <div class="usr_cpt_panel_dialog_add_shop_type">
         <el-dialog v-model="dialog.show"
                    :title="createTypeForm.parent.id === 0 ? '创建分类' : '添加子分类'">
             <el-form :model="createTypeForm" ref="formRef" :rules="formRules" :label-width="labelWidth">
@@ -135,15 +135,15 @@ const formRules = ref({
             </span>
             </template>
         </el-dialog>
-        <vel-image-cutter-dialog :dialog="isShowCreateTypeCutImgDialog" @onConfirm="createTypeCutImgCallback"
+        <usr-image-cutter-dialog :dialog="isShowCreateTypeCutImgDialog" @onConfirm="createTypeCutImgCallback"
                              :cut-width="100"
-                             :cut-height="100"></vel-image-cutter-dialog>
+                             :cut-height="100"></usr-image-cutter-dialog>
     </div>
 </template>
 
 <style scoped>
 
-.vel_cpt_panel_dialog_add_shop_type .el-input {
+.usr_cpt_panel_dialog_add_shop_type .el-input {
     width: 300px;
 }
 
@@ -152,7 +152,7 @@ const formRules = ref({
     gap: 10px;
 }
 
-.vel_cpt_panel_dialog_add_shop_type .type_icon {
+.usr_cpt_panel_dialog_add_shop_type .type_icon {
     width: 70px;
     height: 70px;
     background-color: #f0f2f5;

@@ -2,7 +2,7 @@
 import DateUtil from "@/utils/DateUtil.js";
 import {ref} from "vue";
 import PreviewArticle from "@/components/common/preview-article.vue";
-import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
+import usrEditor from "@/components/common/_usr-cpt/usr-editor.vue";
 
 const props = defineProps(['dialog'])
 // 定义抛出事件
@@ -56,8 +56,8 @@ const onConfirm = async () => {
 </script>
 
 <template>
-    <div class="vel_cpt_panel_drawer_add_article">
-        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="vel_drawer_override">
+    <div class="usr_cpt_panel_drawer_add_article">
+        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="usr_drawer_override">
             <template #header>
                 <h4>添加文章</h4>
             </template>
@@ -77,7 +77,7 @@ const onConfirm = async () => {
                         </div>
                         <div class="page_right" style="flex: 1">
                             <div class="page_right_con">
-                                <el-card shadow="never" class="vel_card_override">
+                                <el-card shadow="never" class="usr_card_override">
                                     <div class="add_article_panel">
                                         <el-scrollbar>
                                             <el-form :model="articleForm" ref="formRef" :rules="formRules"
@@ -102,9 +102,9 @@ const onConfirm = async () => {
                                                     </el-select>
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
-                                                    <vel-editor :content="articleForm.articleDetail"
+                                                    <usr-editor :content="articleForm.articleDetail"
                                                                 editor_width=""
-                                                                :editor_height="450"></vel-editor>
+                                                                :editor_height="450"></usr-editor>
                                                 </el-form-item>
                                             </el-form>
                                         </el-scrollbar>
@@ -120,15 +120,15 @@ const onConfirm = async () => {
 </template>
 
 <style scoped>
-.vel_cpt_panel_drawer_add_article :deep(.vel_drawer_override) .el-drawer__header {
+.usr_cpt_panel_drawer_add_article :deep(.usr_drawer_override) .el-drawer__header {
     margin-bottom: 0;
 }
 
-.vel_cpt_panel_drawer_add_article :deep(.vel_drawer_override) .el-drawer__body {
+.usr_cpt_panel_drawer_add_article :deep(.usr_drawer_override) .el-drawer__body {
     padding: 0;
 }
 
-:deep(.vel_drawer_override) {
+:deep(.usr_drawer_override) {
     background-color: #f6f8f9;
 }
 
@@ -161,7 +161,7 @@ const onConfirm = async () => {
     padding: 20px 20px 20px 0;
 }
 
-:deep(.vel_card_override) .el-card__body {
+:deep(.usr_card_override) .el-card__body {
     padding: 0;
 }
 

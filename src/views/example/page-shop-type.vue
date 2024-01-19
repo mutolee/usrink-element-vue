@@ -85,7 +85,7 @@ const createTypeDialogCallback = (e) => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" v-loading="loading" class="vel_card_override">
+        <el-card shadow="never" v-loading="loading" class="usr_card_override">
             <el-row style="margin-bottom: 10px">
                 <el-button type="primary" @click="showCreateTypeDialog">创建分类</el-button>
             </el-row>
@@ -145,7 +145,7 @@ const createTypeDialogCallback = (e) => {
     padding: 20px;
 }
 
-.vel_card_override {
+.usr_card_override {
 
 }
 
@@ -159,7 +159,7 @@ const createTypeDialogCallback = (e) => {
     margin-left: 0;
 }
 
-:deep(.vel_card_override) .el-table__inner-wrapper::before {
+:deep(.usr_card_override) .el-table__inner-wrapper::before {
     background-color: transparent !important;
 }
 

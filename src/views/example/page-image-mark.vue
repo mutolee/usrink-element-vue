@@ -34,7 +34,7 @@ const addAnnotation = (event) => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" class="vel_card_override">
+        <el-card shadow="never" class="usr_card_override">
             <div id="imageContainer" ref="imageContainer" @click="addAnnotation">
                 <img class="img_panel" src="/res/imgs/shanshui.png" alt="Annotated Image" />
                 <div v-for="(annotation, index) in annotations" :key="index" class="annotation" :style="{ left: annotation.x + 'px', top: annotation.y + 'px' }">
@@ -50,7 +50,7 @@ const addAnnotation = (event) => {
     padding: 20px;
 }
 
-.vel_card_override {
+.usr_card_override {
     height: calc(100vh - 90px - 20px - 20px - 2px);
 }
 

@@ -43,7 +43,7 @@ const showInfoArticleDialog = () => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" class="vel_card_override top">
+        <el-card shadow="never" class="usr_card_override top">
             <el-form :inline="true" :model="queryForm">
                 <el-form-item label="编号">
                     <el-input v-model="queryForm.articleNo" placeholder="编号" clearable style="width: 180px"/>
@@ -66,7 +66,7 @@ const showInfoArticleDialog = () => {
         <el-row class="top_btn_panel">
             <el-button type="primary" @click="showAddArticleDialog">添加文章</el-button>
         </el-row>
-        <el-card v-loading="loading" shadow="never" class="vel_card_override content">
+        <el-card v-loading="loading" shadow="never" class="usr_card_override content">
             <el-table
                 class="article_table"
                 :data="articleList">
@@ -115,14 +115,14 @@ const showInfoArticleDialog = () => {
     padding: 20px;
 }
 
-.vel_card_override.top .el-form {
+.usr_card_override.top .el-form {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 15px;
 }
 
-.vel_card_override.top .el-form .el-form-item {
+.usr_card_override.top .el-form .el-form-item {
     margin-bottom: 0;
     margin-right: 0;
 }
@@ -131,7 +131,7 @@ const showInfoArticleDialog = () => {
     margin: 15px 0 15px 0;
 }
 
-.vel_card_override.content .el-table {
+.usr_card_override.content .el-table {
     margin-bottom: 20px;
 }
 

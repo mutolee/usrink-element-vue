@@ -54,7 +54,7 @@ const showAddGoodsDialog = () => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" class="vel_card_override top">
+        <el-card shadow="never" class="usr_card_override top">
             <el-form :inline="true" :model="queryForm">
                 <el-form-item label="编号">
                     <el-input v-model="queryForm.shopNo" placeholder="商品编号" clearable style="width: 180px"/>
@@ -84,7 +84,7 @@ const showAddGoodsDialog = () => {
         <el-row class="top_btn_panel">
             <el-button type="primary" @click="showAddGoodsDialog">添加商品</el-button>
         </el-row>
-        <el-card v-loading="loading" shadow="never" class="vel_card_override content">
+        <el-card v-loading="loading" shadow="never" class="usr_card_override content">
             <el-table
                 class="shop_table"
                 :data="goodsList">
@@ -139,14 +139,14 @@ const showAddGoodsDialog = () => {
     padding: 20px;
 }
 
-.vel_card_override.top .el-form {
+.usr_card_override.top .el-form {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 15px;
 }
 
-.vel_card_override.top .el-form .el-form-item {
+.usr_card_override.top .el-form .el-form-item {
     margin-bottom: 0;
     margin-right: 0;
 }
@@ -155,7 +155,7 @@ const showAddGoodsDialog = () => {
     margin: 15px 0 15px 0;
 }
 
-.vel_card_override.content .el-table {
+.usr_card_override.content .el-table {
     margin-bottom: 20px;
 }
 

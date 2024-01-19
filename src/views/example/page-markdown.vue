@@ -2,19 +2,19 @@
 import {ref, onMounted} from "vue";
 
 // 获取元素，变量名需要和元素上的ref属性的值一致
-const velCardEleRef = ref(null)
-const velCardEleHeight = ref(400)
+const usrCardEleRef = ref(null)
+const usrCardEleHeight = ref(400)
 
 onMounted(()=>{
-    velCardEleHeight.value = getVelCardEleHeight()
+    usrCardEleHeight.value = getusrCardEleHeight()
 })
 
 /**
  * 获取元素高度
  * @return {number}
  */
-const getVelCardEleHeight = () => {
-    return velCardEleRef.value.offsetHeight
+const getusrCardEleHeight = () => {
+    return usrCardEleRef.value.offsetHeight
 }
 
 
@@ -81,9 +81,9 @@ const text = '<h1 align="center">Markdown Editor built on Vue</h1>\n' +
 
 <template>
     <div class="page">
-        <div ref="velCardEleRef">
-            <el-card shadow="never" class="vel_card_override">
-                <v-md-editor v-model="text" :height="velCardEleHeight + 'px'"></v-md-editor>
+        <div ref="usrCardEleRef">
+            <el-card shadow="never" class="usr_card_override">
+                <v-md-editor v-model="text" :height="usrCardEleHeight + 'px'"></v-md-editor>
             </el-card>
         </div>
     </div>
@@ -94,11 +94,11 @@ const text = '<h1 align="center">Markdown Editor built on Vue</h1>\n' +
     padding: 20px;
 }
 
-.vel_card_override {
+.usr_card_override {
     height: calc(100vh - 90px - 20px - 20px - 2px);
 }
 
-:deep(.vel_card_override) .el-card__body{
+:deep(.usr_card_override) .el-card__body{
     padding: 0;
 }
 

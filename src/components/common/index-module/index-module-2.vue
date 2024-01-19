@@ -10,7 +10,7 @@ const height = width / 4;
 </script>
 
 <template>
-    <div class="vel_cpt_panel_index_module_2" :style="{width:width + 'px'}">
+    <div class="usr_cpt_panel_index_module_2" :style="{width:width + 'px'}">
         <div class="item_con" v-for="item in [1,2,3,4,5,6,7,8]" :key="item" :style="{width:height + 'px',height:height + 'px'}">
             <el-avatar :size="height - height * 0.4" />
             <el-text>推荐模块</el-text>
@@ -19,13 +19,13 @@ const height = width / 4;
 </template>
 
 <style scoped>
-    .vel_cpt_panel_index_module_2{
+    .usr_cpt_panel_index_module_2{
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
         padding: 10px 0;
     }
-    .vel_cpt_panel_index_module_2 .item_con{
+    .usr_cpt_panel_index_module_2 .item_con{
         display: flex;
         align-items: center;
         justify-content: center;

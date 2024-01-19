@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <el-card shadow="never" class="vel_card_override">
+    <el-card shadow="never" class="usr_card_override">
       <h3>{{ name }} 页面暂未开发...</h3>
     </el-card>
   </div>
@@ -15,7 +15,7 @@ const name = 'page-json'
   padding: 20px;
 }
 
-.vel_card_override {
+.usr_card_override {
   height: calc(100vh - 90px - 20px - 20px - 2px);
 }
 

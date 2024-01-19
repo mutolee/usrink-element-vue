@@ -10,7 +10,7 @@ const height = width / 2;
 </script>
 
 <template>
-    <div class="vel_cpt_panel_index_module_1" :style="{width:width + 'px'}">
+    <div class="usr_cpt_panel_index_module_1" :style="{width:width + 'px'}">
         <div class="item_con" :style="{width:width + 'px',height:height + 'px'}">
             <el-image>
                 <template #error>
@@ -22,10 +22,10 @@ const height = width / 2;
 </template>
 
 <style scoped>
-.vel_cpt_panel_index_module_1{
+.usr_cpt_panel_index_module_1{
     padding-bottom: 10px;
 }
-.vel_cpt_panel_index_module_1 .item_con{
+.usr_cpt_panel_index_module_1 .item_con{
         background-color: #f0f2f5;
     }
 

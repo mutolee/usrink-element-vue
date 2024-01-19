@@ -10,7 +10,7 @@ const height = width / 3;
 </script>
 
 <template>
-    <div class="vel_cpt_panel_index_module_8" >
+    <div class="usr_cpt_panel_index_module_8" >
         <div class="panel_tit" :style="{paddingLeft: width * 0.025 + 'px'}">
             <div class="panel_tit_con">
                 <el-text tag="b" size="large">限时抢购</el-text>

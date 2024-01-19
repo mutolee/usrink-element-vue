@@ -1,5 +1,5 @@
 <script setup>
-import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
+import usrImageCutterDialog from "@/components/common/_usr-cpt/usr-image-cutter-dialog.vue";
 import {ref} from "vue";
 
 const cutterImgUrl = ref('')
@@ -18,7 +18,7 @@ const openDialog = () => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" class="vel_card_override">
+        <el-card shadow="never" class="usr_card_override">
             <el-image :src="cutterImgUrl"
                       style="width: 300px; height: 150px; background-color: #f0f2f5; display: flex;justify-content: center;align-items: center;">
                 <template #error>
@@ -29,7 +29,7 @@ const openDialog = () => {
             <el-button @click="openDialog">选择图片</el-button>
         </el-card>
     </div>
-    <vel-image-cutter-dialog :dialog="dialog" @onConfirm="cutDown" :cut-width="300" :cut-height="150"></vel-image-cutter-dialog>
+    <usr-image-cutter-dialog :dialog="dialog" @onConfirm="cutDown" :cut-width="300" :cut-height="150"></usr-image-cutter-dialog>
 </template>
 
 <style scoped>
@@ -37,7 +37,7 @@ const openDialog = () => {
     padding: 20px;
 }
 
-.vel_card_override {
+.usr_card_override {
     height: calc(100vh - 90px - 20px - 20px - 2px);
 }
 

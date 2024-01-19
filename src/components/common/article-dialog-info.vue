@@ -24,8 +24,8 @@ const articleInfo = ref({
 </script>
 
 <template>
-    <div class="vel_cpt_panel_drawer_info_article">
-        <el-drawer v-model="dialog.show" :size="preViewWidth" direction="rtl" class="vel_drawer_override">
+    <div class="usr_cpt_panel_drawer_info_article">
+        <el-drawer v-model="dialog.show" :size="preViewWidth" direction="rtl" class="usr_drawer_override">
             <template #header>
                 <h4>文章详情</h4>
             </template>
@@ -51,15 +51,15 @@ const articleInfo = ref({
 </template>
 
 <style scoped>
-.vel_cpt_panel_drawer_info_article :deep(.vel_drawer_override) .el-drawer__header {
+.usr_cpt_panel_drawer_info_article :deep(.usr_drawer_override) .el-drawer__header {
     margin-bottom: 0;
 }
 
-.vel_cpt_panel_drawer_info_article :deep(.vel_drawer_override) .el-drawer__body {
+.usr_cpt_panel_drawer_info_article :deep(.usr_drawer_override) .el-drawer__body {
     padding: 0;
 }
 
-:deep(.vel_drawer_override) {
+:deep(.usr_drawer_override) {
     background-color: #f6f8f9;
 }
 

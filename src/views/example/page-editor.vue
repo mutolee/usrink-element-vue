@@ -1,5 +1,5 @@
 <script setup>
-import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
+import usrEditor from "@/components/common/_usr-cpt/usr-editor.vue";
 import {ref} from "vue";
 
 const valueHtml = ref({val: '<p></p>'})
@@ -8,9 +8,9 @@ const valueHtml = ref({val: '<p></p>'})
 
 <template>
     <div class="page">
-        <vel-editor
+        <usr-editor
             :content="valueHtml"
-            ></vel-editor>
+            ></usr-editor>
         <el-input
             v-model="valueHtml.val"
             type="textarea"

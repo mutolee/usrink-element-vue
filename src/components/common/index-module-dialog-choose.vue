@@ -97,8 +97,8 @@ const closeDialog = () => {
 </script>
 
 <template>
-    <div class="vel_cpt_panel_drawer_choose_module">
-        <el-drawer v-model="dialog.show" direction="rtl" class="vel_drawer_override">
+    <div class="usr_cpt_panel_drawer_choose_module">
+        <el-drawer v-model="dialog.show" direction="rtl" class="usr_drawer_override">
             <template #header>
                 <h4>选择模块</h4>
             </template>
@@ -107,7 +107,7 @@ const closeDialog = () => {
                     <el-scrollbar>
                         <div class="con_list">
                             <el-card v-for="data in dataArr" :key="data.type" :shadow="data.chooseEd ? 'always': 'hover'"
-                                     class="vel_card_thumb_override">
+                                     class="usr_card_thumb_override">
                                 <el-image @click="chooseItem(data)" class="img_thumb"
                                           :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + data.type + '.jpg'"></el-image>
                             </el-card>
@@ -127,15 +127,15 @@ const closeDialog = () => {
 
 <style scoped>
 
-:deep(.vel_drawer_override){
+:deep(.usr_drawer_override){
     width: 360px !important;
 }
 
-:deep(.vel_drawer_override) .el-drawer__body{
+:deep(.usr_drawer_override) .el-drawer__body{
     padding: 0;
 }
 
-:deep(.vel_drawer_override) .el-drawer__footer{
+:deep(.usr_drawer_override) .el-drawer__footer{
     padding: 20px;
 }
 
@@ -152,21 +152,21 @@ const closeDialog = () => {
     padding: 0 15px;
 }
 
-.vel_card_thumb_override{
+.usr_card_thumb_override{
     border: 2px solid transparent;
 }
 
-.vel_card_thumb_override.is-always-shadow {
+.usr_card_thumb_override.is-always-shadow {
     border: 2px solid #409EFF;
 }
 
 
-:deep(.vel_card_thumb_override) .el-card__body {
+:deep(.usr_card_thumb_override) .el-card__body {
     padding: 0;
     display: flex;
 }
 
-.vel_card_thumb_override .img_thumb {
+.usr_card_thumb_override .img_thumb {
     width: 150px;
     height: 75px;
 }

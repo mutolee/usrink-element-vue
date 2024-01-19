@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 
-const githubUrl = ref('https://github.com/mutolee/vel-admin-web')
+const githubUrl = ref('https://github.com/mutolee/usrink-element-vue')
 
 </script>
 

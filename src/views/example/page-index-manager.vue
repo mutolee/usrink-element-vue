@@ -98,7 +98,7 @@ watch(() => list.value, newVal => {
             </div>
         </div>
         <div class="page_right">
-            <el-card shadow="never" class="vel_card_override" v-loading="loading">
+            <el-card shadow="never" class="usr_card_override" v-loading="loading">
                 <div class="right_header">
                     <el-button type="primary" @click="showAddModuleDialog">添加模块</el-button>
                 </div>
@@ -216,7 +216,7 @@ watch(() => list.value, newVal => {
     align-items: center;
 }
 
-:deep(.vel_card_override) .el-card__body {
+:deep(.usr_card_override) .el-card__body {
     padding: 0;
 }
 

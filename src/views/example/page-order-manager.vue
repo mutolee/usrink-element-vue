@@ -2,8 +2,8 @@
 import {ref} from "vue";
 import {ArrowDown, ArrowUp} from "@element-plus/icons-vue";
 import OrderDialogInfo from "@/components/common/order-dialog-info.vue";
-import VelDescriptions from "@/components/common/_vel-cpt/vel-descriptions.vue";
-import VelDescriptionsItem from "@/components/common/_vel-cpt/vel-descriptions-item.vue";
+import usrDescriptions from "@/components/common/_usr-cpt/usr-descriptions.vue";
+import usrDescriptionsItem from "@/components/common/_usr-cpt/usr-descriptions-item.vue";
 
 const queryForm = ref({
     serialNo: '',
@@ -238,7 +238,7 @@ const showOrderInfoDialog = () => {
 
 <template>
     <div class="page">
-        <el-card shadow="never" class="vel_card_override top">
+        <el-card shadow="never" class="usr_card_override top">
             <el-form :inline="true" :model="queryForm">
                 <el-form-item label="流水号">
                     <el-input v-model="queryForm.serialNo" placeholder="支付流水号" clearable style="width: 180px"/>
@@ -281,7 +281,7 @@ const showOrderInfoDialog = () => {
                 <el-radio-button label="-1">退款中</el-radio-button>
             </el-radio-group>
         </el-row>
-        <el-card v-loading="loading" shadow="never" class="vel_card_override content">
+        <el-card v-loading="loading" shadow="never" class="usr_card_override content">
             <el-table
                 class="order_table"
                 :data="orderList">
@@ -291,24 +291,24 @@ const showOrderInfoDialog = () => {
                             <div class="order-detail">
                                 <el-descriptions title="订单信息">
                                 </el-descriptions>
-                                <vel-descriptions>
-                                    <vel-descriptions-item>
+                                <usr-descriptions>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">交易流水号：</el-text></template>
                                         <template #desc><el-text>167877165981809751000</el-text></template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">订单编号：</el-text></template>
                                         <template #desc><el-text>202303141327975001</el-text></template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">创建时间：</el-text></template>
                                         <template #desc><el-text>2024-12-12 12:12:12</el-text></template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">订单金额：</el-text></template>
                                         <template #desc><el-text>￥99.99</el-text></template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">订单状态：</el-text></template>
                                         <template #desc>
                                             <el-tag v-if="scope.row.status === 0" size="small" type="warning">待支付
@@ -324,12 +324,12 @@ const showOrderInfoDialog = () => {
                                             <el-tag v-else-if="scope.row.status === -1" size="small" type="danger">退款中
                                             </el-tag>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name><el-text type="info">租赁周期：</el-text></template>
                                         <template #desc><el-text>2023-12-12 到 2024-12-12</el-text></template>
-                                    </vel-descriptions-item>
-                                </vel-descriptions>
+                                    </usr-descriptions-item>
+                                </usr-descriptions>
                             </div>
                             <div class="order-detail">
                                 <el-descriptions title="商品信息" />
@@ -436,14 +436,14 @@ const showOrderInfoDialog = () => {
     padding: 20px;
 }
 
-.vel_card_override.top .el-form {
+.usr_card_override.top .el-form {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 15px;
 }
 
-.vel_card_override.top .el-form .el-form-item {
+.usr_card_override.top .el-form .el-form-item {
     margin-bottom: 0;
     margin-right: 0;
 }
@@ -452,7 +452,7 @@ const showOrderInfoDialog = () => {
     margin: 15px 0 15px 0;
 }
 
-.vel_card_override.content .el-table {
+.usr_card_override.content .el-table {
     margin-bottom: 20px;
 }
 
@@ -472,7 +472,7 @@ const showOrderInfoDialog = () => {
     background-color: #f6f8f9;
 }
 
-:deep(.vel_card_override) .el-table .el-table__cell.el-table__expanded-cell {
+:deep(.usr_card_override) .el-table .el-table__cell.el-table__expanded-cell {
     padding: 0;
 }
 

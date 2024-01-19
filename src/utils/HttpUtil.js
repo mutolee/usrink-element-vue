@@ -2,7 +2,7 @@ import axios from 'axios'
 import loginUtil from '@/utils/LoginUtil'
 import {ElMessage} from "element-plus";
 
-const HTTP_BASE_URL = "https://mutolee.github.io/vel-admin-web"
+const HTTP_BASE_URL = "https://mutolee.github.io/usrink-element-vue"
 const HTTP_BASE_URL_DEV = "http://localhost:5173"
 
 // Http 接口状态

@@ -1,8 +1,8 @@
 <script setup>
-import VelTimeline from "@/components/common/_vel-cpt/vel-timeline.vue";
+import usrTimeline from "@/components/common/_usr-cpt/usr-timeline.vue";
 import {ref} from "vue";
-import VelDescriptions from "@/components/common/_vel-cpt/vel-descriptions.vue";
-import VelDescriptionsItem from "@/components/common/_vel-cpt/vel-descriptions-item.vue";
+import usrDescriptions from "@/components/common/_usr-cpt/usr-descriptions.vue";
+import usrDescriptionsItem from "@/components/common/_usr-cpt/usr-descriptions-item.vue";
 
 const props = defineProps(['dialog'])
 
@@ -74,8 +74,8 @@ const wlData = ref([
 </script>
 
 <template>
-    <div class="vel_cpt_panel_order_info_article">
-        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="vel_drawer_override">
+    <div class="usr_cpt_panel_order_info_article">
+        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="usr_drawer_override">
             <template #header>
                 <div class="order-info-header">
                     <el-button type="warning" plain>订单发货</el-button>
@@ -91,78 +91,78 @@ const wlData = ref([
                             <div class="order-info-item">
                                 <el-descriptions title="订单信息">
                                 </el-descriptions>
-                                <vel-descriptions>
-                                    <vel-descriptions-item>
+                                <usr-descriptions>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">交易流水号：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>167877165981809751000</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">订单编号：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>202303141327975001</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">创建时间：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>2024-12-12 12:12:12</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">订单金额：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>￥99.99</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">订单状态：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-tag size="small" type="warning">待支付</el-tag>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">租赁周期：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>2023-12-12 到 2024-12-12</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                </vel-descriptions>
+                                    </usr-descriptions-item>
+                                </usr-descriptions>
                             </div>
                             <div class="order-info-item">
                                 <el-descriptions title="收货信息">
                                 </el-descriptions>
-                                <vel-descriptions>
-                                    <vel-descriptions-item>
+                                <usr-descriptions>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">收件人：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>杨林恩</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">联系电话：</el-text>
                                         </template>
                                         <template #desc>
                                             <el-text>18721272099</el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="info">收货地址：</el-text>
                                         </template>
@@ -171,8 +171,8 @@ const wlData = ref([
                                                 北京市-北京市-东城区-123北京市-北京市-东城区-123北京市-北京市-东城区-123北京市-北京市-东城区-123
                                             </el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                    <vel-descriptions-item>
+                                    </usr-descriptions-item>
+                                    <usr-descriptions-item>
                                         <template #name>
                                             <el-text type="danger">买家备注：</el-text>
                                         </template>
@@ -181,13 +181,13 @@ const wlData = ref([
                                                 啊记录卡束带结发了，辣椒水都发了，阿斯蒂芬。
                                             </el-text>
                                         </template>
-                                    </vel-descriptions-item>
-                                </vel-descriptions>
+                                    </usr-descriptions-item>
+                                </usr-descriptions>
                             </div>
                             <div class="order-info-item">
                                 <el-descriptions title="备注信息">
                                 </el-descriptions>
-                                <vel-timeline :timelines="descList"/>
+                                <usr-timeline :timelines="descList"/>
                                 <el-form label-width="100px" style="margin-top: 20px">
                                     <el-form-item label="添加备注：">
                                         <el-input type="textarea" :rows="2"
@@ -333,7 +333,7 @@ const wlData = ref([
                             <div class="order-info-item">
                                 <el-descriptions title="订单状态流转记录">
                                 </el-descriptions>
-                                <vel-timeline :timelines="orderChangeList"/>
+                                <usr-timeline :timelines="orderChangeList"/>
                             </div>
                         </div>
                     </div>
@@ -344,15 +344,15 @@ const wlData = ref([
 </template>
 
 <style scoped>
-.vel_cpt_panel_order_info_article :deep(.vel_drawer_override) .el-drawer__header {
+.usr_cpt_panel_order_info_article :deep(.usr_drawer_override) .el-drawer__header {
     margin-bottom: 20px;
 }
 
-.vel_cpt_panel_order_info_article :deep(.vel_drawer_override) .el-drawer__body {
+.usr_cpt_panel_order_info_article :deep(.usr_drawer_override) .el-drawer__body {
     padding: 0;
 }
 
-:deep(.vel_drawer_override) {
+:deep(.usr_drawer_override) {
     background-color: #f6f8f9;
 }
 

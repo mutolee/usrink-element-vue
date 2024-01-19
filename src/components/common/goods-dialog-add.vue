@@ -1,10 +1,10 @@
 <script setup>
 import {nextTick, onMounted, ref} from "vue";
-import VelSkuSingle from "@/components/common/_vel-cpt/vel-sku-single.vue";
+import usrSkuSingle from "@/components/common/_usr-cpt/usr-sku-single.vue";
 import {Delete, Plus, Warning} from "@element-plus/icons-vue";
-import VelImageCutterDialog from "@/components/common/_vel-cpt/vel-image-cutter-dialog.vue";
+import usrImageCutterDialog from "@/components/common/_usr-cpt/usr-image-cutter-dialog.vue";
 import cacheUtil from "@/utils/CacheUtil";
-import VelEditor from "@/components/common/_vel-cpt/vel-editor.vue";
+import usrEditor from "@/components/common/_usr-cpt/usr-editor.vue";
 import Preview_shop from "@/components/common/preview-shop.vue";
 
 const props = defineProps(['dialog'])
@@ -227,8 +227,8 @@ const onConfirm = async () => {
 </script>
 
 <template>
-    <div class="vel_cpt_panel_drawer_add_goods">
-        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="vel_drawer_override">
+    <div class="usr_cpt_panel_drawer_add_goods">
+        <el-drawer v-model="dialog.show" size="80%" direction="rtl" class="usr_drawer_override">
             <template #header>
                 <h4>添加商品</h4>
             </template>
@@ -248,7 +248,7 @@ const onConfirm = async () => {
                         </div>
                         <div class="page_right" style="flex: 1">
                             <div class="page_right_con">
-                                <el-card shadow="never" class="vel_card_override">
+                                <el-card shadow="never" class="usr_card_override">
                                     <div class="add_goods_panel">
                                         <el-scrollbar>
                                             <el-form :model="shopInfo" ref="formRef" :rules="formRules" label-width="120px">
@@ -327,8 +327,8 @@ const onConfirm = async () => {
                                                         v-model="shopInfo.shopType" clearable placeholder="选择分类"/>
                                                 </el-form-item>
                                                 <el-form-item label="规格" prop="skus" class="sku_panel">
-                                                    <vel-sku-single :skus="shopInfo.skus"
-                                                                    @onDelSkuRow="skuDelEvent"></vel-sku-single>
+                                                    <usr-sku-single :skus="shopInfo.skus"
+                                                                    @onDelSkuRow="skuDelEvent"></usr-sku-single>
                                                 </el-form-item>
                                                 <el-form-item label="价格单位" prop="unit">
                                                     <el-select v-model="shopInfo.unit" size="default" clearable
@@ -348,8 +348,8 @@ const onConfirm = async () => {
                                                     </el-select>
                                                 </el-form-item>
                                                 <el-form-item label="商品描述">
-                                                    <vel-editor :content="shopInfo.shopDetail"
-                                                                editor_width=""></vel-editor>
+                                                    <usr-editor :content="shopInfo.shopDetail"
+                                                                editor_width=""></usr-editor>
                                                 </el-form-item>
                                             </el-form>
                                         </el-scrollbar>
@@ -357,10 +357,10 @@ const onConfirm = async () => {
                                 </el-card>
                             </div>
                         </div>
-                        <vel-image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
+                        <usr-image-cutter-dialog :dialog="isShowChooseShopImgCutImgDialog"
                                              @onConfirm="chooseShopImgCutImgCallback"
                                              :cut-width="300"
-                                             :cut-height="210"></vel-image-cutter-dialog>
+                                             :cut-height="210"></usr-image-cutter-dialog>
                     </div>
                 </el-scrollbar>
             </template>
@@ -370,15 +370,15 @@ const onConfirm = async () => {
 
 <style scoped>
 
-.vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__header {
+.usr_cpt_panel_drawer_add_goods :deep(.usr_drawer_override) .el-drawer__header {
     margin-bottom: 0;
 }
 
-.vel_cpt_panel_drawer_add_goods :deep(.vel_drawer_override) .el-drawer__body {
+.usr_cpt_panel_drawer_add_goods :deep(.usr_drawer_override) .el-drawer__body {
     padding: 0;
 }
 
-:deep(.vel_drawer_override) {
+:deep(.usr_drawer_override) {
     background-color: #f6f8f9;
 }
 
@@ -411,7 +411,7 @@ const onConfirm = async () => {
     padding: 20px 20px 20px 0;
 }
 
-:deep(.vel_card_override) .el-card__body {
+:deep(.usr_card_override) .el-card__body {
     padding: 0;
 }
 
@@ -487,11 +487,11 @@ const onConfirm = async () => {
     margin-bottom: 3px;
 }
 
-:deep(.vel_card_override) .el-form-item .no_error .el-input__wrapper {
+:deep(.usr_card_override) .el-form-item .no_error .el-input__wrapper {
     box-shadow: 0 0 0 1px var(--el-border-color) inset;
 }
 
-:deep(.vel_card_override) .el-form-item .no_error .el-input__wrapper.is-focus {
+:deep(.usr_card_override) .el-form-item .no_error .el-input__wrapper.is-focus {
     box-shadow: 0 0 0 1px var(--el-border-color) inset !important;
 }
 

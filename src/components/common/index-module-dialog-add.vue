@@ -88,13 +88,13 @@ const formRef = ref(null)
 </script>
 
 <template>
-    <div class="vel_cpt_panel_dialog_add_module">
+    <div class="usr_cpt_panel_dialog_add_module">
         <el-dialog v-model="dialog.show" title="添加模块">
             <el-form :model="addModuleForm" ref="formRef" :rules="formRules" :label-width="labelWidth">
                 <el-form-item label="编号" prop="moduleNo">
                     <el-input v-model="addModuleForm.moduleNo" clearable/>
                 </el-form-item>
-                <el-form-item label="标题" prop="moduleTit" class="vel_from_item_tit">
+                <el-form-item label="标题" prop="moduleTit" class="usr_from_item_tit">
                     <el-input v-model="addModuleForm.moduleTit" clearable/>
                     <el-checkbox v-model="addModuleForm.isShowTit" label="显示标题" size="large"/>
                 </el-form-item>
@@ -105,7 +105,7 @@ const formRef = ref(null)
                     </el-select>
                 </el-form-item>
                 <el-form-item label="布局类型" class="el_form_item_choose_module">
-                    <el-card class="vel_card_thumb_override">
+                    <el-card class="usr_card_thumb_override">
                         <el-image
                             :src="httpUtil.defaults.baseURL + '/res/imgs/index-module-thumb-' + addModuleForm.moduleType + '.jpg'"
                             class="img_thumb"></el-image>
@@ -129,24 +129,24 @@ const formRef = ref(null)
 
 <style scoped>
 
-.vel_cpt_panel_dialog_add_module .el-input {
+.usr_cpt_panel_dialog_add_module .el-input {
     width: 300px;
 }
 
-.vel_cpt_panel_dialog_add_module .img_thumb {
+.usr_cpt_panel_dialog_add_module .img_thumb {
     width: 150px;
     height: 75px;
 }
 
-:deep(.vel_from_item_tit) .el-form-item__content {
+:deep(.usr_from_item_tit) .el-form-item__content {
     column-gap: 10px;
 }
 
-.vel_card_thumb_override {
+.usr_card_thumb_override {
     border: 1px solid transparent;
 }
 
-:deep(.vel_card_thumb_override) .el-card__body {
+:deep(.usr_card_thumb_override) .el-card__body {
     padding: 0;
     display: flex;
 }

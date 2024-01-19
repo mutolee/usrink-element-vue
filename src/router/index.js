@@ -1,7 +1,7 @@
-import VelFrameMain from '@/components/aframe/vel-frame-main.vue'
-import VelFrameLogin from "@/components/aframe/vel-frame-login.vue"
-import VelFrameWelcome from "@/components/aframe/vel-frame-welcome.vue"
-import VelFrameNotfound from "@/components/aframe/vel-frame-notfound.vue"
+import usrFrameMain from '@/components/aframe/usr-frame-main.vue'
+import usrFrameLogin from "@/components/aframe/usr-frame-login.vue"
+import usrFrameWelcome from "@/components/aframe/usr-frame-welcome.vue"
+import usrFrameNotfound from "@/components/aframe/usr-frame-notfound.vue"
 import {createRouter, createWebHashHistory} from 'vue-router'
 import NProgress from 'nprogress'
 import loginUtil from "@/utils/LoginUtil";
@@ -17,22 +17,22 @@ const routes = [
     {
         name: 'gen',
         path: '/',
-        component: VelFrameMain,
+        component: usrFrameMain,
         redirect: '/welcome',
         children: [
             // 默认的两个静态页面，不需要动态添加
-            {path: '/welcome', component: VelFrameWelcome},
-            {path: '/404', component: VelFrameNotfound}
+            {path: '/welcome', component: usrFrameWelcome},
+            {path: '/404', component: usrFrameNotfound}
         ]
     },
     // login 页面
-    {path: '/login', component: VelFrameLogin},
+    {path: '/login', component: usrFrameLogin},
     // 404 Notfound
     // 理论上，这里应该永远匹配不到，因为路由守卫前置拦截会把将要访问的路由重定向的对应的路由上
     // 比如访问了`/aaa`一个不存在的路由，
     // 前置守卫会判断用户是否已经授权登录，如果没有会被重定向到`/login`
     // 如果已经授权登录了，但该路由不在用户的权限内，会被重定向到`/404`
-    {path: '/:pathMatch(.*)*', component: VelFrameNotfound}
+    {path: '/:pathMatch(.*)*', component: usrFrameNotfound}
 ]
 
 /**
