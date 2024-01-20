@@ -6,7 +6,7 @@
 
 国际惯例，介绍一下，usrink-element-vue 为我快速搭建后台管理系统而做的一套脚手架，不用每次有了新项目，搞重复的事情。
 
-功能列表：
+#### 功能列表：
 1. 登录页面
 2. 主页面骨架，左上下布局
 3. 动态菜单
@@ -25,6 +25,7 @@
 在线预览：https://mutolee.github.io/usrink-element-vue/
 
 ### 缩略图
+
 | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_1.png?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_2.png?raw=true">  |
 |--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_3.png?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_4.jpg?raw=true">  | 
