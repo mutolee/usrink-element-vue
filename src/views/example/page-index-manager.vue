@@ -76,7 +76,7 @@ watch(() => list.value, newVal => {
                 <div class="preview_con">
                     <el-scrollbar>
                         <div class="minapp_header">
-                            <span>首页</span>
+                            <span>首页<el-text type="info">(预览)</el-text></span>
                         </div>
                         <template v-for="item in list" :key="item">
                             <index-module1 :width="360" v-if="item.id === 1"/>
@@ -203,7 +203,6 @@ watch(() => list.value, newVal => {
 }
 
 .preview_con .minapp_header span{
-    display: block;
     height: 40px;
     line-height: 40px;
     font-size: 16px;
