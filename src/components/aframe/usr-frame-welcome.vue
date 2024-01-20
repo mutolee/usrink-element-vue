@@ -30,10 +30,11 @@ const userNick = computed(() => userInfoStore.userInfo.userNick)
                         <p class="tit">你好呀，{{ userNick }}，又是元气满满的一天！</p>
                         <p class="tips">
                             国际惯例，介绍一下，<a :href="githubUrl" target="_blank">UsrInk-Element-Vue</a>
-                            为我快速搭建后台管理系统而做的一套脚手架，不用每次有了新项目，搞重复的事情，你懂得。<br>
-                            你也看到了，这是一个极其简洁的项目，除了一些必要的功能，没有多余的东西，甚至没有一个可以供你直接使用的小组件。<br>
-                            <a :href="githubUrl" target="_blank">UsrInk-Element-Vue</a> 可以让你<span
-                            style="color: red">直接开始写页面</span>，而不用从0开始搞类似菜单、Tab导航、路由之类的与业务无关的东西。
+                            为我快速搭建后台管理系统而做的一套脚手架，不用每次有了新项目，搞重复的事情。<br>
+                            我会在这个项目里，不断的整合一些常用的组件及页面，比如：表格、表单、弹窗、文件上传、图片裁剪、商品管理页面、订单管理页面等等。<br>
+                            我还会在这个项目里，创建一个Lab，放一些测试性的东西，一些小组件、小功能。<br>
+                            总之，<a :href="githubUrl" target="_blank">UsrInk-Element-Vue</a> 可以让你<span
+                            style="color: red">只关注业务</span>，而不用从0开始搞类似菜单、Tab导航、路由之类的与业务无关的东西。
                         </p>
                     </div>
                 </el-card>
