@@ -25,8 +25,12 @@
 在线预览：https://mutolee.github.io/usrink-element-vue/
 
 ### 缩略图
-
-
+| <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_1.png?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_2.png?raw=true">  |
+|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_3.png?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_4.jpg?raw=true">  | 
+| <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_5.jpg?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_6.jpg?raw=true">  | 
+| <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_7.jpg?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_8.jpg?raw=true">  | 
+| <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_9.jpg?raw=true"> | <img src="https://github.com/mutolee/usrink-element-vue/blob/branch-develop/public/res/imgs/thumb/thumb_10.jpg?raw=true"> | 
 
 ### 如何安装
 
