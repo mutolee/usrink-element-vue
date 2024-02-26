@@ -37,6 +37,7 @@ const goTo = (path) => router.push(path)
             class="usr_menu_panel"
             :style="{height:'calc(100vh - ' + height + ')'}">
             <el-scrollbar>
+                <!-- 树形菜单，只支持三级菜单，够用！ -->
                 <el-menu
                     class="el_menu_override"
                     :default-active="activeIndex"
